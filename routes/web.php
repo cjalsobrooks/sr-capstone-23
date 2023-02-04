@@ -27,4 +27,4 @@ Route::get('/admin', [AdminController::class, 'index']);
 
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
-})
+});
