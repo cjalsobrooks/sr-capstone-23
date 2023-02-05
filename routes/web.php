@@ -17,14 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//splash page
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
+//admin routes
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
 
+
+//user routes
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
