@@ -14,12 +14,12 @@
         </button>
       </div>
     </div>
-    <form class="needs-validation" novalidate="">
+    <form class="needs-validation" novalidate="" action="{{route('editpermissions', $user->id)}}" method="POST">
       <h4>Editing: {{$user->name}}</h4>
       <div class="row g-3">
         <div class="col-sm-6">
           <label for="firstName" class="form-label">Name</label>
-          <input type="text" class="form-control" id="firstName" placeholder="" value="{{$user->name}}" required="">
+          <input name="name" type="text" class="form-control" id="firstName" placeholder="" value="{{$user->name}}" required="">
           <div class="invalid-feedback">
             Valid first name is required.
           </div>
@@ -29,14 +29,14 @@
           <label for="admin" class="form-label">Admin Status</label>
           @if($user->is_admin == 0)         
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <input name="is_admin" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
                 false
               </label>
             </div>  
           @else
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <input name="is_admin" class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
               <label class="form-check-label" for="flexCheckChecked">
                 true
               </label>
@@ -48,7 +48,7 @@
           <label for="username" class="form-label">Email Address</label>
           <div class="input-group has-validation">
             <span class="input-group-text">@</span>
-            <input type="text" class="form-control" id="username" placeholder="Username" value="{{$user->email}}" required="">
+            <input name="email" type="text" class="form-control" id="username" placeholder="Username" value="{{$user->email}}" required="">
           <div class="invalid-feedback">
               Your username is required.
             </div>
@@ -56,6 +56,7 @@
         </div>
 
       <hr class="my-4">
+      @csrf <!-- {{ csrf_field() }} -->
       <button class="w-25 btn btn-primary btn-lg" type="submit">update</button>
     </form>
   </main>

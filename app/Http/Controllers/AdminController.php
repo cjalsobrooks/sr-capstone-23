@@ -25,4 +25,21 @@ class AdminController extends Controller
         $user = User::find($id);
         return view('admin.permissions', compact('user'));
     }
+
+    public function editPermissions(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->name = $request->input('name');
+
+        if($request->input('is_admin') == null){
+            $user->is_admin = 0;
+        }else{
+            $user->is_admin = $request->input('is_admin');
+        }
+        
+        $user->email = $request->input('email');
+        $user->save();
+
+        return view('admin.permissions', compact('user'));
+    }
 }

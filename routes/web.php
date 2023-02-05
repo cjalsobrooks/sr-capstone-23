@@ -28,7 +28,7 @@ Auth::routes();
 //admin routes
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
-
+Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions'])->name('editpermissions');
 
 //user routes
 Route::middleware(['redirect'])->group(function() {

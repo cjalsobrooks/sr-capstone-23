@@ -36,7 +36,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->is_admin}}</td>
-                <td><a style="text-decoration: none;" href="{{ route('permissions', $user->id)}}">Edit</a></td>
+                <td><a style="text-decoration: none;" href="{{route('permissions', $user->id)}}">Edit</a></td>
                 <td><a style="text-decoration: none;" href="#">Delete</a></td>
             </tr>
          @endforeach
