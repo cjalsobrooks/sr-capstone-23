@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
+    @stack('head')
 </head>
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -57,11 +58,11 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/editusers">
                       <span data-feather="shopping-cart" class="align-text-bottom"></span>
                       Edit Users
                     </a>
-                  </li>
+                </li>
               </ul>
             </div>
           </nav>

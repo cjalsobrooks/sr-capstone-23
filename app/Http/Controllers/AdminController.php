@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyUsers;
 
 class AdminController extends Controller
 {
@@ -18,6 +20,13 @@ class AdminController extends Controller
     {
         $users = User::all();
         return view('admin.adminHome', compact('users'));
+    }
+
+    //edit user admin status-------------------------------------------
+    public function edit()
+    {
+        $users = User::all();
+        return view('admin.editUsers', compact('users'));
     }
 
     public function permissions($id)
@@ -36,10 +45,22 @@ class AdminController extends Controller
         }else{
             $user->is_admin = $request->input('is_admin');
         }
-        
+
         $user->email = $request->input('email');
         $user->save();
 
         return view('admin.permissions', compact('user'));
     }
+
+    //send emails---------------------------------------------------------
+    public function sendEmail()
+    {
+        //currently functional, requires .env mailer configuration for smtp.
+        $users = User::all();
+        foreach($users as $user){
+            $name = $user->name;
+            Mail::to($user->email)->send(new NotifyUsers($user->name));
+        }
+    }
+
 }

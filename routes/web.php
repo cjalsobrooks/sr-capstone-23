@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +26,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//admin routes
+//admin routes-------------------------------------
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/editusers', [AdminController::class, 'edit'])->name('editusers');
 Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
 Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions'])->name('editpermissions');
 
-//user routes
+
+//admin emails-------------------------------------
+Route::get('/testmail', [AdminController::class, 'sendEmail']);
+
+
+//user routes-------------------------------------
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
+

@@ -15,33 +15,22 @@
         </button>
       </div>
     </div>
-
-    <h2>Edit Users</h2>
-    <div class="table-responsive" id="inner-height">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Admin</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-         @foreach ($users as $user)
-            <tr>
-                <td>{{$user->id}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->is_admin}}</td>
-                <td><a style="text-decoration: none;" href="{{route('permissions', $user->id)}}">Edit</a></td>
-                <td><a style="text-decoration: none;" href="#">Delete</a></td>
-            </tr>
-         @endforeach
-        </tbody>
-      </table>
-    </div>
+    <button id="sendemail" class="w-25 btn btn-primary btn-lg">Emails: don't press yet</button>
   </main>
+  <script>
+      function SendMail() {
+        token = document.querySelector('meta[name="csrf-token"]').content;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("get", "/testmail", false);
+        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+        xhttp.send();
+
+        if(xhttp.readyState == 4 && xhttp.response == 200){
+          console.log("success")  
+        }else{
+          console.log(xhttp.response)
+        }
+      }
+      document.getElementById("sendemail").addEventListener("click", SendMail, false);
+  </script>
 @endsection
