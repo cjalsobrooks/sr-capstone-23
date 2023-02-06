@@ -52,13 +52,24 @@ class AdminController extends Controller
         return view('admin.permissions', compact('user'));
     }
 
-    //send emails---------------------------------------------------------
+    //send emails------------------------------------------------------------
+    public function findEmails($search){
+        $users = User::where('name', 'LIKE', '%'.$search.'%')->get();
+        $email_array = [];
+        foreach($users as $user){
+            $user_array = [];
+            $user_array['name'] = $user->name;
+            $user_array['email'] = $user->email;
+            array_push($email_array, $user_array);
+        }
+        return json_encode($email_array);
+    }
+
     public function sendEmail()
     {
         //currently functional, requires .env mailer configuration for smtp.
         $users = User::all();
         foreach($users as $user){
-            $name = $user->name;
             Mail::to($user->email)->send(new NotifyUsers($user->name));
         }
     }

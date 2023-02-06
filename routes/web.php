@@ -34,6 +34,7 @@ Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions']
 
 
 //admin emails-------------------------------------
+Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
 Route::get('/testmail', [AdminController::class, 'sendEmail']);
 
 
