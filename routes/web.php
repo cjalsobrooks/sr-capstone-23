@@ -1,6 +1,11 @@
 <?php
+
+
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +18,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//splash page
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//admin routes-------------------------------------
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/editusers', [AdminController::class, 'edit'])->name('editusers');
+Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
+Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions'])->name('editpermissions');
+
+
+//admin emails-------------------------------------
+Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
+Route::get('/testmail', [AdminController::class, 'sendEmail']);
+
+
+//user routes-------------------------------------
+Route::middleware(['redirect'])->group(function() {
+    Route::get('/home', [UserController::class, 'index']);
+});
+
