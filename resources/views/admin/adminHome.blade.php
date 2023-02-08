@@ -28,18 +28,12 @@
           <label for="finduser" class="form-label">Find User
           </label>
           <input name="finduser" type="text" class="form-control" id="finduser"  required="">
-          <div class="invalid-feedback">
-            Valid first name is required.
-          </div>
         </div>
         <div class="col-sm-6">
           <label for="userselect" class="form-label">Names</label>
           <div class="input-group has-validation">
             <select class="form-control" id="userselect" name="userselect">
             </select>
-          <div class="invalid-feedback">
-              Your username is required.
-            </div>
           </div>
         </div>
         <div class="col-sm-6">
@@ -47,18 +41,13 @@
           <div class="input-group has-validation">
             <span class="input-group-text">@</span>
             <input class="form-control" id="emailselect" name="emailselect">
-          <div class="invalid-feedback">
-              Your username is required.
-            </div>
+
           </div>
         </div>
         <div class="col-sm-12">
           <label for="firstName" class="form-label">Message
           </label>
           <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
-          <div class="invalid-feedback">
-            Valid first name is required.
-          </div>
         </div>
       </div>
       <hr class="my-4">
@@ -73,9 +62,6 @@
           <label for="firstName" class="form-label">Message
           </label>
           <textarea name="name" type="text" class="form-control" id="" placeholder="" value="" required=""></textarea>
-          <div class="invalid-feedback">
-            Valid first name is required.
-          </div>
         </div>
       </div>
       <hr class="my-4">
@@ -111,21 +97,21 @@
         let data = document.forms.emailform;
         let name = data['finduser'].value;
         let options = document.getElementById("userselect");
-        while (options.firstChild) {
-            options.removeChild(options.firstChild);
-        }
+
         currently_visible.length = 0;
         
         if(name.length > 0){
             //request for emails from server
-            console.log(name);
             token = document.querySelector('meta[name="csrf-token"]').content;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("get", "/findemail/" + name, false);
+            xhttp.open("get", "/findemail/" + name, true);
             xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
             xhttp.send();
-
-            if(xhttp.readyState == 4){
+            xhttp.onreadystatechange = function(){
+              while (options.firstChild) {
+                options.removeChild(options.firstChild);
+              }
+              console.log(xhttp.response)
               let obj = JSON.parse(xhttp.response)
               for (i = 0; i < obj.length; i++) {
                     let node = document.createElement("option");
@@ -134,9 +120,11 @@
                     options.appendChild(node);
                     currently_visible[String(obj[i].name)] = String(obj[i].email);
               }
-            }
+            }  
         }
       }
+
+
       function findEmail() {
         let data = document.forms.emailform;
         let name = data['userselect'].value;
@@ -159,7 +147,6 @@
         document.getElementById("emailform").style.display = 'none';
         document.getElementById("emailform2").style.display = 'block';
       }
-      document.getElementById("showall").addEventListener("click", toggleAll, true);
-      
+      document.getElementById("showall").addEventListener("click", toggleAll, true);   
   </script>
 @endsection
