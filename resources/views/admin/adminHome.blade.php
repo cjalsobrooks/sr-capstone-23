@@ -120,7 +120,7 @@
                     options.appendChild(node);
                     currently_visible[String(obj[i].name)] = String(obj[i].email);
               }
-            }  
+            } 
         }
       }
 

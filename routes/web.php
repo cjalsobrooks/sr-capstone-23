@@ -42,8 +42,3 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
