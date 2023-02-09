@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.app')
 
 @section('content')
 <body class="bg-image" style= "background-image: url('https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/ae425906-03cc-4d0b-b6c9-f9dbb0123c96/Lineup.png?format=2500w'); height: 100v;">
