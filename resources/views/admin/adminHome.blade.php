@@ -3,7 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">{{ Auth::user()->name }}</h1>
+      <h1 class="h2"><span style="font-style: bold; !important">Admin : </span>{{ Auth::user()->name }}</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
           <span data-feather="calendar" class="align-text-bottom"></span>
@@ -93,7 +93,7 @@
       //-----------Find user emails javascript logic---------------------
       let currently_visible = [];
 
-      function DynamicForm() {
+      function DynamicForm1() {
         let data = document.forms.emailform;
         let name = data['finduser'].value;
         let options = document.getElementById("userselect");
@@ -114,15 +114,26 @@
               console.log(xhttp.response)
               let obj = JSON.parse(xhttp.response)
               for (i = 0; i < obj.length; i++) {
-                    let node = document.createElement("option");
-                    node.value = String(obj[i].name);
-                    node.innerHTML = String(obj[i].name);
-                    options.appendChild(node);
-                    currently_visible[String(obj[i].name)] = String(obj[i].email);
+                let node = document.createElement("option");
+                node.value = String(obj[i].name);
+                node.innerHTML = String(obj[i].name);
+                options.appendChild(node);
+                currently_visible[String(obj[i].name)] = String(obj[i].email);
               }
             } 
         }
       }
+
+      function delay1(callback, ms) {
+          var timer = 0;
+          return function() {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+              callback.apply(context, args);
+            }, ms || 0);
+          };
+        }
 
 
       function findEmail() {
@@ -134,7 +145,7 @@
       }
       
       document.getElementById("userselect").addEventListener("click", findEmail, true);
-      document.getElementById("finduser").addEventListener("keyup", DynamicForm, true);
+      document.getElementById("finduser").addEventListener("keyup", delay1(DynamicForm1, 500), true);
 
       //-------------------Form Toggling----------------------------------------------
       function toggleOne(){

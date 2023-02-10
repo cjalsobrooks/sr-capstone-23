@@ -28,6 +28,7 @@ Auth::routes();
 
 //admin routes-------------------------------------
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/findusers/{search}', [AdminController::class, 'findUsers']);
 Route::get('/editusers', [AdminController::class, 'edit'])->name('editusers');
 Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
 Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions'])->name('editpermissions');

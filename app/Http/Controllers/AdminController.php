@@ -29,6 +29,28 @@ class AdminController extends Controller
         return view('admin.editUsers', compact('users'));
     }
 
+    public function findUsers($search){
+        if($search == 0){
+            $users = User::all();
+        }else{
+            $users = User::where('name', 'LIKE', '%'.$search.'%')->get();
+        }
+        $user_array = [];
+        foreach($users as $user){
+            $prop_array = [];
+            $prop_array['id'] = $user->id;
+            $prop_array['name'] = $user->name;
+            $prop_array['email'] = $user->email;
+            $prop_array['admin'] = $user->is_admin;
+
+            $obj_array = [];
+            $obj_array['user'] = $prop_array;
+            array_push($user_array, $obj_array);
+        }
+        return $user_array;
+    }
+
+
     public function permissions($id)
     {
         $user = User::find($id);
@@ -39,13 +61,11 @@ class AdminController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->input('name');
-
         if($request->input('is_admin') == null){
             $user->is_admin = 0;
         }else{
             $user->is_admin = $request->input('is_admin');
         }
-
         $user->email = $request->input('email');
         $user->save();
 
