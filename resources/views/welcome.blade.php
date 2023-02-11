@@ -3,22 +3,20 @@
 
     
 
-<head>
-  <title>Volunteer Welcome Page</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-  </style>
-  <!-- Background image-->
-  <style>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Welcome</title>  
+
+        <!-- Fonts -->
+        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        @vite(['resources/js/app.js'])
+        <!-- Styles -->
+
+
+        <!-- Background image-->
+        <style>
             body {
                 font-family: 'Nunito', sans-serif;
                 background-image: url('https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/46440191-5388-43e3-a82d-228c522211b8/DSC_4637.jpg?');
@@ -58,11 +56,17 @@
                             @endif
                     </ul>
                     @endguest
-    </div>
-  </div>
-  <h1 class=" bg-info"style="text-align: center;vertical-align: middle;font-weight: bold; font-size: 100px; color: #6aa84f;">Welcome Volunteers!</h1>
-</nav>    
+                </div>
+            </nav>
+        </header>
+        
+        <div class="sqs-block-content">
+            <style>
+                
+            </style>
+            <h1 style="white-space:pre-wrap;text-align: center;vertical-align: middle;font-weight: bold; font-size: 100px; color: #FFFFFF">Welcome Volunteers!</h1>
+        </div>
+        
 
-</body>
-
+    </body>
 </html>
