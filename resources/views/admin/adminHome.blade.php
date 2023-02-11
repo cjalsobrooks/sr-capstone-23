@@ -178,33 +178,18 @@
           left: 'prev',
           center: 'title',
           right: 'next'
-        },
-        events: [
-          {
-            title: `${test}`,
-            start: '2023-06-02T10:30:00',
-            end: '2023-06-02T12:30:00'
-          },
-          {
-            title: 'Event 2',
-            start: '2023-06-02T12:30:00',
-            end: '2023-06-02T16:30:00'
-          },
-          {
-            title: 'Event 3',
-            start: '2023-06-03T08:30:00',
-            end: '2023-06-412:30:00'
-          },
-          {
-            title: 'Event 4',
-            start: '2023-06-03T14:30:00',
-            end: '2023-06-4T17:30:00'
-          }
-        ]
+        }
       });
 
-  calendar.render();
-});
+      //call database on page load and render these with correct values in loop
+      calendar.addEvent({title: `${test}`, start: '2023-06-02T10:30:00', end: '2023-06-02T12:30:00'});
+      calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
+      calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-412:30:00'});
+      calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
+
+      calendar.render();
+  });
+
   </script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 @endsection

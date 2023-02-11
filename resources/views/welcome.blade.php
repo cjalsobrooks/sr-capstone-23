@@ -11,7 +11,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        @vite(['resources/js/app.js'])
+        @vite(['resources/sass/welcome.scss','resources/js/app.js'])
         <!-- Styles -->
 
 
