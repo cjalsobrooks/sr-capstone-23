@@ -11,7 +11,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        @vite(['resources/js/app.js'])
+        @vite(['resources/sass/welcome.scss','resources/js/app.js'])
         <!-- Styles -->
 
 
@@ -86,6 +86,7 @@
             </style>
             <h1 style="white-space:pre-wrap;text-align: center;vertical-align: middle;font-weight: bold; font-size: 100px; color: #FFFFFF">Welcome Volunteers!</h1>
         </div>
+
         
 
     </body>
