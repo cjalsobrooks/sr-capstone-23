@@ -27,7 +27,6 @@
         </div>
       @csrf <!-- {{ csrf_field() }} -->
     </form>
-
     <div class="table-responsive" id="inner-height">
       <table class="table table-striped table-sm">
         <thead>
@@ -103,8 +102,8 @@
             a.href = `#`; //<--- fix this later
             tdDelete.appendChild(a);
 
-              }
-            } 
+          }
+        } 
       }
         function delay2(callback, ms) {
           var timer = 0;
