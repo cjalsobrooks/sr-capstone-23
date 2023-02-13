@@ -3,7 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Admin : {{ Auth::user()->name }}</h1>
+      <h1 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
           <button type="button" class="btn btn-sm btn-outline-secondary">button 1</button>
@@ -21,9 +21,9 @@
     <form id="usereditsearch" class="needs-validation" novalidate="" action="" method="POST">
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="finduser2" class="form-label">Search
+          <label for="finduser2" class="form-label">Search by last name
           </label>
-          <input name="finduser" type="text" class="form-control" id="finduser2"  required="">
+          <input name="finduser2" type="text" class="form-control" id="finduser2"  required="">
         </div>
       @csrf <!-- {{ csrf_field() }} -->
     </form>
@@ -32,7 +32,8 @@
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col">Email</th>
             <th scope="col">Admin</th>
             <th></th>
@@ -43,7 +44,8 @@
          @foreach ($users as $user)
             <tr>
                 <td id="1">{{$user->id}}</td>
-                <td id="2">{{$user->name}}</td>
+                <td id="2">{{$user->first_name}}</td>
+                <td id="2">{{$user->last_name}}</td>
                 <td id="3">{{$user->email}}</td>
                 <td id="4">{{$user->is_admin}}</td>
                 <td id="5"><a style="text-decoration: none;" href="{{route('permissions', $user->id)}}">Edit</a></td>
@@ -60,16 +62,16 @@
       //-----------Find user emails javascript logic---------------------
       function DynamicForm2() {
         let data = document.forms.usereditsearch;
-        let name = data['finduser2'].value;
+        let lastname = data['finduser2'].value;
         let body = document.getElementById('responsivebody')
 
         //request for emails from server
         token = document.querySelector('meta[name="csrf-token"]').content;
         var xhttp = new XMLHttpRequest();
-        if(name.length==0){
+        if(lastname.length==0){
           xhttp.open("get", "/findusers/" + 0, true);
         }else{
-          xhttp.open("get", "/findusers/" + name, true);
+          xhttp.open("get", "/findusers/" + lastname, true);
         }
         xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
         xhttp.send();

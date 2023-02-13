@@ -3,7 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->name }}</h1>
+      <h1 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
           <span data-feather="calendar" class="align-text-bottom"></span>
@@ -25,7 +25,7 @@
       <h4>Email Individual</h4>
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="finduser" class="form-label">Find User
+          <label for="finduser" class="form-label">Search by last name
           </label>
           <input name="finduser" type="text" class="form-control" id="finduser"  required="">
         </div>
@@ -100,16 +100,16 @@
 
       function DynamicForm1() {
         let data = document.forms.emailform;
-        let name = data['finduser'].value;
+        let lastname = data['finduser'].value;
         let options = document.getElementById("userselect");
 
         currently_visible.length = 0;
         
-        if(name.length > 0){
+        if(lastname.length > 0){
             //request for emails from server
             token = document.querySelector('meta[name="csrf-token"]').content;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("get", "/findemail/" + name, true);
+            xhttp.open("get", "/findemail/" + lastname, true);
             xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
             xhttp.send();
             xhttp.onreadystatechange = function(){
@@ -120,10 +120,10 @@
               let obj = JSON.parse(xhttp.response)
               for (i = 0; i < obj.length; i++) {
                 let node = document.createElement("option");
-                node.value = String(obj[i].name);
-                node.innerHTML = String(obj[i].name);
+                node.value = String(obj[i].lastname);
+                node.innerHTML = `${String(obj[i].firstname)} ${String(obj[i].lastname)}`;
                 options.appendChild(node);
-                currently_visible[String(obj[i].name)] = String(obj[i].email);
+                currently_visible[String(obj[i].lastname)] = String(obj[i].email);
               }
             } 
         }
@@ -143,9 +143,9 @@
 
       function findEmail() {
         let data = document.forms.emailform;
-        let name = data['userselect'].value;
-        if (currently_visible[name] !== undefined) {
-            document.getElementById("emailselect").value = currently_visible[name];
+        let lastname = data['userselect'].value;
+        if (currently_visible[lastname] !== undefined) {
+            document.getElementById("emailselect").value = currently_visible[lastname];
         }
       }
       

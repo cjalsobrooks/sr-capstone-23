@@ -18,11 +18,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->firstname(),
+            'last_name' => fake()->lastname(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
-            'is_admin' => rand(0,1)
+            'is_admin' => rand(0,1),
+            'is_section_lead' => rand(0,1)
         ];
     }
 
