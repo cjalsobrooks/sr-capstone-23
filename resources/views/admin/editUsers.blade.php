@@ -18,7 +18,7 @@
 
     <h2>Edit Users</h2>
 
-    <form id="usereditsearch" class="needs-validation" novalidate="" action="" method="POST">
+    <form id="usereditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
       <div class="row g-3">
         <div class="col-sm-6">
           <label for="finduser2" class="form-label">Search by last name
