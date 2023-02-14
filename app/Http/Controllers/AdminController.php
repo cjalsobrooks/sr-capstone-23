@@ -60,7 +60,8 @@ class AdminController extends Controller
     public function editPermissions(Request $request, $id)
     {
         $user = User::find($id);
-        $user->name = $request->input('name');
+        $user->first_name = $request->input('firstName');
+        $user->last_name = $request->input('lastName');
         if($request->input('is_admin') == null){
             $user->is_admin = 0;
         }else{

@@ -15,11 +15,19 @@
       </div>
     </div>
     <form class="needs-validation" novalidate="" action="{{route('editpermissions', $user->id)}}" method="POST">
-      <h4>Editing: {{$user->name}}</h4>
+      <h4>Editing: {{$user->first_name}} {{$user->last_name}}</h4>
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="firstName" class="form-label">Name</label>
-          <input name="name" type="text" class="form-control" id="firstName" placeholder="" value="{{$user->name}}" required="">
+          <label for="firstName" class="form-label">First Name</label>
+          <input name="firstName" type="text" class="form-control" id="firstName" placeholder="" value="{{$user->first_name}}" required="">
+          <div class="invalid-feedback">
+            Valid first name is required.
+          </div>
+        </div>
+        
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input name="lastName" type="text" class="form-control" id="lastName" placeholder="" value="{{$user->last_name}}" required="">
           <div class="invalid-feedback">
             Valid first name is required.
           </div>
