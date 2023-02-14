@@ -87,6 +87,18 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="group-size" class="col-md-4 col-form-label text-md-end">{{ __('I have read and agree to the waiver.') }}</label>
+                            <div class=col-md-1>
+                                <input name="isgroup" type="checkbox" value="yes">
+                            </div>
+
+                            <div class="col-md-4">
+                                <input id="signature" type="text" class="form-control" name="group size">
+                                <label for="signature" class="form-label">Signature</label>
+                            </div>
+                        </div>
+
                         <div class="row mb-3 ">
                             <div class="col-md-6 offset-md-4">
                                 <a href="register/waiver">Click here to review the waiver.</a> 

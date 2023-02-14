@@ -43,3 +43,9 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
+
+//waiver-------------------------------------------
+Route::get('/register/waiver', function()
+{
+    return response()->file(asset("/waiver.pdf"));
+});
