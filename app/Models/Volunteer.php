@@ -9,4 +9,12 @@ class Volunteer extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'shirt_size',
+        'age'
+    ];
 }

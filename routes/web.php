@@ -27,12 +27,16 @@ Route::get('/', function () {
 Auth::routes();
 
 //admin routes-------------------------------------
+
+//home
 Route::get('/admin', [AdminController::class, 'index']);
+//edit users
 Route::get('/findusers/{search}', [AdminController::class, 'findUsers']);
 Route::get('/editusers', [AdminController::class, 'edit'])->name('editusers');
 Route::get('/permissions/{id}', [AdminController::class, 'permissions'])->name('permissions');
 Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions'])->name('editpermissions');
-
+//edit schedules
+Route::get('/editschedules', [AdminController::class, 'editSchedules']);
 
 //admin emails-------------------------------------
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);

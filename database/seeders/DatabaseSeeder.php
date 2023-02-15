@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(10)->create();
-        Volunteer::factory(8)->create();
-        Section::factory(3)->create();
-        Location::factory(3)->create();
-        Shift::factory(10)->create();
-        //Roster::factory(10)->create();
+        // Volunteer::factory(8)->create();
+        // Section::factory(3)->create();
+        // Location::factory(3)->create();
+        // Shift::factory(10)->create();
+        // Roster::factory(10)->create();
     }
 }

@@ -13,8 +13,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
+    <script>
+        //cross site request forgery token, required for api calls in .js files
+        token = document.querySelector('meta[name="csrf-token"]').content;
+    </script>
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
-    @stack('head')
+    @stack('js')
+    
 </head>
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -46,9 +51,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="/editschedules">
                     <span data-feather="file" class="align-text-bottom"></span>
-                    Schedules
+                    Edit Schedules
                   </a>
                 </li>
                 <li class="nav-item">

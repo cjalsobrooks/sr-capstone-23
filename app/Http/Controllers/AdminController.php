@@ -73,6 +73,14 @@ class AdminController extends Controller
         return view('admin.permissions', compact('user'));
     }
 
+    //edit schedules--------------------------------------------------------
+    public function editSchedules()
+    {
+        $users = User::all();
+        return view('admin.editSchedules', compact('users'));
+    }
+
+
     //send emails------------------------------------------------------------
     public function findEmails($search){
         $users = User::where('last_name', 'LIKE', '%'.$search.'%')->get();
