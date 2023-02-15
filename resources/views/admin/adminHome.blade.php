@@ -3,16 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h1>
-      <div class="btn-toolbar mb-2 mb-md-0">
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-          <span data-feather="calendar" class="align-text-bottom"></span>
-          This week
-        </button>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+      <h2 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h2>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
           <button id="showall" type="button" class="btn btn-sm btn-outline-secondary">All</button>
@@ -50,8 +41,8 @@
           <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
         </div>
       </div>
-      
-      <button id="sendemail" class="w-25 mt-4 btn btn-primary btn-lg">Emails: don't press yet</button>
+      <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+
       @csrf <!-- {{ csrf_field() }} -->
     </form>
 
@@ -64,20 +55,15 @@
           <textarea name="name" type="text" class="form-control" id="" placeholder="" value="" required=""></textarea>
         </div>
       </div>
-      <button id="sendemail" class="w-25 mt-4 btn btn-primary btn-lg">Emails: don't press yet</button>
+      <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
       @csrf <!-- {{ csrf_field() }} -->
     </form>
-    <hr class="my-4">
-    <div class="row pt-4">
-      <h2 class="fw-bold">Your Schedule</h2>
-      <div class="col-12 mt-4" id='calendar'></div>
-    </div>
+
   </main>
 
   @prepend('js')
     @vite(['resources/js/adminhome.js'])   
   @endprepend
   
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 
 @endsection

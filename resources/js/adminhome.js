@@ -84,28 +84,3 @@
         document.getElementById("emailform2").style.display = 'block';
       }
       document.getElementById("showall").addEventListener("click", toggleAll, true);
-
-
-      let test = "title";
-      //-----------------Calendar Test------------------------------
-      document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
-        initialDate: '2023-06-02',
-        headerToolbar: {
-          left: 'prev',
-          center: 'title',
-          right: 'next'
-        }
-      });
-
-      //call database on page load and render these with correct values in loop
-      calendar.addEvent({title: `${test}`, start: '2023-06-02T10:30:00', end: '2023-06-02T12:30:00'});
-      calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
-      calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-412:30:00'});
-      calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
-
-      calendar.render();
-  });

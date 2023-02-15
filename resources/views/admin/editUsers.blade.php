@@ -2,32 +2,22 @@
 
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h1>
-      <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary">button 1</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">button 2</button>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-          <span data-feather="calendar" class="align-text-bottom"></span>
-          This week
-        </button>
-      </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
+      <h2 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h2>
     </div>
 
-    <h2>Edit Users</h2>
-
+    <h4>Edit Users</h4>
     <form id="usereditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="finduser2" class="form-label">Search by last name
+          <label for="finduser2" class="form-label">Users by last name
           </label>
           <input name="finduser2" type="text" class="form-control" id="finduser2"  required="">
         </div>
-      @csrf <!-- {{ csrf_field() }} -->
+        @csrf <!-- {{ csrf_field() }} -->
+      </div>
     </form>
-    <div class="table-responsive" id="inner-height">
+    <div class="table-responsive mt-4" id="inner-height">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
