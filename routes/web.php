@@ -47,7 +47,8 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
-
+Route::get('/emailsupervisor', [UserController::class, 'emailSupervisor']);
+Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
 //waiver-------------------------------------------
 Route::get('/register/waiver', function()
 {

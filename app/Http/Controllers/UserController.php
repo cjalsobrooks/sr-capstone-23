@@ -25,4 +25,12 @@ class UserController extends Controller
     {
         return view('user.userHome');
     }
+
+    public function emailSupervisor() {
+        return view('user.emailSupervisor');
+    }
+
+    public function riverbendMap() {
+        return view('user.riverbendMap');
+    }
 }
