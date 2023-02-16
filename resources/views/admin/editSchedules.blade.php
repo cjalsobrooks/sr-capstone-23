@@ -70,7 +70,7 @@
       </ul>
     </div>
 
-    <div class="createoptions">
+    <div id="section" class="createoptions">
       <h2 class="fw-bold my-3">Add Section</h2>
       <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
         <h4>Choose section leader</h4>
@@ -102,7 +102,7 @@
     </div>
 
 
-    <div style="display:none;" class="createoptions">
+    <div id="location" style="display:none;" class="createoptions">
       <h2 class="fw-bold my-3">Add Location</h2>
       <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
         <div class="row g-3">
@@ -129,6 +129,40 @@
     </div>
   </div>
 
+  <div id="shift" style="display:none;" class="createoptions">
+      <h2 class="fw-bold my-3">Add Shift</h2>
+      <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <h4>Choose section leader</h4>
+            <div class="input-group has-validation">
+              <select class="form-control" id="userselect" name="userselect">
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h4>Shift Name</h4>
+            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+          </div>
+          <div class="col-sm-12">
+            <h4>Description</h4>
+            <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
+          </div>
+          <div class="col-sm-6">
+            <h4>Start Time</h4>
+            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+          </div>
+          <div class="col-sm-6">
+            <h4>End Time</h4>
+            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+          </div>
+        </div>
+        @csrf <!-- {{ csrf_field() }} -->
+      </form>
+      <button id="sendemail" type="button" class="btn btn-success mt-4">Submit</button>
+    </div>
+  </div>
+
   <div class="row pt-4 toggleedit"> 
     <h2 class="h2"><span class="fw-bold">Schedule : </span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h2>
     <div style="max-height: 500px;" class="col-12 mt-4 toggleedit" id='calendar'></div>
@@ -141,16 +175,34 @@
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   <script>
       //ternary toggle
-      function toggleDiv() {
-      var div = document.getElementsByClassName("createoptions");
-      for(var i = 0; i < div.length; i++){
-          div[i].style.display = div[i].style.display == "none" ? "block" : "none";
-        }
+      function toggleDiv(inner) {
+      let selected = ''
+      var buttons = document.getElementsByClassName("createoptionstoggle");
+      switch(String(inner)) {
+        case "Add Section":
+          selected = 'section'
+          break;
+        case "Add Location":
+          selected = 'location'
+          break;
+        case "Add Shift":
+          selected = 'shift'
+          break;
       }
+
+      var divs = document.getElementsByClassName("createoptions");
+      for(var i = 0; i < divs.length; i++){
+          divs[i].style.display = "none";    
+      }
+      document.getElementById(selected).style.display = "block"
+    }
+
 
       var elements = document.getElementsByClassName("createoptionstoggle");
       Array.from(elements).forEach(function(element) {
-        element.addEventListener('click', toggleDiv);
+        element.addEventListener('click', () =>{
+          toggleDiv(element.innerText);
+        });
       });
   </script>
 
