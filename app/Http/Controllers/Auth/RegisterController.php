@@ -55,6 +55,10 @@ class RegisterController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            #'shirt_size' => ['required', 'string', 'max:3'],
+            #'age' => ['required', 'integer', 'min:2'],
+            #'group_size' => ['required', 'integer', 'min:1', 'max:10'],
+            #'waiver_signed' => ['required', 'boolean']
         ]);
     }
 
@@ -70,15 +74,16 @@ class RegisterController extends Controller
             'first_name' => $data['firstname'],
             'last_name' => $data['lastname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
         ]);
 
         Volunteer::create([
             'user_id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
-            'shirt_size' =>  "m",
-            'age' => rand(18, 45)
+           #'shirt_size' => $data->shirt_size,
+           #'age' => $data->age,
+
         ]);
         return $user;
     }

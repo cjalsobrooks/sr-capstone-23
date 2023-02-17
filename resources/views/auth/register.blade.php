@@ -10,7 +10,8 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        
+                        <!-- first name input -->
                         <div class="row mb-3">
                             <label for="firstname" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
@@ -25,6 +26,7 @@
                             </div>
                         </div>
 
+                        <!-- last name input -->
                         <div class="row mb-3">
                             <label for="lastname" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
@@ -39,6 +41,7 @@
                             </div>
                         </div>
 
+                        <!-- email input -->
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -53,6 +56,7 @@
                             </div>
                         </div>
 
+                        <!-- password input -->
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -67,6 +71,7 @@
                             </div>
                         </div>
 
+                        <!-- confirm password -->
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
@@ -75,36 +80,52 @@
                             </div>
                         </div>
 
+                        <!-- group attribute section -->
                         <div class="row mb-3">
+                            <!-- is group? checkbox to enable/disable group size field -->
                             <label for="group-size" class="col-md-4 col-form-label text-md-end">{{ __('Group?:') }}</label>
                             <div class=col-md-1>
                                 <input name="isgroup" type="checkbox" value="yes">
                             </div>
 
+                            <!-- enter # of members. read by js and will add fields corresponding to # of members in grp. -->
                             <div class="col-md-4">
-                                <input id="group-size" type="number" class="form-control" name="group size">
-                                <label for="group-size" class="form-label">How many?</label>
+                                <input id="group_size" type="number" class="form-control" name="group size" min="1" max="10">
+                                <label for="group_size" class="form-label">How many?</label>
+
+                                <!-- <input id="toggle-event" type="checkbox" data-toggle="toggle">
+                                <div id="console-event"></div>
+                                <script>
+                                    $(function() {
+                                        $('#toggle-event').change(function() {
+                                        $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+                                        })
+                                    })
+                                </script> -->
                             </div>
                         </div>
 
+                        <!-- waiver sign section -->
                         <div class="row mb-3">
-                            <label for="group-size" class="col-md-4 col-form-label text-md-end">{{ __('I have read and agree to the waiver.') }}</label>
+                            <!-- check have read waiver -->
+                            <label for="waiver" class="col-md-4 col-form-label text-md-end">{{ __('I have read and agree to the waiver.') }}</label>
                             <div class=col-md-1>
-                                <input name="isgroup" type="checkbox" value="yes">
+                                <input name="waiver" type="checkbox" value="yes" required>
                             </div>
-
+                            
+                            <!-- signed by input -->
                             <div class="col-md-4">
-                                <input id="signature" type="text" class="form-control" name="group size">
+                                <input id="signature" type="text" class="form-control" name="group size" required>
                                 <label for="signature" class="form-label">Signature</label>
                             </div>
                         </div>
 
+                        
                         <div class="row mb-3 ">
-                            <div class="col-md-6 offset-md-4">
-                                <a href="register/waiver">Click here to review the waiver.</a> 
-                                <!-- does not at all work, like at all -->
+                            <div class="col-md-6 offset-md-5">                          
+                                <a class="nav-link" href="{{route('view-waiver')}}" target=_blank>{{ __('Click to view waiver.') }}</a>
                             </div>
-                        </div>
+                        </div>                       
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-5">
