@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyUsers;
 
@@ -80,8 +81,24 @@ class AdminController extends Controller
         return view('admin.editSchedules', compact('users'));
     }
 
+    //ajax search volunteers
+    public function findVolunteers($search){
+        $volunteers = Volunteer::where('last_name', 'LIKE', '%'.$search.'%')->get();
+        $names_array = [];
+        foreach($volunteers as $vol){
+            $vol_array = [];
+            $vol_array['firstname'] = $vol->first_name;
+            $vol_array['lastname'] = $vol->last_name;
+            $vol_array['Id'] = $vol->id;
+            array_push($names_array, $vol_array);
+        }
+        return json_encode($names_array);
+    }
+
 
     //send emails------------------------------------------------------------
+
+    //ajax search user emails
     public function findEmails($search){
         $users = User::where('last_name', 'LIKE', '%'.$search.'%')->get();
         $email_array = [];
@@ -95,6 +112,7 @@ class AdminController extends Controller
         return json_encode($email_array);
     }
 
+    //api triggers email event
     public function sendEmail()
     {
         //currently functional, requires .env mailer configuration for smtp.

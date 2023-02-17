@@ -69,27 +69,29 @@
         <li><a class="dropdown-item createoptionstoggle" href="#">Add Shift</a></li>
       </ul>
     </div>
+  
 
     <div id="section" class="createoptions">
       <h2 class="fw-bold my-3">Add Section</h2>
-      <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
+      <form id="sectionform" class="needs-validation" novalidate="" action="" method="POST">
         <h4>Choose section leader</h4>
         <div class="row g-3">
           <div class="col-sm-6">
-            <label for="finduser" class="form-label">Volunteers by last name
+            <label for="finduser1" class="form-label">Volunteers by last name
             </label>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+            <input name="finduser1" type="text" class="form-control" id="finduser1"  required="">
           </div>
           <div class="col-sm-6">
-            <label for="userselect" class="form-label">Name</label>
+            <label for="volselect" class="form-label">Name</label>
             <div class="input-group has-validation">
-              <select class="form-control" id="userselect" name="userselect">
+              <select class="form-control" id="volselect" name="volselect">
               </select>
+              <input type="hidden" id="volId" name="volId" value="">
             </div>
           </div>
           <div class="col-sm-6">
             <h4>Section Name</h4>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+            <input name="" type="text" class="form-control" id=""  required="">
           </div>
           <div class="col-sm-12">
             <h4>Description</h4>
@@ -104,19 +106,21 @@
 
     <div id="location" style="display:none;" class="createoptions">
       <h2 class="fw-bold my-3">Add Location</h2>
-      <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
+      <form id="" class="needs-validation" novalidate="" action="" method="POST">
         <div class="row g-3">
-          
           <div class="col-sm-6">
-            <h4>Choose section leader</h4>
+            <h4>Choose Section</h4>
+            <input name="" type="text" class="form-control" id=""  required="">
+          </div>
+          <div class="col-sm-6">
+
+          </div>
+          <div class="col-sm-6">
+            <h4>Location Name</h4>
             <div class="input-group has-validation">
               <select class="form-control" id="userselect" name="userselect">
               </select>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <h4>Section Name</h4>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
           </div>
           <div class="col-sm-12">
             <h4>Description</h4>
@@ -127,19 +131,22 @@
       </form>
       <button id="sendemail" type="button" class="btn btn-success mt-4">Submit</button>
     </div>
-  </div>
 
   <div id="shift" style="display:none;" class="createoptions">
       <h2 class="fw-bold my-3">Add Shift</h2>
       <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
         <div class="row g-3">
           <div class="col-sm-6">
-            <h4>Choose section leader</h4>
+            <h4>Choose Location</h4>
             <div class="input-group has-validation">
               <select class="form-control" id="userselect" name="userselect">
               </select>
             </div>
           </div>
+          <div class="col-sm-6">
+
+          </div>
+
           <div class="col-sm-6">
             <h4>Shift Name</h4>
             <input name="finduser" type="text" class="form-control" id="finduser"  required="">
@@ -149,12 +156,17 @@
             <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
           </div>
           <div class="col-sm-6">
+            <h4>Day</h4>
+            <input name="finduser" type="date" class="form-control" id="finduser"  required="">
+          </div>
+        <div class="col-sm-6"></div>
+          <div class="col-sm-6">
             <h4>Start Time</h4>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+            <input name="finduser" type="time" class="form-control" id="finduser"  required="">
           </div>
           <div class="col-sm-6">
             <h4>End Time</h4>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+            <input name="finduser" type="time" class="form-control" id="finduser"  required="">
           </div>
         </div>
         @csrf <!-- {{ csrf_field() }} -->
@@ -162,7 +174,6 @@
       <button id="sendemail" type="button" class="btn btn-success mt-4">Submit</button>
     </div>
   </div>
-
   <div class="row pt-4 toggleedit"> 
     <h2 class="h2"><span class="fw-bold">Schedule : </span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h2>
     <div style="max-height: 500px;" class="col-12 mt-4 toggleedit" id='calendar'></div>
@@ -174,7 +185,6 @@
   @endprepend
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   <script>
-      //ternary toggle
       function toggleDiv(inner) {
       let selected = ''
       var buttons = document.getElementsByClassName("createoptionstoggle");
@@ -204,6 +214,7 @@
           toggleDiv(element.innerText);
         });
       });
+
   </script>
 
 @endsection
