@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Exception;
+use \Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Volunteer;
@@ -78,8 +79,13 @@ class AdminController extends Controller
     //edit schedules--------------------------------------------------------
     public function editSchedules()
     {
+        $sections = DB::table('sections')
+                      ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+                      ->select('sections.name', 'sections.description', 'volunteers.first_name', 'volunteers.last_name')
+                      ->get();
+
         $users = User::all();
-        return view('admin.editSchedules', compact('users'));
+        return view('admin.editSchedules', compact('sections','users'));
     }
 
     //ajax search volunteers
@@ -96,11 +102,11 @@ class AdminController extends Controller
         return json_encode($names_array);
     }
 
-    //create section
+    //create-----------------------------------------------------------------
     public function createSection(Request $request)
     {
         $section = Section::where('name', strval($request->input('sectionName')))->get();
-        if(!is_null($section)){
+        if(is_null($section)){
             try{
                 Section::create([
                     'volunteer_id' => $request->input('volId'),
@@ -111,7 +117,6 @@ class AdminController extends Controller
             }catch(Exception $e){
                 return $e->getMessage();
             }
-
         }else{
             return "A section with that name already exists";
         }
