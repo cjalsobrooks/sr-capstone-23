@@ -46,6 +46,10 @@ Route::get('/findvolunteers/{search}', [AdminController::class, 'findVolunteers'
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
 Route::get('/testmail', [AdminController::class, 'sendEmail']);
 
+//create
+Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');
+
+
 
 //user routes-------------------------------------
 Route::middleware(['redirect'])->group(function() {

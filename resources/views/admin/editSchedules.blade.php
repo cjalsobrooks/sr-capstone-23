@@ -73,7 +73,7 @@
 
     <div id="section" class="createoptions">
       <h2 class="fw-bold my-3">Add Section</h2>
-      <form id="sectionform" class="needs-validation" novalidate="" action="" method="POST">
+      <form id="sectionform" class="needs-validation" novalidate="" action="javascript:void(0)" method="POST">
         <h4>Choose section leader</h4>
         <div class="row g-3">
           <div class="col-sm-6">
@@ -91,16 +91,60 @@
           </div>
           <div class="col-sm-6">
             <h4>Section Name</h4>
-            <input name="" type="text" class="form-control" id=""  required="">
+            <input name="sectionname" type="text" class="form-control" id="section-name"  required="">
           </div>
           <div class="col-sm-12">
             <h4>Description</h4>
-            <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
+            <textarea name="section-description" type="text" class="form-control" id="section-description" placeholder="" value="" required=""></textarea>
           </div>
         </div>
         @csrf <!-- {{ csrf_field() }} -->
       </form>
-      <button id="sendemail" type="button" class="btn btn-success mt-4">Submit</button>
+      <button id="addsection" type="button" class="btn btn-success mt-4">Submit</button>
+
+      <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-light">
+        <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+
+          <svg class="bi me-2" width="30" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+          <path fill="#282828" d="M100.232,149.198c-2.8,0-5.4-1.8-7.2-5.2c-22.2-41-22.4-41.4-22.4-41.6c-3.2-5.1-4.9-11.3-4.9-17.6
+            c0-19.1,15.5-34.6,34.6-34.6s34.6,15.5,34.6,34.6c0,6.5-1.8,12.8-5.2,18.2c0,0-1.2,2.4-22.2,41
+            C105.632,147.398,103.132,149.198,100.232,149.198z M100.332,54.198c-16.9,0-30.6,13.7-30.6,30.6c0,5.6,1.5,11.1,4.5,15.9
+            c0.6,1.3,16.4,30.4,22.4,41.5c2.1,3.9,5.2,3.9,7.4,0c7.5-13.8,21.7-40.1,22.2-41c3.1-5,4.7-10.6,4.7-16.3
+            C130.832,67.898,117.132,54.198,100.332,54.198z"/>
+          <path fill="#282828" d="M100.332,105.598c-10.6,0-19.1-8.6-19.1-19.1s8.5-19.2,19.1-19.2c10.6,0,19.1,8.6,19.1,19.1
+            S110.832,105.598,100.332,105.598z M100.332,71.298c-8.3,0-15.1,6.8-15.1,15.1c0,8.3,6.8,15.1,15.1,15.1c8.3,0,15.1-6.8,15.1-15.1
+            C115.432,78.098,108.632,71.298,100.332,71.298z"/>
+          </svg>
+          <span class="fs-5 fw-semibold">Current Sections</span>
+        </a>
+
+        <div class="list-group list-group-flush border-bottom scrollarea">
+          <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+            <div class="d-flex align-items-center justify-content-between">
+              <strong class="mb-1">List group item heading</strong>
+              <small>Wed</small>
+            </div>
+            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+              <strong class="mb-1">List group item heading</strong>
+              <small class="text-muted">Tues</small>
+            </div>
+            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+              <strong class="mb-1">List group item heading</strong>
+              <small class="text-muted">Mon</small>
+            </div>
+            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+          </a>
+    
+
+        </div>
+      </div>
     </div>
 
 
@@ -183,6 +227,7 @@
   @prepend('js')
     @vite(['resources/js/editschedules.js'])  
   @endprepend
+
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   <script>
       function toggleDiv(inner) {
@@ -214,6 +259,33 @@
           toggleDiv(element.innerText);
         });
       });
+
+
+
+
+
+
+      //-------------------------------------------------------------
+      function createsection() {
+        // Form fields, see IDs above
+        const params = {
+            volId: document.querySelector('#volId').value,
+            sectionName: document.querySelector('#section-name').value,
+            sectionDescription: document.querySelector('#section-description').value
+        }
+
+        const xhttp = new XMLHttpRequest()
+        xhttp.open('POST', '/createsection')
+        xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
+        xhttp.setRequestHeader('Content-type', 'application/json')
+        xhttp.send(JSON.stringify(params))
+        xhttp.onload = function() {
+            alert(xhttp.responseText)
+        }
+    }
+
+    let submitSection = document.getElementById("addsection");
+    submitSection.addEventListener('click', createsection);
 
   </script>
 

@@ -9,4 +9,9 @@ class Section extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = [
+        'volunteer_id',
+        'name',
+        'description'
+    ];
 }

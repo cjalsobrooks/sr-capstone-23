@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Volunteer;
+use App\Models\Section;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyUsers;
 
@@ -95,6 +96,26 @@ class AdminController extends Controller
         return json_encode($names_array);
     }
 
+    //create section
+    public function createSection(Request $request)
+    {
+        $section = Section::where('name', strval($request->input('sectionName')))->get();
+        if(!is_null($section)){
+            try{
+                Section::create([
+                    'volunteer_id' => $request->input('volId'),
+                    'name' => $request->input('sectionName'),
+                    'description' => $request->input('sectionDescription')
+                ]);
+                return "Section was created successfully";
+            }catch(Exception $e){
+                return $e->getMessage();
+            }
+
+        }else{
+            return "A section with that name already exists";
+        }
+    }
 
     //send emails------------------------------------------------------------
 
