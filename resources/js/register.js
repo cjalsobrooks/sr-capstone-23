@@ -16,30 +16,36 @@
 
             // this doesnt work yet so dont even worry about it
             function modifyFields() {
-                let num = document.getElementById('group_size').value;
-                let container = document.getElementById('container');
-                let current_excess = container.childElementCount - (num - 1);
-                let volSec = document.getElementById('volinfo');
-
+                let num = document.getElementById('group_size').value;              // number of volunteers in grp
+                let container = document.getElementById('container');               // place where elements should insert
+                let current_excess = container.childElementCount - (num - 1);       // number of ADDITIONAL fields to add
+                let volSec = document.getElementById('volinfo');                    // section id of all fields to be duplicated
+                
+                // document fragment idea starter? 
                 frag = new DocumentFragment();
                 frag.appendChild(volSec.cloneNode());
                 
-
+                // if first selection
                 if (lastGrpNum == 0) {
-                    let changeNum = num;
+                    let changeNum = num;                                            // diff btw prev value and new value
+                    lastGrpNum = num;                                               //set new value
+
                     for(let i = 0; i < changeNum; i++) {
                         document.getElementById('container').after(frag);
                     }
                 }
                 else {
-                    let changeNum = lastGrpNum - num; 
-                    lastGrpNum = num;
+                    let changeNum = lastGrpNum - num;                               // diff btw prev value and new value
+                    lastGrpNum = num;                                               // set new value
                     let pos = (changeNum > 0);
                     switch(pos) {
+                        // if adding fields
                         case true:
                             for(let i = 0; i < changeNum; i++) {
                                 container.appendChild(volInfo);
                             }
+
+                        // if removing fields
                         case false:
                             container.removeChild(container.lastChild);
                     }        
