@@ -14,6 +14,7 @@
 
             var lastGrpNum = 0;
 
+            // this doesnt work yet so dont even worry about it
             function modifyFields() {
                 let num = document.getElementById('group_size').value;
                 let container = document.getElementById('container');
