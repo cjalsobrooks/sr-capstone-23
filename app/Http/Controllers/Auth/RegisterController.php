@@ -130,11 +130,11 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
-            'shirt_size' => $data->shirt_size,  
-            'age' => $data->age,
-            'is_waiver_signed' => $data->waiver_signed,
-            'waiver_signed_by' => $data->signed_by,
-            'comment' => $data->comment,        
+            'shirt_size' => $data['shirt_size'],  
+            'age' => $data['age'],
+            'is_waiver_signed' => $data['waiver_signed'],
+            'waiver_signed_by' => $data['signed_by'],
+            'comment' => $data['comment'],        
         ]);
  
         for ($i = 0; $i < $data['group_size']; $i++) {
@@ -150,9 +150,9 @@ class RegisterController extends Controller
                 'last_name' => $data[$ln],
                 'shirt_size' => $data[$shirt],
                 'age' => $data[$a],
-                'is_waiver_signed' => $data->waiver_signed,
-                'waiver_signed_by' => $data->signed_by,
-                'comment' => $data->comment,           
+                'is_waiver_signed' => $data['waiver_signed'],
+                'waiver_signed_by' => $data['signed_by'],
+                'comment' => $data['comment'],           
             ]);
         }
         return $user;
