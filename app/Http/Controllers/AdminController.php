@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Volunteer;
 use App\Models\Section;
+use App\Models\Location;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyUsers;
 
@@ -25,7 +26,8 @@ class AdminController extends Controller
         return view('admin.adminHome', compact('users'));
     }
 
-    //edit user admin status-------------------------------------------
+
+    //edit user admin status----------------------------------------------------
     public function edit()
     {
         $users = User::all();
@@ -76,16 +78,23 @@ class AdminController extends Controller
         return view('admin.permissions', compact('user'));
     }
 
+
     //edit schedules--------------------------------------------------------
     public function editSchedules()
     {
+        $users = User::all();
+
         $sections = DB::table('sections')
                       ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-                      ->select('sections.name', 'sections.description', 'volunteers.first_name', 'volunteers.last_name')
+                      ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name')
                       ->get();
 
-        $users = User::all();
-        return view('admin.editSchedules', compact('sections','users'));
+        $locations = DB::table('locations')
+                        ->join('sections', 'locations.section_id', '=', 'sections.id')
+                        ->select('locations.name', 'locations.description', 'locations.id', 'sections.name as section')
+                        ->get();
+
+        return view('admin.editSchedules', compact('sections','users','locations'));
     }
 
     //ajax search volunteers
@@ -102,28 +111,69 @@ class AdminController extends Controller
         return json_encode($names_array);
     }
 
+
     //create-----------------------------------------------------------------
     public function createSection(Request $request)
     {
         $section = Section::where('name', strval($request->input('sectionName')))->get();
-        if(is_null($section)){
+        if(!is_null($section)){
             try{
                 Section::create([
                     'volunteer_id' => $request->input('volId'),
                     'name' => $request->input('sectionName'),
                     'description' => $request->input('sectionDescription')
                 ]);
-                return "Section was created successfully";
+                return "Section was created successfully.";
             }catch(Exception $e){
                 return $e->getMessage();
             }
         }else{
-            return "A section with that name already exists";
+            return "A section with that name already exists.";
         }
     }
 
-    //send emails------------------------------------------------------------
 
+    public function createLocation(Request $request)
+    {
+        $section = Location::where('name', strval($request->input('sectionName')))->get();
+        if(!is_null($section)){
+            try{
+                Location::create([
+                    'section_id' => $request->input('sectionId'),
+                    'name' => $request->input('locationName'),
+                    'description' => $request->input('locationDescription')
+                ]);
+                return "Location was created successfully.";
+            }catch(Exception $e){
+                return $e->getMessage();
+            }
+        }else{
+            return "A location with that name already exists.";
+        }
+    }
+
+
+    //refresh page values----------------------------------------------------
+    public function refreshSections()
+    {
+        $sections = DB::table('sections')
+                      ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+                      ->select('sections.name', 'sections.description', 'volunteers.first_name', 'volunteers.last_name')
+                      ->get();
+        return view('partial.displaysections', compact('sections'));
+    }
+    public function refreshLocations()
+    {
+        $locations = DB::table('locations')
+                        ->join('sections', 'locations.section_id', '=', 'sections.id')
+                        ->select('locations.name', 'locations.description', 'locations.id', 'sections.name as section')
+                        ->get();
+                        
+        return view('partial.displaylocations', compact('locations'));
+    }
+
+
+    //send emails------------------------------------------------------------
     //ajax search user emails
     public function findEmails($search){
         $users = User::where('last_name', 'LIKE', '%'.$search.'%')->get();

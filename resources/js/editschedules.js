@@ -77,7 +77,6 @@
         let fullname = data['volselect'].value;
         if (currently_visible[fullname] !== undefined) {
             document.getElementById("volId").value = currently_visible[fullname];
-            console.log(document.getElementById("volId").value)
         }
       }
 

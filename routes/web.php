@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//admin routes-------------------------------------
+//admin routes----------------------------------------------------
 
 //home
 Route::get('/admin', [AdminController::class, 'index']);
@@ -48,10 +48,14 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 
 //create
 Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');
+Route::post('/createlocation', [AdminController::class, 'createLocation'])->name('createlocation');
+
+//refresh values
+Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');
+Route::get('/refreshlocations', [AdminController::class, 'refreshLocations'])->name('refreshlocations');
 
 
-
-//user routes-------------------------------------
+//user routes-------------------------------------------------------
 Route::middleware(['redirect'])->group(function() {
     Route::get('/home', [UserController::class, 'index']);
 });
@@ -59,7 +63,7 @@ Route::get('/emailsupervisor', [UserController::class, 'emailSupervisor']);
 Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
 
 
-//waiver-------------------------------------------
+//waiver------------------------------------------------------------
 Route::get('/view-waiver', function() {
     $file = storage_path('/app/pdfs/waiver.pdf');
     return response()->file($file);
