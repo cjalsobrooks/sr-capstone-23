@@ -43,11 +43,36 @@
     </div>
 
     <div style="display:none;" class="editoptions" id="editsect">
-      <h2 class="fw-bold my-3 ">Edit Section</h2>
+      <div class="row">
+        <h2 class="fw-bold my-3 ">Edit Section</h2>
+        <div class="col-sm-6">
+          <label for="sectionId" class="form-label">Choose section
+          </label>
+          <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
+            @foreach ($sections as $section)
+              <option value="{{$section->id}}">{{$section->name}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="sectionId" class="form-label">Choose section location
+          </label>
+          <div class="input-group has-validation">
+            <select class="form-control" id="locationId" name="locationId">
+              @foreach ($locations as $location)
+                <option value="{{$location->id}}">{{$location->name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <div style="display: none;" class="editoptions col-12-sm my-4" id="showcalendar">
+      <div id="calendar"></div>
+    </div>
   </div>
 
+  
 
     <div style="display:none;" id="togglecreate">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
@@ -235,53 +260,7 @@
 
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   <script>
-      function toggleDiv(inner) {
-      let selected = ''
-      switch(String(inner)) {
-        case "Add Section":
-          selected = 'section'
-          break;
-        case "Add Location":
-          selected = 'location'
-          break;
-        case "Add Shift":
-          selected = 'shift'
-          break;
-        case "Edit Volunteers":
-          selected = 'editvol'
-          break;
-        case "Edit Section":
-          selected = 'editsect'
-          break;
-      }
-      if (!selected.includes('edit')){
-        var divs = document.getElementsByClassName("createoptions");
-        for(var i = 0; i < divs.length; i++){
-            divs[i].style.display = "none";    
-        }
-      }else{
-        var divs = document.getElementsByClassName("editoptions");
-        for(var i = 0; i < divs.length; i++){
-            divs[i].style.display = "none";    
-        }
-      }
-      document.getElementById(selected).style.display = "block";
-    }
 
-
-      var elements = document.getElementsByClassName("createoptionstoggle");
-      Array.from(elements).forEach(function(element) {
-        element.addEventListener('click', () =>{
-          toggleDiv(element.innerText);
-        });
-      });
-
-      var elements = document.getElementsByClassName("editoptionstoggle");
-      Array.from(elements).forEach(function(element) {
-        element.addEventListener('click', () =>{
-          toggleDiv(element.innerText);
-        });
-      });
 
 
       //-------------------------------------------------------------

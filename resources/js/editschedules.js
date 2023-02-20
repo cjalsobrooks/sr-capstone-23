@@ -81,54 +81,110 @@
       document.getElementById("volselect").addEventListener("click", findId, true);
 
 
-      //-------------------Form Toggling----------------------------------------------
-      function toggleEdit(){
-        let none = document.getElementsByClassName("toggleedit");
-        document.getElementById("togglecreate").style.display = 'none';
-        for(var i = 0; i < none.length; i++){
-          none[i].style.display = "block";
+
+
+
+
+  // -----------------Calendar Test--------------------------------------------------
+      let test = "title";
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        allDaySlot: false,
+        initialView: 'listWeek',
+        initialDate: '2023-06-02',
+        headerToolbar: {
+          left: 'prev next',
+          center: 'title',
+          right: 'listWeek,timeGridWeek,timeGridDay'
         }
+      });
+
+      //call database on page load and render these with correct values in loop
+      calendar.addEvent({
+        title: `${test}`,
+        start: '2023-06-02T10:30:00',
+        end: '2023-06-02T12:30:00',
+        eventContent: 'some text'
+      });
+      calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
+      calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-03T12:30:00'});
+      calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
+
+      document.addEventListener('DOMContentLoaded', function() {
+        calendar.render();
+      });
+
+
+
+//-----------------------------advanced div toggle by class-----------------------------
+  function toggleDiv(inner) {
+    let selected = ''
+    switch(String(inner)) {
+      case "Add Section":
+        selected = 'section'
+        break;
+      case "Add Location":
+        selected = 'location'
+        break;
+      case "Add Shift":
+        selected = 'shift'
+        break;
+      case "Edit Volunteers":
+        selected = 'editvol'
+        break;
+      case "Edit Section":
+        selected = 'editsect'
+        break;
+    }
+    if (!selected.includes('edit')){
+      var divs = document.getElementsByClassName("createoptions");
+      for(var i = 0; i < divs.length; i++){
+          divs[i].style.display = "none";    
       }
-      document.getElementById("showedit").addEventListener("click", toggleEdit, true);
-
-      function toggleCreate(){
-        let block = document.getElementsByClassName("toggleedit");
-        document.getElementById("togglecreate").style.display = 'block';
-        for(var i = 0; i < block.length; i++){
-          block[i].style.display = "none";
-        }
+    }else{
+      var divs = document.getElementsByClassName("editoptions");
+      for(var i = 0; i < divs.length; i++){
+          divs[i].style.display = "none";    
       }
-      document.getElementById("showcreate").addEventListener("click", toggleCreate, true);
+    }
+    document.getElementById(selected).style.display = "block";
+    if(selected == 'editsect'){
+      document.getElementById('showcalendar').style.display = "block";
+      calendar.render();
+    }
+  }
 
 
+    var elements = document.getElementsByClassName("createoptionstoggle");
+    Array.from(elements).forEach(function(element) {
+      element.addEventListener('click', () =>{
+        toggleDiv(element.innerText);
+      });
+    });
 
-  //-----------------Calendar Test------------------------------
-  //     let test = "title";
+    var elements = document.getElementsByClassName("editoptionstoggle");
+    Array.from(elements).forEach(function(element) {
+      element.addEventListener('click', () =>{
+        toggleDiv(element.innerText);
+      });
+    });
 
-  //     document.addEventListener('DOMContentLoaded', function() {
-  //     var calendarEl = document.getElementById('calendar');
+    //-------------------Form Toggling----------------------------------------------
+    function toggleEdit(){
+      let none = document.getElementsByClassName("toggleedit");
+      document.getElementById("togglecreate").style.display = 'none';
+      for(var i = 0; i < none.length; i++){
+        none[i].style.display = "block";
+      }
+    }
+    document.getElementById("showedit").addEventListener("click", toggleEdit, true);
 
-  //     var calendar = new FullCalendar.Calendar(calendarEl, {
-  //       allDaySlot: false,
-  //       initialView: 'listWeek',
-  //       initialDate: '2023-06-02',
-  //       headerToolbar: {
-  //         left: 'prev next',
-  //         center: 'title',
-  //         right: 'listWeek,timeGridWeek,timeGridDay'
-  //       }
-  //     });
-
-  //     //call database on page load and render these with correct values in loop
-  //     calendar.addEvent({
-  //       title: `${test}`,
-  //       start: '2023-06-02T10:30:00',
-  //       end: '2023-06-02T12:30:00',
-  //       eventContent: 'some text'
-  //     });
-  //     calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
-  //     calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-03T12:30:00'});
-  //     calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
-
-  //     calendar.render();
-  // });
+    function toggleCreate(){
+      let block = document.getElementsByClassName("toggleedit");
+      document.getElementById("togglecreate").style.display = 'block';
+      for(var i = 0; i < block.length; i++){
+        block[i].style.display = "none";
+      }
+    }
+    document.getElementById("showcreate").addEventListener("click", toggleCreate, true);
