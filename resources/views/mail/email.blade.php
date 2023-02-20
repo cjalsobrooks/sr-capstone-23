@@ -21,6 +21,6 @@
     <p>Hey {{ $name }},</p>
     <p>This is a Laravel test email template.</p>
     <p class="signature">Henry</p>
-<div>
+</div>
 </body>
 </html>

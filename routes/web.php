@@ -41,6 +41,7 @@ Route::post('/editpermissions/{id}', [AdminController::class, 'editPermissions']
 //edit schedules
 Route::get('/editschedules', [AdminController::class, 'editSchedules']);
 Route::get('/findvolunteers/{search}', [AdminController::class, 'findVolunteers']);
+Route::get('/findvolunteers2/{search}', [AdminController::class, 'findVolunteers2'])->name('findvolunteers2');
 
 //admin emails
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
@@ -49,6 +50,7 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 //create
 Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');
 Route::post('/createlocation', [AdminController::class, 'createLocation'])->name('createlocation');
+Route::post('/createshift', [AdminController::class, 'createShift'])->name('createshift');
 
 //refresh values
 Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');

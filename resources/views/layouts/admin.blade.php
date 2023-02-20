@@ -17,6 +17,8 @@
         //cross site request forgery token, required for api calls in .js files
         token = document.querySelector('meta[name="csrf-token"]').content;
     </script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
     @stack('js')
     

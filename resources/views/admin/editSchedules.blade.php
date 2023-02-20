@@ -7,48 +7,22 @@
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group me-2">
         <button id="showedit" type="button" class="btn btn-sm btn-outline-secondary">Edit Schedule</button>
-        <button id="showcreate" type="button" class="btn btn-sm btn-outline-secondary">Create Section</button>
+        <button id="showcreate" type="button" class="btn btn-sm btn-outline-secondary">Create New</button>
       </div>
     </div>
   </div>
 
   <div class="toggleedit">
-    <form id="usereditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
-      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
-
-      <h4 class="mt-10">Edit Schedules</h4>
-      <div class="row g-3">
-        <div class="col-sm-6">
-          <label for="finduser2" class="form-label">Volunteers by last name
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+      <form id="voleditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
+          <label for="findvol2" class="form-label">Volunteers by last name
           </label>
-          <input name="finduser2" type="text" class="form-control" id="finduser2"  required="">
-        </div>
-      @csrf <!-- {{ csrf_field() }} -->
+          <input name="findfindvol2" type="text" class="form-control" id="findvol2"  required="">
+        @csrf <!-- {{ csrf_field() }} -->
+      </form>
+      <div id="target3">
+        @include('partial.displayvolunteers')
       </div>
-    </form>
-    <div class="table-responsive mt-4" id="inner-height">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="responsivebody">
-         @foreach ($users as $user)
-            <tr>
-                <td id="1">{{$user->id}}</td>
-                <td id="2">{{$user->first_name}}</td>
-                <td id="3">{{$user->last_name}}</td>
-                <td id="4">{{$user->email}}</td>
-                <td id="6"><a style="text-decoration: none;" href="{{route('permissions', $user->id)}}">Edit</a></td>
-            </tr>
-         @endforeach
-        </tbody>
-      </table>
     </div>
   </div>
 
@@ -132,7 +106,7 @@
         <div class="row g-3">
           <div class="col-sm-6">
             <h4>Choose Section</h4>
-            <select name="sectionid" type="text" class="form-control" id="sectionid"  required="">
+            <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
               @foreach ($sections as $section)
                 <option value="{{$section->id}}">{{$section->name}}</option>
               @endforeach
@@ -186,7 +160,10 @@
           <div class="col-sm-6">
             <h4>Choose Location</h4>
             <div class="input-group has-validation">
-              <select class="form-control" id="userselect" name="userselect">
+              <select class="form-control" id="locationId" name="locationId">
+                @foreach ($locations as $location)
+                  <option value="{{$location->id}}">{{$location->name}}</option>
+                @endforeach
               </select>
             </div>
           </div>
@@ -196,35 +173,39 @@
 
           <div class="col-sm-6">
             <h4>Shift Name</h4>
-            <input name="finduser" type="text" class="form-control" id="finduser"  required="">
+            <input name="shiftName" type="text" class="form-control" id="shift-name"  required="">
           </div>
           <div class="col-sm-12">
             <h4>Description</h4>
-            <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
+            <textarea name="shiftDescription" type="text" class="form-control" id="shift-description" placeholder="" value="" required=""></textarea>
           </div>
           <div class="col-sm-6">
             <h4>Day</h4>
-            <input name="finduser" type="date" class="form-control" id="finduser"  required="">
+            <input name="shiftDay" type="date" class="form-control" id="shift-day"  required="">
           </div>
         <div class="col-sm-6"></div>
           <div class="col-sm-6">
             <h4>Start Time</h4>
-            <input name="finduser" type="time" class="form-control" id="finduser"  required="">
+            <input name="startTime" type="time" class="form-control" id="start-time"  required="">
           </div>
           <div class="col-sm-6">
             <h4>End Time</h4>
-            <input name="finduser" type="time" class="form-control" id="finduser"  required="">
+            <input name="endTime" type="time" class="form-control" id="end-time"  required="">
+          </div>
+          <div class="col-sm-6">
+            <h4>Number of Volunteers</h4>
+            <input name="numVolunteers" type="number" class="form-control" id="num-volunteers"  required="">
           </div>
         </div>
         @csrf <!-- {{ csrf_field() }} -->
       </form>
-      <button id="sendemail" type="button" class="btn btn-success mt-4">Submit</button>
+      <button id="addshift" type="button" class="btn btn-success mt-4">Submit</button>
+      <div style="display:none" class="row pt-4"> 
+        @include('partial.displayshifts')
+      </div>
     </div>
   </div>
-  <div class="row pt-4 toggleedit"> 
-    <h2 class="h2"><span class="fw-bold">Schedule : </span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h2>
-    <div style="max-height: 500px;" class="col-12 mt-4 toggleedit" id='calendar'></div>
-  </div>
+
   </main>
   
   @prepend('js')
@@ -252,7 +233,7 @@
       for(var i = 0; i < divs.length; i++){
           divs[i].style.display = "none";    
       }
-      document.getElementById(selected).style.display = "block"
+      document.getElementById(selected).style.display = "block";
     }
 
 
@@ -276,7 +257,7 @@
         case 1:
           createURL = '/createsection';
           refreshURL = '/refreshsections';
-          targetDiv = 'target1'
+          targetDiv = 'target1';
           params = {
             volId: document.querySelector('#volId').value,
             sectionName: document.querySelector('#section-name').value,
@@ -288,14 +269,24 @@
           refreshURL = '/refreshlocations';
           targetDiv = 'target2'
           params = {
-            sectionId: document.querySelector('#sectionid').value,
+            sectionId: document.querySelector('#sectionId').value,
             locationName: document.querySelector('#location-name').value,
             locationDescription: document.querySelector('#location-description').value
           }
           break;
         case 3:
-          create = '';
-          refresh = '';
+          createURL = '/createshift';
+          refreshURL = '';
+          targetDiv = ''
+          params ={
+            locationId: document.querySelector('#locationId').value,
+            shiftName: document.querySelector('#shift-name').value,
+            shiftDescription: document.querySelector('#shift-description').value,
+            shiftDay: document.querySelector('#shift-day').value,
+            startTime: document.querySelector('#start-time').value,
+            endTime: document.querySelector('#end-time').value,
+            numVolunteers: document.querySelector('#num-volunteers').value
+          }
           break;
       }
 
@@ -318,6 +309,11 @@
     let submitLocation = document.getElementById("addlocation");
     submitLocation.addEventListener('click', () =>{
       create(2);
+    });
+
+    let submitShift = document.getElementById("addshift");
+    submitShift.addEventListener('click', () =>{
+      create(3);
     });
 
     //-------------------------------------------------------------

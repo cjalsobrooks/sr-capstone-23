@@ -30,7 +30,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody id="responsivebody">
+        <tbody id="responsivebody" class="shadow-sm">
          @foreach ($users as $user)
             <tr>
                 <td id="1">{{$user->id}}</td>

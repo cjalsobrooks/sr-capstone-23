@@ -1,45 +1,30 @@
-      //-----------Find user javascript logic---------------------
+      //-----------Find volunteer for edit schedule page---------------------
       function DynamicForm2() {
-        let data = document.forms.usereditsearch;
-        let lastname = data['finduser2'].value;
-        let body = document.getElementById('responsivebody')
+        let data = document.forms.voleditsearch;
+        let lastname = data['findvol2'].value;
+        const xhttp = new XMLHttpRequest();
 
-        //request for emails from server
-        var xhttp = new XMLHttpRequest();
-        if(lastname.length==0){
-          xhttp.open("get", "/findusers/" + 0, true);
+        if(lastname.length == 0){
+          xhttp.open('GET', '/findvolunteers2/' + 0, true);
         }else{
-          xhttp.open("get", "/findusers/" + lastname, true);
+          xhttp.open('GET', '/findvolunteers2/' + lastname, true);
         }
-        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+       
+        xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
+        xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.send();
-        xhttp.onreadystatechange = function(){
-
-          while (body.firstChild) {
-            body.removeChild(body.firstChild);
-          }
-          let obj = JSON.parse(xhttp.response)
-          for (let i = 0; i < obj.length; i++) {
-            const tr = body.insertRow();
-            for(let prop in obj[i].user){
-              const td = tr.insertCell();
-              td.appendChild(document.createTextNode(obj[i].user[prop]));
+        xhttp.onload = function() {
+            let current = document.getElementById('target3');
+            String(xhttp.responseText);
+            while(current.firstChild){
+              current.removeChild(current.lastChild);
             }
-
-            //edit
-            const tdEdit = tr.insertCell();
-            let a = document.createElement('a');
-            a.style.textDecoration = "none";
-            a.appendChild(document.createTextNode("edit"));
-            a.href = `/permissions/${obj[i].user["id"]}`;
-            tdEdit.appendChild(a);
-
-          }
+            current.innerHTML = String(xhttp.responseText);
         } 
       }
 
 
-      //-----------Find users full name javascript logic---------------------
+      //-----------Find volunteers for create volunteers form---------------------
       let currently_visible = [];
       
       function DynamicForm1() {
@@ -90,8 +75,8 @@
           }, ms || 0);
         };
       }
-
-      document.getElementById("finduser2").addEventListener("keyup", delay2(DynamicForm2, 500), true);
+      //event listner binds search actions
+      document.getElementById("findvol2").addEventListener("keyup", delay2(DynamicForm2, 500), true);
       document.getElementById("finduser1").addEventListener("keyup", delay2(DynamicForm1, 500), true);
       document.getElementById("volselect").addEventListener("click", findId, true);
 
@@ -117,28 +102,33 @@
 
 
 
-      //-----------------Calendar Test------------------------------
-      let test = "title";
+  //-----------------Calendar Test------------------------------
+  //     let test = "title";
 
-      document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
+  //     document.addEventListener('DOMContentLoaded', function() {
+  //     var calendarEl = document.getElementById('calendar');
 
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        allDaySlot: false,
-        initialView: 'timeGridWeek',
-        initialDate: '2023-06-02',
-        headerToolbar: {
-          left: 'prev',
-          center: 'title',
-          right: 'next'
-        }
-      });
+  //     var calendar = new FullCalendar.Calendar(calendarEl, {
+  //       allDaySlot: false,
+  //       initialView: 'listWeek',
+  //       initialDate: '2023-06-02',
+  //       headerToolbar: {
+  //         left: 'prev next',
+  //         center: 'title',
+  //         right: 'listWeek,timeGridWeek,timeGridDay'
+  //       }
+  //     });
 
-      //call database on page load and render these with correct values in loop
-      calendar.addEvent({title: `${test}`, start: '2023-06-02T10:30:00', end: '2023-06-02T12:30:00'});
-      calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
-      calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-412:30:00'});
-      calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
+  //     //call database on page load and render these with correct values in loop
+  //     calendar.addEvent({
+  //       title: `${test}`,
+  //       start: '2023-06-02T10:30:00',
+  //       end: '2023-06-02T12:30:00',
+  //       eventContent: 'some text'
+  //     });
+  //     calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
+  //     calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-03T12:30:00'});
+  //     calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
 
-      calendar.render();
-  });
+  //     calendar.render();
+  // });

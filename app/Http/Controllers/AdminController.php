@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Volunteer;
 use App\Models\Section;
 use App\Models\Location;
+use App\Models\Shift;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyUsers;
 
@@ -82,19 +83,36 @@ class AdminController extends Controller
     //edit schedules--------------------------------------------------------
     public function editSchedules()
     {
+        $sectionLeadIds = [];
         $users = User::all();
 
         $sections = DB::table('sections')
                       ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-                      ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name')
+                      ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name', 'volunteers.id as volId')
                       ->get();
+
+        foreach($sections as $section){
+            array_push($sectionLeadIds, $section->volId);
+        }
 
         $locations = DB::table('locations')
                         ->join('sections', 'locations.section_id', '=', 'sections.id')
                         ->select('locations.name', 'locations.description', 'locations.id', 'sections.name as section')
                         ->get();
 
-        return view('admin.editSchedules', compact('sections','users','locations'));
+        $volunteers = Volunteer::all();
+                        
+        return view('admin.editSchedules', compact('sections','users','locations','volunteers', 'sectionLeadIds'));
+    }
+
+    //find shift schedules
+    public function findShifts($search){
+        $shifts = Shift::where('location_id',$search)->get();
+        $shifts_array = [];
+        foreach($shifts as $shift){
+
+        }
+        return json_encode($shifts_array);
     }
 
     //ajax search volunteers
@@ -111,10 +129,34 @@ class AdminController extends Controller
         return json_encode($names_array);
     }
 
+    public function findVolunteers2($search)
+    {
+        if($search == 0){
+            $volunteers = Volunteer::all();
+        }else{
+        $volunteers = Volunteer::where('last_name', 'LIKE', '%'.$search.'%')->get();
+        }
+        
+        $sectionLeadIds = [];
+        $sections = DB::table('sections')
+                      ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+                      ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name', 'volunteers.id as volId')
+                      ->get();
+
+        foreach($sections as $section){
+            array_push($sectionLeadIds, $section->volId);
+        }
+
+                 
+        return view('partial.displayvolunteers', compact('volunteers', 'sectionLeadIds'));
+    }
+
+
 
     //create-----------------------------------------------------------------
     public function createSection(Request $request)
     {
+        //where query behavior needs to be further evaluated, not yet working correctly
         $section = Section::where('name', strval($request->input('sectionName')))->get();
         if(!is_null($section)){
             try{
@@ -135,13 +177,39 @@ class AdminController extends Controller
 
     public function createLocation(Request $request)
     {
-        $section = Location::where('name', strval($request->input('sectionName')))->get();
-        if(!is_null($section)){
+        //where query behavior needs to be further evaluated, not yet working correctly
+        $location = Location::where('name', strval($request->input('sectionName')))->get();
+        if(!is_null($location)){
             try{
                 Location::create([
                     'section_id' => $request->input('sectionId'),
                     'name' => $request->input('locationName'),
                     'description' => $request->input('locationDescription')
+                ]);
+                return "Location was created successfully.";
+            }catch(Exception $e){
+                return $e->getMessage();
+            }
+        }else{
+            return "A location with that name already exists.";
+        }
+    }
+
+    public function createShift(Request $request)
+    {
+        //where query behavior needs to be further evaluated, not yet working correctly
+        $shift = Shift::where('name', strval($request->input('sectionName')))->get();
+        if(!is_null($shift)){
+            try{
+                Shift::create([
+                    'location_id' => $request->input('locationId'),
+                    'name' => $request->input('shiftName'),
+                    'description' => $request->input('shiftDescription'),
+                    'start_time' => $request->input('shiftDay') . "T" . $request->input('startTime'),
+                    'end_time' => $request->input('shiftDay') . "T" . $request->input('endTime'),
+                    'max_volunteers' => $request->input('numVolunteers'),
+                    'current_volunteers' => 0,
+                    'is_accepting' => true
                 ]);
                 return "Location was created successfully.";
             }catch(Exception $e){
