@@ -33,7 +33,7 @@
             xhttp.open("get", "/findemail/" + lastname, true);
             xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
             xhttp.send();
-            xhttp.onreadystatechange = function(){
+            xhttp.onload = function(){
               while (options.firstChild) {
                 options.removeChild(options.firstChild);
               }

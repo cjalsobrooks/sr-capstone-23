@@ -15,7 +15,7 @@
         }
         xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
         xhttp.send();
-        xhttp.onreadystatechange = function(){
+        xhttp.onload = function(){
 
           while (body.firstChild) {
             body.removeChild(body.firstChild);

@@ -105,14 +105,27 @@ class AdminController extends Controller
         return view('admin.editSchedules', compact('sections','users','locations','volunteers', 'sectionLeadIds'));
     }
 
-    //find shift schedules
-    public function findShifts($search){
-        $shifts = Shift::where('location_id',$search)->get();
-        $shifts_array = [];
-        foreach($shifts as $shift){
+    //find search schedules
+    // public function findShifts($search){
+    //     $shifts = Shift::where('location_id',$search)->get();
+    //     $shifts_array = [];
+    //     foreach($shifts as $shift){
 
+    //     }
+    //     return json_encode($shifts_array);
+    // }
+
+    //find search sections
+    public function findLocations($search){
+        $locations = Location::where('section_id',$search)->get();
+        $location_array = [];        $count = 0;
+        foreach($locations as $location){
+            $found_array = [];
+            $found_array['id'] = $location->id;
+            $found_array['name'] = $location->name;
+            array_push($location_array, $found_array);
         }
-        return json_encode($shifts_array);
+        return $location_array;
     }
 
     //ajax search volunteers

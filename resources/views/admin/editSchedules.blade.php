@@ -46,22 +46,20 @@
       <div class="row">
         <h2 class="fw-bold my-3 ">Edit Section</h2>
         <div class="col-sm-6">
-          <label for="sectionId" class="form-label">Choose section
+          <label for="sectionId2" class="form-label">Choose section
           </label>
-          <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
+          <select name="sectionId2" type="text" class="form-control" id="sectionId2"  required="">
             @foreach ($sections as $section)
               <option value="{{$section->id}}">{{$section->name}}</option>
             @endforeach
           </select>
         </div>
         <div class="col-sm-6">
-          <label for="sectionId" class="form-label">Choose section location
+          <label for="locationoptions" class="form-label">Choose section location
           </label>
           <div class="input-group has-validation">
-            <select class="form-control" id="locationId" name="locationId">
-              @foreach ($locations as $location)
-                <option value="{{$location->id}}">{{$location->name}}</option>
-              @endforeach
+            <select class="form-control" id="locationoptions" name="locationoptions">
+
             </select>
           </div>
         </div>
@@ -263,7 +261,7 @@
 
 
 
-      //-------------------------------------------------------------
+      //---------------------------Create new DB entities---------------------------------
       function create(val) {
         // Form fields, see IDs above
         let createURL = '';
@@ -351,6 +349,38 @@
             current.innerHTML = String(xhttp.responseText);
         }
     }
+
+
+  
+
+    //---------------------------refresh calendar values---------------------------------
+  
+      function DynamicForm3() {
+        let sectionId = document.querySelector('#sectionId2').value
+        //request for emails from server
+        let options = document.getElementById('locationoptions');
+        token = document.querySelector('meta[name="csrf-token"]').content;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("get", "/findlocations/" + sectionId, true);
+        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+        xhttp.send();
+        xhttp.onload = function(){
+          while (options.firstChild) {
+            options.removeChild(options.firstChild);
+          }
+          let obj = JSON.parse(xhttp.response)
+          for(var i = 0; i < obj.length; i++){
+            let node = document.createElement("option");
+            node.value = `${String(obj[i].id)}`;
+            node.innerHTML = `${String(obj[i].name)}`;
+            options.appendChild(node);
+          }
+        }
+      }
+
+      //event listner binds search actions
+      document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
+
   </script>
 
 @endsection

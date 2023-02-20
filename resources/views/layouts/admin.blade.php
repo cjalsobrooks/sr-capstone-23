@@ -29,9 +29,11 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="form-control-dark w-100 rounded-0 border-0"></div>
         <div class="navbar-nav">
           <div class="nav-item text-nowrap">
-            <a class="dropdown-item nav-link px-3" href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+        <div class="form-control-dark w-100 rounded-0 border-0"></div>
+            <a style="background-color: rgba(0, 0, 0, 0.25); width: 114.891px; text-align:center;" class="dropdown-item nav-link px-3" href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
                 {{ __('Sign out') }}
             </a>
          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
