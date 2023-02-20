@@ -13,37 +13,58 @@
   </div>
 
   <div class="toggleedit">
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
-      <form id="voleditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
-          <label for="findvol2" class="form-label">Volunteers by last name
-          </label>
-          <input name="findfindvol2" type="text" class="form-control" id="findvol2"  required="">
-        @csrf <!-- {{ csrf_field() }} -->
-      </form>
-      <div id="target3">
-        @include('partial.displayvolunteers')
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    <div>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      Edit Options
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item editoptionstoggle" href="#">Edit Volunteers</a></li>
+      <li><a class="dropdown-item editoptionstoggle" href="#">Edit Section</a></li>
+    </ul>
+  </div>
+
+
+    <div class="editoptions" id="editvol">
+      <h2 class="fw-bold my-3">Edit Volunteers</h2>
+      <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <form id="voleditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
+            <label for="findvol2" class="form-label">Volunteers by last name
+            </label>
+            <input name="findfindvol2" type="text" class="form-control" id="findvol2"  required="">
+          @csrf <!-- {{ csrf_field() }} -->
+        </form>
+        <div id="target3">
+          @include('partial.displayvolunteers')
+        </div>
       </div>
     </div>
+
+    <div style="display:none;" class="editoptions" id="editsect">
+      <h2 class="fw-bold my-3 ">Edit Section</h2>
+    </div>
+
   </div>
 
 
     <div style="display:none;" id="togglecreate">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-      <div></div>
-      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        Options
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item createoptionstoggle" href="#">Add Section</a></li>
-        <li><a class="dropdown-item createoptionstoggle" href="#">Add Location</a></li>
-        <li><hr class="dropdown-divider createoptionstoggle"></li>
-        <li><a class="dropdown-item createoptionstoggle" href="#">Add Shift</a></li>
-      </ul>
-    </div>
+        <div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Create Options
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item createoptionstoggle" href="#">Add Section</a></li>
+          <li><a class="dropdown-item createoptionstoggle" href="#">Add Location</a></li>
+          <li><hr class="dropdown-divider createoptionstoggle"></li>
+          <li><a class="dropdown-item createoptionstoggle" href="#">Add Shift</a></li>
+        </ul>
+      </div>
     
-
-
     <div id="section" class="createoptions">
       <h2 class="fw-bold my-3">Add Section</h2>
         <form id="sectionform" class="needs-validation" novalidate="" action="javascript:void(0)" method="POST">
@@ -92,7 +113,7 @@
             <span class="fs-5 fw-semibold">Current Sections</span>
           </a>
 
-          <div id ="target1" class="list-group list-group-flush border-bottom scrollarea">
+          <div id ="target1" class="shadow-sm list-group list-group-flush border-bottom scrollarea">
             @include('partial.displaysections')
           </div>
         </div>
@@ -147,7 +168,7 @@
           <span class="fs-5 fw-semibold">Current Locations</span>
         </a>
 
-        <div id ="target2" class="list-group list-group-flush border-bottom scrollarea">
+        <div id ="target2" class="shadow-sm list-group list-group-flush border-bottom scrollarea">
           @include('partial.displaylocations')
         </div>
       </div>
@@ -216,7 +237,6 @@
   <script>
       function toggleDiv(inner) {
       let selected = ''
-      var buttons = document.getElementsByClassName("createoptionstoggle");
       switch(String(inner)) {
         case "Add Section":
           selected = 'section'
@@ -227,17 +247,36 @@
         case "Add Shift":
           selected = 'shift'
           break;
+        case "Edit Volunteers":
+          selected = 'editvol'
+          break;
+        case "Edit Section":
+          selected = 'editsect'
+          break;
       }
-
-      var divs = document.getElementsByClassName("createoptions");
-      for(var i = 0; i < divs.length; i++){
-          divs[i].style.display = "none";    
+      if (!selected.includes('edit')){
+        var divs = document.getElementsByClassName("createoptions");
+        for(var i = 0; i < divs.length; i++){
+            divs[i].style.display = "none";    
+        }
+      }else{
+        var divs = document.getElementsByClassName("editoptions");
+        for(var i = 0; i < divs.length; i++){
+            divs[i].style.display = "none";    
+        }
       }
       document.getElementById(selected).style.display = "block";
     }
 
 
       var elements = document.getElementsByClassName("createoptionstoggle");
+      Array.from(elements).forEach(function(element) {
+        element.addEventListener('click', () =>{
+          toggleDiv(element.innerText);
+        });
+      });
+
+      var elements = document.getElementsByClassName("editoptionstoggle");
       Array.from(elements).forEach(function(element) {
         element.addEventListener('click', () =>{
           toggleDiv(element.innerText);
