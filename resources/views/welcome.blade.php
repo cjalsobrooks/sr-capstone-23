@@ -27,46 +27,30 @@
         </style>
 </head>
 <body>
-
-<nav class="navbar navbar-inverse">
-
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <a href="{{ url('https://www.riverbendfestival.com/') }}">
-     <img src="https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/d34d336a-8005-4100-8a3a-220ffa5d528c/40TH+LOGO+WHITE.png?format=1500w%20%20%22" alt = "Riverbend Logo" style="width:220px;"></a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>     
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-       <ul class="nav navbar-nav navbar-right">
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in">{{ __(' Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"><span class="glyphicon glyphicon-user">{{ __(' Register') }}</a>
-                                </li>
-                            @endif
-                    </ul>
-                    @endguest
-                </div>
-            </nav>
-        </header>
+    <header>
+        <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand" href="https://www.riverbendfestival.com/"><img src="https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/d34d336a-8005-4100-8a3a-220ffa5d528c/40TH+LOGO+WHITE.png?format=1500w%20%20%22" alt = "Riverbend Logo" style="width:220px;"></a>
+        <h1 style="white-space:pre-wrap;text-align: center;vertical-align: middle;font-weight: bold; font-size: 100px; color: #8fce00">Welcome Volunteers!</h1>
         
-        <div class="sqs-block-content">
-            <style>
-                
-            </style>
-            <h1 style="white-space:pre-wrap;text-align: center;vertical-align: middle;font-weight: bold; font-size: 100px; color: #FFFFFF">Welcome Volunteers!</h1>
-        </div>
+            <ul class="nav justify-content-end">  
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ route('login') }}" role="button">Login</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                        <a class="btn btn-secondary" href="{{ route('register') }}" role="button">Register</a>
+                        <li>
+                    @endif
+
+                @endguest
+            </ul>
+        </nav>
+    </header>
         
 
-    </body>
+</body>
 </html>
