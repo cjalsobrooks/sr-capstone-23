@@ -82,41 +82,6 @@
 
 
 
-
-
-
-  // -----------------Calendar Test--------------------------------------------------
-      let test = "title";
-      var calendarEl = document.getElementById('calendar');
-
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        allDaySlot: false,
-        initialView: 'listWeek',
-        initialDate: '2023-06-02',
-        headerToolbar: {
-          left: 'prev next',
-          center: 'title',
-          right: 'listWeek,timeGridWeek,timeGridDay'
-        }
-      });
-
-      //call database on page load and render these with correct values in loop
-      calendar.addEvent({
-        title: `${test}`,
-        start: '2023-06-02T10:30:00',
-        end: '2023-06-02T12:30:00',
-        eventContent: 'some text'
-      });
-      calendar.addEvent({title: 'Event 2', start: '2023-06-02T12:30:00', end: '2023-06-02T16:30:00'});
-      calendar.addEvent({title: 'Event 3', start: '2023-06-03T08:30:00', end: '2023-06-03T12:30:00'});
-      calendar.addEvent({title: 'Event 4', start: '2023-06-03T14:30:00', end: '2023-06-4T17:30:00'});
-
-      document.addEventListener('DOMContentLoaded', function() {
-        calendar.render();
-      });
-
-
-
 //-----------------------------advanced div toggle by class-----------------------------
   function toggleDiv(inner) {
     let selected = ''
@@ -188,3 +153,5 @@
       }
     }
     document.getElementById("showcreate").addEventListener("click", toggleCreate, true);
+
+
