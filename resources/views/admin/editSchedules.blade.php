@@ -433,7 +433,7 @@
 
       //event listner binds search actions
       document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
-      document.getElementById("locationoptions").addEventListener("click", DynamicForm4);
+      document.getElementById("locationoptions").addEventListener("change", DynamicForm4);
   </script>
 
 @endsection
