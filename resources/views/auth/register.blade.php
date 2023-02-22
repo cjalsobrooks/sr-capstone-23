@@ -11,9 +11,6 @@
                         <form id="registernew" method="POST" action="{{ route('register') }}">
                             @csrf
                             
-                            
-                                
-
                                 <!-- email input -->
                                 <div class="row mb-3">
                                     <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
@@ -92,12 +89,11 @@
                                     <div class="col-md-6">
                                         <select class="form-select" id=shirt name="shirt_size">
                                             <option selected>--</option>
-                                            <option value="XS">XS</option>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+                                            <option value="xs">XS</option>
+                                            <option value="s">S</option>
+                                            <option value="m">M</option>
+                                            <option value="l">L</option>
+                                            <option value="xl">XL</option>
                                         </select>
                                     </div>
                                 </div>
@@ -121,7 +117,7 @@
 
                                 <!-- enter # of members. read by js and will add fields corresponding to # of members in grp. -->
                                 <div class="col-md-4">
-                                    <select class="form-select" id=group_size disabled>
+                                    <select name="group_size" class="form-select" id=group_size disabled>
                                         <option value="1" selected>N/A</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -180,12 +176,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e1" id=shirt1 name="shirt_size1">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -240,12 +235,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e2" id=shirt2 name="shirt_size2">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -301,12 +295,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e3" id=shirt3 name="shirt_size3">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -362,12 +355,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e4" id=shirt4 name="shirt_size4">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -423,12 +415,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e5" id=shirt5 name="shirt_size5">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -484,12 +475,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e5" id=shirt6 name="shirt_size6">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -545,12 +535,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e7" id=shirt7 name="shirt_size7">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -606,12 +595,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e8" id=shirt8 name="shirt_size8">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>
@@ -667,12 +655,11 @@
                                         <div class="col-md-6">
                                             <select class="form-select e9" id=shirt9 name="shirt_size9">
                                                 <option selected>--</option>
-                                                <option value="XS">XS</option>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </select>
                                         </div>
                                     </div>

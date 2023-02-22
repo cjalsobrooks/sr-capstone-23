@@ -51,62 +51,64 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'shirt_size' => ['required', 'string', 'max:3'],
-            'age' => ['required', 'integer', 'min:2'],
-            'group_size' => ['required', 'integer', 'min:1', 'max:10'],
-            'waiver_signed' => ['required', 'boolean'],
-            // e1 ---- index 8
-            'firstname1' => ['string', 'max:255', 'nullable'],
-            'lastname1' => ['string', 'max:255', 'nullable'],
-            'shirt_size1' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e2 ---- index 12
-            'firstname2' => ['string', 'max:255', 'nullable'],
-            'lastname2' => ['string', 'max:255', 'nullable'],
-            'shirt_size2' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e3 ---- index 16
-            'firstname3' => ['string', 'max:255', 'nullable'],
-            'lastname3' => ['string', 'max:255', 'nullable'],
-            'shirt_size3' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e4 ---- index 20
-            'firstname4' => ['string', 'max:255', 'nullable'],
-            'lastname4' => ['string', 'max:255', 'nullable'],
-            'shirt_size4' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e5 ---- index 24
-            'firstname5' => ['string', 'max:255', 'nullable'],
-            'lastname5' => ['string', 'max:255', 'nullable'],
-            'shirt_size5' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e6 ---- index 28
-            'firstname6' => ['string', 'max:255', 'nullable'],
-            'lastname6' => ['string', 'max:255', 'nullable'],
-            'shirt_size6' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e7 ---- index 32
-            'firstname7' => ['string', 'max:255', 'nullable'],
-            'lastname7' => ['string', 'max:255', 'nullable'],
-            'shirt_size7' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e8 ---- index 36
-            'firstname8' => ['string', 'max:255', 'nullable'],
-            'lastname8' => ['string', 'max:255', 'nullable'],
-            'shirt_size8' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],
-            // e9 ---- index 40 
-            'firstname8' => ['string', 'max:255', 'nullable'],
-            'lastname8' => ['string', 'max:255', 'nullable'],
-            'shirt_size8' => ['string', 'max:3', 'nullable'],
-            'age1' => ['string', 'max:3', 'nullable'],           
-            //signed by
-            'signed_by' => ['required', 'string', 'max: 255'],
-            'comment' => ['string', 'max: 255', 'nullable'],
+
+            // 'firstname' => ['required', 'string', 'max:255'],
+            // 'lastname' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'shirt_size' => ['required', 'string', 'max:3'],
+            // 'age' => ['required', 'integer', 'min:2'],
+            // 'group_size' => ['required', 'integer', 'min:1', 'max:10'],
+            // 'waiver_signed' => ['required', 'boolean'],
+            // // e1 ---- index 8
+            // 'firstname1' => ['nullable','string', 'max:255'],
+            // 'lastname1' => ['nullable','string', 'max:255'],
+            // 'shirt_size1' => ['nullable','string', 'max:3'],
+            // 'age1' => ['nullable','string', 'max:3'],
+            // // e2 ---- index 12
+            // 'firstname2' => ['nullable','string', 'max:255'],
+            // 'lastname2' => ['nullable','string', 'max:255'],
+            // 'shirt_size2' => ['nullable','string', 'max:3'],
+            // 'age2' => ['nullable','string', 'max:3'],
+            // // e3 ---- index 16
+            // 'firstname3' => ['nullable','string', 'max:255'],
+            // 'lastname3' => ['nullable','string', 'max:255'],
+            // 'shirt_size3' => ['nullable','string', 'max:3'],
+            // 'age3' => ['nullable','string', 'max:3'],
+            // // e4 ---- index 20
+            // 'firstname4' => ['nullable','string', 'max:255'],
+            // 'lastname4' => ['nullable','string', 'max:255'],
+            // 'shirt_size4' => ['nullable','string', 'max:3'],
+            // 'age4' => ['nullable','string', 'max:3'],
+            // // e5 ---- index 24
+            // 'firstname5' => ['nullable','string', 'max:255'],
+            // 'lastname5' => ['nullable','string', 'max:255'],
+            // 'shirt_size5' => ['nullable','string', 'max:3'],
+            // 'age5' => ['nullable','string', 'max:3'],
+            // // e6 ---- index 28
+            // 'firstname6' => ['nullable','string', 'max:255'],
+            // 'lastname6' => ['nullable','string', 'max:255'],
+            // 'shirt_size6' => ['nullable','string', 'max:3'],
+            // 'age6' => ['nullable','string', 'max:3'],
+            // // e7 ---- index 32
+            // 'firstname7' => ['nullable','string', 'max:255'],
+            // 'lastname7' => ['nullable','string', 'max:255'],
+            // 'shirt_size7' => ['nullable','string', 'max:3'],
+            // 'age7' => ['nullable','string', 'max:3'],
+            // // e8 ---- index 36
+            // 'firstname8' => ['nullable','string', 'max:255'],
+            // 'lastname8' => ['nullable','string', 'max:255'],
+            // 'shirt_size8' => ['nullable','string', 'max:3'],
+            // 'age8' => ['nullable','string', 'max:3'],
+            // // e9 ---- index 40 
+            // 'firstname9' => ['nullable','string', 'max:255'],
+            // 'lastname9' => ['nullable','string', 'max:255'],
+            // 'shirt_size9' => ['nullable','string', 'max:3'],
+            // 'age9' => ['nullable','string', 'max:3'],           
+            // //signed by
+            // 'signed_by' => ['required', 'string', 'max: 255'],
+            // 'comment' => ['nullable','string', 'max: 255']
+
         ]);
     }
 
