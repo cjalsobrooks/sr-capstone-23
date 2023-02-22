@@ -104,21 +104,25 @@ class AdminController extends Controller
                         
         return view('admin.editSchedules', compact('sections','users','locations','volunteers', 'sectionLeadIds'));
     }
+    //ajax search schedules
+    public function findShifts($search){
+        $shifts = Shift::where('location_id',$search)->get();
+        $shift_array = [];
+        foreach($shifts as $shift){
+            $found_array = [];
+            $found_array['current'] = $shift->current_volunteers;
+            $found_array['max'] = $shift->max_volunteers;
+            $found_array['start'] = $shift->start_time;
+            $found_array['end'] = $shift->end_time;
+            array_push($shift_array, $found_array);
+        }
+        return $shift_array;
+    }
 
-    //find search schedules
-    // public function findShifts($search){
-    //     $shifts = Shift::where('location_id',$search)->get();
-    //     $shifts_array = [];
-    //     foreach($shifts as $shift){
-
-    //     }
-    //     return json_encode($shifts_array);
-    // }
-
-    //find search sections
+    //ajax search sections
     public function findLocations($search){
         $locations = Location::where('section_id',$search)->get();
-        $location_array = [];        $count = 0;
+        $location_array = []; 
         foreach($locations as $location){
             $found_array = [];
             $found_array['id'] = $location->id;
@@ -160,7 +164,6 @@ class AdminController extends Controller
             array_push($sectionLeadIds, $section->volId);
         }
 
-                 
         return view('partial.displayvolunteers', compact('volunteers', 'sectionLeadIds'));
     }
 

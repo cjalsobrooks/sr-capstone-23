@@ -43,6 +43,7 @@ Route::get('/editschedules', [AdminController::class, 'editSchedules']);
 Route::get('/findvolunteers/{search}', [AdminController::class, 'findVolunteers']);
 Route::get('/findvolunteers2/{search}', [AdminController::class, 'findVolunteers2'])->name('findvolunteers2');
 Route::get('/findlocations/{search}', [AdminController::class, 'findLocations'])->name('findlocations');
+Route::get('/findshifts/{search}', [AdminController::class, 'findShifts'])->name('findshifts');
 
 //admin emails
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);

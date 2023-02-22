@@ -357,7 +357,6 @@
   
       function DynamicForm3() {
         let sectionId = document.querySelector('#sectionId2').value
-        //request for emails from server
         let options = document.getElementById('locationoptions');
         token = document.querySelector('meta[name="csrf-token"]').content;
         var xhttp = new XMLHttpRequest();
@@ -381,6 +380,60 @@
       //event listner binds search actions
       document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
 
+
+
+
+    //---------------Calendar definition---------------------------------------------------
+
+    var calendarEl = document.getElementById('calendar');
+            
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      allDaySlot: false,
+      initialView: 'listWeek',
+      initialDate: '2023-06-02',
+      headerToolbar: {
+        left: 'prev next',
+        center: 'title',
+        right: 'listWeek,timeGridWeek,timeGridDay'
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      calendar.render();
+    });
+
+
+
+      //--------load the calendar--------------------------------------------------
+      function DynamicForm4() {
+
+        calendar.removeAllEvents();
+        let sectionId = document.querySelector('#locationoptions').value
+        if(sectionId == ""){
+          sectionId=0;
+        }
+        token = document.querySelector('meta[name="csrf-token"]').content;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("get", "/findshifts/" + sectionId, true);
+        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+        xhttp.send();
+        xhttp.onload = function(){
+          let obj = JSON.parse(xhttp.response)
+          for(var i = 0; i < obj.length; i++){
+            //call database on page load and render these with correct values in loop
+            calendar.addEvent({
+              title: `${String(obj[i].current)} out of ${String(obj[i].max)}`,
+              start: String(obj[i].start),
+              end: String(obj[i].end)});
+          }
+
+          calendar.render();
+        }
+      }
+
+      //event listner binds search actions
+      document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
+      document.getElementById("locationoptions").addEventListener("change", DynamicForm4);
   </script>
 
 @endsection

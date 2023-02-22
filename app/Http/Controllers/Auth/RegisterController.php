@@ -60,53 +60,53 @@ class RegisterController extends Controller
             'group_size' => ['required', 'integer', 'min:1', 'max:10'],
             'waiver_signed' => ['required', 'boolean'],
             // e1 ---- index 8
-            'firstname1' => ['string', 'max:255'],
-            'lastname1' => ['string', 'max:255'],
-            'shirt_size1' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname1' => ['string', 'max:255', 'nullable'],
+            'lastname1' => ['string', 'max:255', 'nullable'],
+            'shirt_size1' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e2 ---- index 12
-            'firstname2' => ['string', 'max:255'],
-            'lastname2' => ['string', 'max:255'],
-            'shirt_size2' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname2' => ['string', 'max:255', 'nullable'],
+            'lastname2' => ['string', 'max:255', 'nullable'],
+            'shirt_size2' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e3 ---- index 16
-            'firstname3' => ['string', 'max:255'],
-            'lastname3' => ['string', 'max:255'],
-            'shirt_size3' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname3' => ['string', 'max:255', 'nullable'],
+            'lastname3' => ['string', 'max:255', 'nullable'],
+            'shirt_size3' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e4 ---- index 20
-            'firstname4' => ['string', 'max:255'],
-            'lastname4' => ['string', 'max:255'],
-            'shirt_size4' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname4' => ['string', 'max:255', 'nullable'],
+            'lastname4' => ['string', 'max:255', 'nullable'],
+            'shirt_size4' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e5 ---- index 24
-            'firstname5' => ['string', 'max:255'],
-            'lastname5' => ['string', 'max:255'],
-            'shirt_size5' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname5' => ['string', 'max:255', 'nullable'],
+            'lastname5' => ['string', 'max:255', 'nullable'],
+            'shirt_size5' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e6 ---- index 28
-            'firstname6' => ['string', 'max:255'],
-            'lastname6' => ['string', 'max:255'],
-            'shirt_size6' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname6' => ['string', 'max:255', 'nullable'],
+            'lastname6' => ['string', 'max:255', 'nullable'],
+            'shirt_size6' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e7 ---- index 32
-            'firstname7' => ['string', 'max:255'],
-            'lastname7' => ['string', 'max:255'],
-            'shirt_size7' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname7' => ['string', 'max:255', 'nullable'],
+            'lastname7' => ['string', 'max:255', 'nullable'],
+            'shirt_size7' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e8 ---- index 36
-            'firstname8' => ['string', 'max:255'],
-            'lastname8' => ['string', 'max:255'],
-            'shirt_size8' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],
+            'firstname8' => ['string', 'max:255', 'nullable'],
+            'lastname8' => ['string', 'max:255', 'nullable'],
+            'shirt_size8' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],
             // e9 ---- index 40 
-            'firstname8' => ['string', 'max:255'],
-            'lastname8' => ['string', 'max:255'],
-            'shirt_size8' => ['string', 'max:3'],
-            'age1' => ['string', 'max:3'],           
+            'firstname8' => ['string', 'max:255', 'nullable'],
+            'lastname8' => ['string', 'max:255', 'nullable'],
+            'shirt_size8' => ['string', 'max:3', 'nullable'],
+            'age1' => ['string', 'max:3', 'nullable'],           
             //signed by
             'signed_by' => ['required', 'string', 'max: 255'],
-            'comment' => ['string', 'max: 255'],
+            'comment' => ['string', 'max: 255', 'nullable'],
         ]);
     }
 
@@ -137,12 +137,12 @@ class RegisterController extends Controller
             'comment' => $data['comment'],        
         ]);
  
-        for ($i = 0; $i < $data['group_size']; $i++) {
-
-            $fn = 4 * $i;
-            $ln = 4 * $i + 1;
-            $shirt = 4 * $i + 2;
-            $a = 4 * $i + 3; 
+        for ($i = 0; $i < $data['group_size']-1; $i++) {
+            $volnumber = $i + 1;
+            $fn = 'firstname'.$volnumber;
+            $ln = 'lastname'.$volnumber;
+            $shirt = 'shirt_size'.$volnumber;
+            $a = 'age'.$volnumber; 
 
             Volunteer::create([
                 'user_id' => $user->id,
