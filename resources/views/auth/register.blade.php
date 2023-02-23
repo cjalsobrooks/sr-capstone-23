@@ -117,7 +117,7 @@
 
                                 <!-- enter # of members. read by js and will add fields corresponding to # of members in grp. -->
                                 <div class="col-md-4">
-                                    <select name="group_size" class="form-select" id=group_size disabled>
+                                    <select name="group_size" class="form-select" id=group_size>
                                         <option value="1" selected>N/A</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
