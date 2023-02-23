@@ -66,7 +66,7 @@
 
                         <div class="d-grid gap-2 col-6 mx-auto">
                             <a class="btn btn-warning" type="button" href="https://www.riverbendfestival.com">Festival Information</a>
-                            <button class="btn btn-warning" type="button">FAQ/User Guide (TODO)</button>
+                            <a class="btn btn-warning" type="button" href="https://www.riverbendfestival.com/faq">FAQ/User Guide</a>
                         </div>
                         
                     </div>
