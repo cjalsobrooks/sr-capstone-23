@@ -14,6 +14,7 @@
       </p>
 
       <h2 id="schedule">Your Shift Schedule</h2>
+      <!-- <div id='calendar'></div> -->
       <table class="table">
         <thead>
           <tr>
@@ -25,27 +26,29 @@
         </thead>
         <tbody>
           <tr>
-            <td>Friday, February 10th</td>
+            <td>Wednesday, February 22nd</td>
             <td>Checkpoint</td>
             <td>9:00 AM</td>
             <td>1:00 PM</td>
           </tr>
           <tr>
-            <td>Saturday, February 11th</td>
+            <td>Thursday, February 23rd</td>
             <td>Janitorial</td>
             <td>1:00 PM</td>
             <td>5:00 PM</td>
           </tr>
           <tr>
-            <td>Sunday, February 12th</td>
+            <td>Friday, February 24th</td>
             <td>Security</td>
             <td>9:00 AM</td>
             <td>1:00 PM</td>
           </tr>
         </tbody>
       </table>
+    </div>
   </main>
 
+  <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js%27%3E'></script> -->
   @prepend('js')
     @vite(['resources/js/adminhome.js'])   
   @endprepend
