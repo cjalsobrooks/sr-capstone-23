@@ -202,17 +202,21 @@
       <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
         <div class="row g-3">
           <div class="col-sm-6">
-            <h4>Choose Location</h4>
+            <h4>Choose Section</h4>
             <div class="input-group has-validation">
-              <select class="form-control" id="locationId" name="locationId">
-                @foreach ($locations as $location)
-                  <option value="{{$location->id}}">{{$location->name}}</option>
+              <select class="form-control" id="sectionId3" name="sectionId3">
+                @foreach ($sections as $section)
+                  <option value="{{$section->id}}">{{$section->name}}</option>
                 @endforeach
               </select>
             </div>
           </div>
           <div class="col-sm-6">
-
+            <h4>Choose Location</h4>
+            <div class="input-group has-validation">
+              <select class="form-control" id="locationoptions2" name="locationoptions2">
+              </select>
+            </div>
           </div>
 
           <div class="col-sm-6">
@@ -295,7 +299,8 @@
           refreshURL = '';
           targetDiv = ''
           params ={
-            locationId: document.querySelector('#locationId').value,
+            locationId: document.querySelector('#locationoptions2').value,
+            sectionId: document.querySelector('#sectionId3').value,
             shiftName: document.querySelector('#shift-name').value,
             shiftDescription: document.querySelector('#shift-description').value,
             shiftDay: document.querySelector('#shift-day').value,
@@ -332,7 +337,7 @@
       create(3);
     });
 
-    //-------------------------------------------------------------
+    //-------------------------refresh list of sections/locations created------------------------
     function refreshValues(url,target) {
 
         const xhttp = new XMLHttpRequest();
@@ -353,11 +358,11 @@
 
   
 
-    //---------------------------refresh calendar values---------------------------------
+    //---------------------------refresh calendar location options---------------------------------
   
-      function DynamicForm3() {
-        let sectionId = document.querySelector('#sectionId2').value
-        let options = document.getElementById('locationoptions');
+      function DynamicForm3(sectionIdTag, locationOptionsTag) {
+        let sectionId = document.querySelector(sectionIdTag).value
+        let options = document.getElementById(locationOptionsTag);
         token = document.querySelector('meta[name="csrf-token"]').content;
         var xhttp = new XMLHttpRequest();
         xhttp.open("get", "/findlocations/" + sectionId, true);
@@ -377,14 +382,7 @@
         }
       }
 
-      //event listner binds search actions
-      document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
-
-
-
-
-    //---------------Calendar definition---------------------------------------------------
-
+    //---------------Calendar definition statement-------------------------------
     var calendarEl = document.getElementById('calendar');
             
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -432,8 +430,15 @@
       }
 
       //event listner binds search actions
-      document.getElementById("sectionId2").addEventListener("click", DynamicForm3);
+      document.getElementById("sectionId2").addEventListener("click", ()=>{
+        DynamicForm3('#sectionId2','locationoptions');
+      });
       document.getElementById("locationoptions").addEventListener("change", DynamicForm4);
+
+      //reuse Dynamic form 3 for shift creation form
+      document.getElementById("sectionId3").addEventListener("click", ()=>{
+        DynamicForm3('#sectionId3','locationoptions2');
+      });
   </script>
 
 @endsection

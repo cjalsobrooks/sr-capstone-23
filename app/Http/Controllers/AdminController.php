@@ -172,9 +172,11 @@ class AdminController extends Controller
     //create-----------------------------------------------------------------
     public function createSection(Request $request)
     {
-        //where query behavior needs to be further evaluated, not yet working correctly
-        $section = Section::where('name', strval($request->input('sectionName')))->get();
-        if(!is_null($section)){
+        //check if section exists, if true return message, if false create section
+        if (Section::where('name', strval($request->input('sectionName')))->exists()) {
+            $section_name = strval($request->input('sectionName'));
+            return "A Section named \"{$section_name}\" already exists.";
+        }else{
             try{
                 Section::create([
                     'volunteer_id' => $request->input('volId'),
@@ -185,17 +187,22 @@ class AdminController extends Controller
             }catch(Exception $e){
                 return $e->getMessage();
             }
-        }else{
-            return "A section with that name already exists.";
         }
     }
 
 
     public function createLocation(Request $request)
     {
-        //where query behavior needs to be further evaluated, not yet working correctly
-        $location = Location::where('name', strval($request->input('sectionName')))->get();
-        if(!is_null($location)){
+        //check if location name exists for the given section, if true return message, if false create location
+        if (DB::table('locations')
+            ->join('sections', 'sections.id', '=', 'locations.section_id')
+            ->where('sections.id', $request->input('sectionId'))
+            ->where('locations.name', $request->input('locationName'))
+            ->exists()) 
+        {
+            $location_name = strval($request->input('locationName'));
+            return "A location named \"{$location_name}\" already exists for that section.";
+        }else{
             try{
                 Location::create([
                     'section_id' => $request->input('sectionId'),
@@ -206,16 +213,23 @@ class AdminController extends Controller
             }catch(Exception $e){
                 return $e->getMessage();
             }
-        }else{
-            return "A location with that name already exists.";
         }
     }
 
     public function createShift(Request $request)
     {
-        //where query behavior needs to be further evaluated, not yet working correctly
-        $shift = Shift::where('name', strval($request->input('sectionName')))->get();
-        if(!is_null($shift)){
+        //check if shift exists, if true return message, if false create shift
+        if (DB::table('sections')
+            ->join('locations', 'sections.id', '=', 'locations.section_id')
+            ->join('shifts', 'locations.id', '=', 'shifts.location_id')
+            ->where('sections.id', $request->input('sectionId'))
+            ->where('locations.id', $request->input('locationId'))
+            ->where('shifts.name', $request->input('shiftName'))
+            ->exists()) 
+         {
+            $shift_name = strval($request->input('shiftName'));
+            return "A Shift named \"{$shift_name}\" already exists for this locaiton.";
+         }else{
             try{
                 Shift::create([
                     'location_id' => $request->input('locationId'),
@@ -227,13 +241,11 @@ class AdminController extends Controller
                     'current_volunteers' => 0,
                     'is_accepting' => true
                 ]);
-                return "Location was created successfully.";
+                return "Shift was created successfully.";
             }catch(Exception $e){
                 return $e->getMessage();
             }
-        }else{
-            return "A location with that name already exists.";
-        }
+         }
     }
 
 
