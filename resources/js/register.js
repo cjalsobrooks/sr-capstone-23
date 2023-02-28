@@ -3,7 +3,7 @@
 
             // enables/disables group number input field when checkbox is clicked
             document.getElementById('isgroup').addEventListener('click', function() {
-                document.getElementById('group_size').disabled = document.getElementById('isgroup').checked ? false : true; // enable or disable group size field
+                //document.getElementById('group_size').disabled = document.getElementById('isgroup').checked ? false : true; // enable or disable group size field
                 let size = document.getElementById('group_size').value;                
                 for(let i = 0; i < size - 1; i++) {
                     let extraid = 'e'.concat(i+1);
