@@ -372,7 +372,11 @@
           while (options.firstChild) {
             options.removeChild(options.firstChild);
           }
+          let nodeDefault = document.createElement("option");
+          nodeDefault.value="0";
+          nodeDefault.innerHTML="--- select a location ---";
           let obj = JSON.parse(xhttp.response)
+          options.appendChild(nodeDefault);
           for(var i = 0; i < obj.length; i++){
             let node = document.createElement("option");
             node.value = `${String(obj[i].id)}`;
