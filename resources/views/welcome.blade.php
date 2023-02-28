@@ -53,6 +53,21 @@
                     @endif
 
                 @endguest
+
+                @auth 
+                    <li class="nav-item">
+                        <a class="btn btn-warning" href="/home" role="button" style="margin-right:1em">Home</a>
+                    <li>
+                    <li class="nav-item">
+                        <a class="btn btn-secondary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
+        
             </ul>
         </nav>
     </header>
