@@ -36,8 +36,14 @@
     <header>
         <nav class="navbar navbar-light bg-dark">            
             <a class="navbar-brand" href="https://www.riverbendfestival.com/"><img src="https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/d34d336a-8005-4100-8a3a-220ffa5d528c/40TH+LOGO+WHITE.png?format=1500w%20%20%22" alt = "Riverbend Logo" style="width:220px;"></a>
-            <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">Welcome Volunteers!</h1>                 
-        
+            
+            @guest
+                <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">Welcome Volunteers!</h1>  
+            @endguest
+            @auth
+                <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">Welcome {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>  
+            @endauth
+                           
             <ul class="nav justify-content-end" style="margin-right: 2.5em">  
                 @guest
                     @if (Route::has('login'))
