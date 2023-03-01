@@ -218,17 +218,46 @@ class AdminController extends Controller
 
     public function createShift(Request $request)
     {
-        //check if shift exists, if true return message, if false create shift
-        if (DB::table('sections')
-            ->join('locations', 'sections.id', '=', 'locations.section_id')
+        $start_time = $request->input('shiftDay') . "T" . $request->input('startTime');
+        $end_time =  $request->input('shiftDay') . "T" . $request->input('endTime');
+        //check if shift name exists
+        if (DB::table('locations')
             ->join('shifts', 'locations.id', '=', 'shifts.location_id')
-            ->where('sections.id', $request->input('sectionId'))
             ->where('locations.id', $request->input('locationId'))
             ->where('shifts.name', $request->input('shiftName'))
             ->exists()) 
          {
             $shift_name = strval($request->input('shiftName'));
-            return "A Shift named \"{$shift_name}\" already exists for this locaiton.";
+            return "A Shift named \"{$shift_name}\" already exists for this location.";
+
+            //check if shift start-time or end-time exist
+         }else if(strtotime(strval($start_time)) > strtotime(strval($end_time))){
+            return "Shift \"start-time\" cannot be greater than \"end-time\"";
+
+            //check if shift start-time or end-time falls on or between anothe shift
+         }else if(count($evaluate_shifts = DB::table('locations')
+            ->join('shifts', 'locations.id', '=', 'shifts.location_id')
+            ->where('locations.id', $request->input('locationId'))
+            ->where('shifts.start_time', $start_time)
+            ->orWhere('shifts.end_time', $end_time)
+            ->orWhereRaw('? between `start_time` and `end_time`', $start_time)
+            ->orWhereRaw('? between `start_time` and `end_time`', $end_time)
+            ->select('shifts.name', 'shifts.start_time', 'shifts.end_time')
+            ->get()) > 0){
+
+                $start_time_converted = date('h:i:s a m/d/Y', strtotime(strval($start_time)));
+                $end_time_converted = date('h:i:s a m/d/Y', strtotime(strval($end_time)));
+
+                $evaluation_string = "A Shift start time of \"{$start_time_converted}\" or an end time of \"{$end_time_converted}\" violated time constraints. The time lies on or between an existing shift.\n\nPlease review the following shifts for this location:\n";
+                foreach($evaluate_shifts as $shift){
+                    $name = $shift->name;
+                    $start = date('h:i:s a m/d/Y', strtotime(strval($shift->start_time)));
+                    $end = date('h:i:s a m/d/Y', strtotime(strval($shift->end_time)));
+                    $evaluation_string .= "{$name}:  {$start} -> {$end}" . "\n";
+                }
+                return $evaluation_string;
+            
+            // if we reach this point create a new shift
          }else{
             try{
                 Shift::create([
