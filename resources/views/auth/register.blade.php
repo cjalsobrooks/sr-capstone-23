@@ -87,7 +87,7 @@
                                     <label for="shirt" class="col-md-4 col-form-label text-md-end">{{ __('Select T-Shirt Size:') }}</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-select" id=shirt name="shirt_size">
+                                        <select class="form-select" id=shirt name="shirt_size" required>
                                             <option selected>--</option>
                                             <option value="xs">XS</option>
                                             <option value="s">S</option>

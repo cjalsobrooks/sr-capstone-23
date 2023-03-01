@@ -11,6 +11,10 @@
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
         @vite(['resources/sass/welcome.scss','resources/js/app.js'])
         <!-- Styles -->
 
@@ -18,7 +22,6 @@
         <!-- Background image-->
         <style>
             body {
-                font-family: 'Nunito', sans-serif;
                 background-image: 
                 linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(0, 57, 71, 0.73)),
                 url('https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/46440191-5388-43e3-a82d-228c522211b8/DSC_4637.jpg?;');
