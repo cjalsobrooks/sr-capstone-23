@@ -8,7 +8,7 @@
   <p class="w-100 pb-3 mb-0 small lh-sm border-bottom">
     <strong class="d-block text-gray-dark">@ {{$vol->first_name}} {{$vol->last_name}}</strong>
     <span class="mt-2 d-block">{{$vol->comment}}</span>
-    <span class="mt-2 d-block">Age: <strong>{{$vol->age}}</strong> &nbsp&nbsp&nbsp Shirt-Size: <strong>{{$vol->shirt_size}}</strong> &nbsp&nbsp&nbsp </span>
+    <span class="mt-2 d-block">Age: <strong>{{$vol->age}}</strong> &nbsp&nbsp&nbsp Shirt-Size: <strong>{{$vol->shirt_size}}</strong> &nbsp&nbsp&nbsp <a style="text-decoration:none;" href="{{route('editvolschedule', $vol->id)}}">Edit</a></span>
   </p>
 </div>
 @endforeach

@@ -167,6 +167,13 @@ class AdminController extends Controller
         return view('partial.displayvolunteers', compact('volunteers', 'sectionLeadIds'));
     }
 
+    public function editVolSchedule($id)
+    {
+        $vol = Volunteer::find($id);
+        $allShifts = Shift::all();
+        $volShifts = Shift::where('vulunteer_id', $id)->get();
+        return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts'));
+    }
 
 
     //create-----------------------------------------------------------------
