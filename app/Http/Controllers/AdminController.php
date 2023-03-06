@@ -9,6 +9,7 @@ use App\Models\Volunteer;
 use App\Models\Section;
 use App\Models\Location;
 use App\Models\Shift;
+use App\Models\Roster;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyUsers;
 
@@ -110,6 +111,7 @@ class AdminController extends Controller
         $shift_array = [];
         foreach($shifts as $shift){
             $found_array = [];
+            $found_array['id'] = $shift->id;
             $found_array['current'] = $shift->current_volunteers;
             $found_array['max'] = $shift->max_volunteers;
             $found_array['start'] = $shift->start_time;
@@ -169,10 +171,11 @@ class AdminController extends Controller
 
     public function editVolSchedule($id)
     {
+        $sections  = Section::all();
         $vol = Volunteer::find($id);
         $allShifts = Shift::all();
         $volShifts = Shift::where('vulunteer_id', $id)->get();
-        return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts'));
+        return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts','sections'));
     }
 
 
@@ -282,6 +285,29 @@ class AdminController extends Controller
                 return $e->getMessage();
             }
          }
+    }
+
+    public function registerVol($shiftid,$volid)
+    {
+
+        try{
+            $shift = Shift::findOrFail($shiftid);
+            if($shift->current_volunteers + 1 < $shift->max_volunteers){
+                Roster::create([
+                    'shift_id' => $shiftid,
+                    'volunteer_id' =>$volid,
+                    'is_valid'  => true
+                ]);
+                $shift->current_volunteers = $shift->current_volunteers + 1;
+                $shift->save();
+                return "Volunteer was registered successfully";
+            }else{
+                return "Error, shift is already full";
+            }
+            
+        }catch(Exception){
+            return "The volunteer has already been registered for this shift";
+        }
     }
 
 
