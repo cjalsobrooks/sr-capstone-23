@@ -44,7 +44,9 @@
                 <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">Welcome Volunteers!</h1>  
             @endguest
             @auth
-                <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">Welcome {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>  
+                <h1 style="white-space:pre-wrap;text-align: left;vertical-align: left;font-weight: bold; font-size: 2vw; color: #FFFFFF">
+                    Welcome {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                </h1>  
             @endauth
                            
             <ul class="nav justify-content-end" style="margin-right: 2.5em">  

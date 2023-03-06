@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark text-bg-light shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark text-bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('https://www.riverbendfestival.com/') }}">
                 <img src="https://images.squarespace-cdn.com/content/v1/615b1c3397012e292b69d5d3/d34d336a-8005-4100-8a3a-220ffa5d528c/40TH+LOGO+WHITE.png?format=1500w%20%20%22" alt = "Riverbend Logo" style="width:220px;">
@@ -37,20 +37,20 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav-dark ms-auto">
+                    <ul class="nav justify-content-end" style="margin-right: 1.5em">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="btn btn-warning" href="{{ route('login') }}" role="button" style="margin-right:1em">Login</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="btn btn-secondary" href="{{ route('register') }}" role="button">Register</a>
                                 </li>
-                            @endif
+                            @endif               
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
