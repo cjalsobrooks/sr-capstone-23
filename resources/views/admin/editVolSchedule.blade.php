@@ -2,9 +2,11 @@
 
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-<h4 class="fw-bold my-4" style="font-family:nunito;">Editing schedule : <span class="text-muted" style="font-family:nunito;">{{$vol->first_name}} {{$vol->last_name}}</span></h4>
+<h2 class="fw-bold my-4" style="">Editing schedule : <span class="text-muted" style="font-family:nunito;">{{$vol->first_name}} {{$vol->last_name}}</span></h2>
+<h4 class="fw-bold my-4" style="">Register</h4>
 <div class="row">
   <div class="col-sm-6">
+    
     <label for="sectionId2" class="form-label">Choose section
     </label>
     <select name="sectionId2" type="text" class="form-control" id="sectionId2"  required="">
@@ -27,6 +29,33 @@
   <div style="max-height: 400px;" id="calendar"></div>
 </div>
 <input type="hidden" id="volId-hidden" name="volId-hidden" value="{{$vol->id}}">
+<h4 class="fw-bold my-4" style="">Unregister</h4>
+<div class="table-responsive mt-4" id="inner-height">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Section</th>
+        <th scope="col">Location</th>
+        <th scope="col">Name</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="responsivebody" class="shadow-sm">
+     @foreach ($volShifts as $shift)
+        <tr>
+            <td id="1">{{$shift->section_name}}</td>
+            <td id="2">{{$shift->location_name}}</td>
+            <td id="3">{{$shift->name}}</td>
+            <td id="4">{{date('h:i:s a m/d', strtotime(strval($shift->start_time)))}}</td>
+            <td id="5">{{date('h:i:s a m/d', strtotime(strval($shift->start_time)))}}</td>
+            <td id="5"><a style="text-decoration: none;" href="#">Unregister</a></td>
+        </tr>
+     @endforeach
+    </tbody>
+  </table>
+</div>
 </main>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 <script>
@@ -90,12 +119,12 @@
 
       function DynamicForm4() {
         calendar.removeAllEvents();
-        let sectionId = document.querySelector('#locationoptions').value;
-        if(sectionId == ""){
-          sectionId=0;
+        let locationId = document.querySelector('#locationoptions').value;
+        if(locationId == ""){
+          locationId=0;
         }
         var xhttp = new XMLHttpRequest();
-        xhttp.open("get", "/findshifts/" + sectionId, true);
+        xhttp.open("get", "/findshifts/" + locationId, true);
         xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
         xhttp.send();
         xhttp.onload = function(){

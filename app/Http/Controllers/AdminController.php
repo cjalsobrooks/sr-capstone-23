@@ -174,7 +174,13 @@ class AdminController extends Controller
         $sections  = Section::all();
         $vol = Volunteer::find($id);
         $allShifts = Shift::all();
-        $volShifts = Shift::where('vulunteer_id', $id)->get();
+        $volShifts = DB::table('shifts')
+                        ->join('rosters', 'shifts.id', '=', 'rosters.shift_id')
+                        ->join('locations', 'locations.id', '=', 'shifts.location_id')
+                        ->join('sections', 'sections.id', '=', 'locations.section_id')
+                        ->where('rosters.volunteer_id', '=', $id)
+                        ->select('sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
+                        ->get();
         return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts','sections'));
     }
 
