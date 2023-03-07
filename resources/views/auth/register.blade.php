@@ -693,8 +693,8 @@
 
                             
                             <div class="row mb-3 ">
-                                <div class="col-md-6 offset-md-3">                          
-                                    <a class="nav-link" href="{{route('view-waiver')}}" target=_blank>{{ __('Click here to review the volunteer waiver.') }}</a>
+                                <div class="col-md-6 offset-md-4">                          
+                                    <a class="nav-link rbfont" href="{{route('view-waiver')}}" target=_blank>{{ __('Click here to review the volunteer waiver.') }}</a>
                                 </div>
                             </div>
                             

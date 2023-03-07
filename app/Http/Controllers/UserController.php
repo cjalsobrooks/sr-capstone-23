@@ -33,4 +33,9 @@ class UserController extends Controller
     public function riverbendMap() {
         return view('user.riverbendMap');
     }
+
+    public function sectionLead() {
+        // actual logic will go here not complete obviously
+        return view('lead.secLeadInfo');
+    } 
 }

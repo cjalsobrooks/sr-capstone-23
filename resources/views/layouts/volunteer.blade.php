@@ -138,6 +138,14 @@
                     Riverbend Map
                   </a>
                 </li>
+                @if(Auth::User()->is_section_lead)
+                <li class="nav-item">
+                  <a class="nav-link" href="/sectionlead">
+                    <span data-feather="file" class="align-text-bottom"></span>
+                    View Your Section
+                  </a>
+                </li>
+                @endif
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="/editusers">
                       <span data-feather="shopping-cart" class="align-text-bottom"></span>

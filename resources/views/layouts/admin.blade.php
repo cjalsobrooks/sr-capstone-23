@@ -74,6 +74,14 @@
                       Edit Users
                     </a>
                 </li>
+                @if(Auth::User()->is_section_lead == 1)
+                  <li class="nav-item">
+                    <a class="nav-link" href="/sectionlead">
+                      <span data-feather="file" class="align-text-bottom"></span>
+                      View Your Section
+                    </a>
+                  </li>
+                @endif
               </ul>
             </div>
           </nav>

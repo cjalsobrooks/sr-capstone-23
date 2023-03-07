@@ -66,6 +66,7 @@ Route::middleware(['redirect'])->group(function() {
 });
 Route::get('/emailsupervisor', [UserController::class, 'emailSupervisor']);
 Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
+Route::get('/sectionlead', [UserController::class, 'sectionLead'])->name('sectionlead');
 
 
 //waiver------------------------------------------------------------
