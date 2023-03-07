@@ -54,6 +54,7 @@ Route::get('/testmail', [AdminController::class, 'sendEmail']);
 Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');
 Route::post('/createlocation', [AdminController::class, 'createLocation'])->name('createlocation');
 Route::post('/createshift', [AdminController::class, 'createShift'])->name('createshift');
+Route::get('/registervol/{shiftid}/{volid}', [AdminController::class, 'registerVol'])->name('registerVol');
 
 //refresh values
 Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');

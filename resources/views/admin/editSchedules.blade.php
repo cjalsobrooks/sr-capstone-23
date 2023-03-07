@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
     <div style="display: none;" class="editoptions col-12-sm my-4" id="showcalendar">
       <div id="calendar"></div>
     </div>
