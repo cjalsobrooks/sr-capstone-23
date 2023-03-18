@@ -16,11 +16,15 @@ h1, h2, h3, h4, label{
 }
 
 .btn-warning{
-    font-family: $font-family-river;
+    font-family: $font-family-river !important;
+}
+
+.btn-secondary{
+    font-family: $font-family-river !important;
 }
 
 .rbfont{
-    font-family: $font-family-river;
+    font-family: $font-family-river !important;
 }
 
 .form-control{

@@ -59,7 +59,7 @@
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                        <a class="btn btn-secondary" href="{{ route('register') }}" role="button">Register</a>
+                        <a class="btn btn-secondary rbfont" href="{{ route('register') }}" role="button">Register</a>
                         <li>
                     @endif
 
