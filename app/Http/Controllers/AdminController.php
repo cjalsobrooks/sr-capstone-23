@@ -330,7 +330,7 @@ class AdminController extends Controller
                 $shift->save();
                 return "Volunteer was unregistered successfully";
             }else{
-                return "Error, shift cannot be less than 0"
+                return "Error, shift cannot be less than 0";
             }
         }catch(Exception $e){
             return $e->getMessage();
