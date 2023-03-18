@@ -50,7 +50,7 @@
             <td id="3">{{$shift->name}}</td>
             <td id="4">{{date('h:i:s a m/d', strtotime(strval($shift->start_time)))}}</td>
             <td id="5">{{date('h:i:s a m/d', strtotime(strval($shift->end_time)))}}</td>
-            <td id="5"><a style="text-decoration: none;" href="#">Unregister</a></td>
+            <td id="5"><a style="text-decoration: none;" href="/unregistervol/{{$shift->id}}/{{$vol->id}}">Unregister</a></td>
         </tr>
      @endforeach
     </tbody>

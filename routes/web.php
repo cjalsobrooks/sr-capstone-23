@@ -56,6 +56,9 @@ Route::post('/createlocation', [AdminController::class, 'createLocation'])->name
 Route::post('/createshift', [AdminController::class, 'createShift'])->name('createshift');
 Route::get('/registervol/{shiftid}/{volid}', [AdminController::class, 'registerVol'])->name('registerVol');
 
+//delete
+Route::get('/unregistervol/{shiftid}/{volid}', [AdminController::class, 'unregisterVol'])->name('unregisterVol');
+
 //refresh values
 Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');
 Route::get('/refreshlocations', [AdminController::class, 'refreshLocations'])->name('refreshlocations');

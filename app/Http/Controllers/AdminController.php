@@ -179,7 +179,7 @@ class AdminController extends Controller
                         ->join('locations', 'locations.id', '=', 'shifts.location_id')
                         ->join('sections', 'sections.id', '=', 'locations.section_id')
                         ->where('rosters.volunteer_id', '=', $id)
-                        ->select('sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
+                        ->select( 'shifts.id','sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
                         ->get();
         return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts','sections'));
     }
@@ -313,6 +313,19 @@ class AdminController extends Controller
             
         }catch(Exception){
             return "The volunteer has already been registered for this shift";
+        }
+    }
+    //delete-----------------------------------------------------------------
+    public function unregisterVol($shiftid,$volid)
+    {
+        try{
+            DB::table('rosters')
+                ->where('shift_id', $shiftid)
+                ->where('volunteer_id', $volid)
+                ->delete();
+            return "success";
+        }catch(Exception $e){
+            return $e->getMessage();
         }
     }
 
