@@ -298,7 +298,7 @@ class AdminController extends Controller
 
         try{
             $shift = Shift::findOrFail($shiftid);
-            if($shift->current_volunteers + 1 < $shift->max_volunteers){
+            if($shift->current_volunteers + 1 <= $shift->max_volunteers){
                 Roster::create([
                     'shift_id' => $shiftid,
                     'volunteer_id' =>$volid,
@@ -319,11 +319,19 @@ class AdminController extends Controller
     public function unregisterVol($shiftid,$volid)
     {
         try{
-            DB::table('rosters')
+            $shift = Shift::findOrFail($shiftid);
+            if($shift->current_volunteers - 1 >= 0){
+                DB::table('rosters')
                 ->where('shift_id', $shiftid)
                 ->where('volunteer_id', $volid)
                 ->delete();
-            return "success";
+
+                $shift->current_volunteers = $shift->current_volunteers - 1;
+                $shift->save();
+                return "Volunteer was unregistered successfully";
+            }else{
+                return "Error, shift cannot be less than 0"
+            }
         }catch(Exception $e){
             return $e->getMessage();
         }

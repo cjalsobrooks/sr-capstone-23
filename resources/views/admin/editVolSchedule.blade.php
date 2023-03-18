@@ -64,8 +64,9 @@
             
       var calendar = new FullCalendar.Calendar(calendarEl, {
         allDaySlot: false,
-        initialView: 'listWeek',
+        initialView: 'list',
         initialDate: '2023-06-02',
+        duration: {days: 3},
         headerToolbar: {
           left: 'prev next',
           center: 'title',
