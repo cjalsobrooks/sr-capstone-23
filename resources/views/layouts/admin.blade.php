@@ -21,6 +21,25 @@
         token = document.querySelector('meta[name="csrf-token"]').content;
     </script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <script>
+        //-------------------------refresh partial views created------------------------
+        function refreshValues(url,target) {
+
+          const xhttp = new XMLHttpRequest();
+          xhttp.open('GET', url);
+          xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
+          xhttp.setRequestHeader('Content-type', 'application/json');
+          xhttp.send();
+          xhttp.onload = function() {
+              let current = document.getElementById(target);
+              String(xhttp.responseText);
+              while(current.firstChild){
+                current.removeChild(current.lastChild);
+              }
+              current.innerHTML = String(xhttp.responseText);
+          }
+        }
+    </script>
 
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
     @stack('js')

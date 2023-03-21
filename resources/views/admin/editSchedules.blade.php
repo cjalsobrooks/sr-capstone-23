@@ -337,27 +337,6 @@
       create(3);
     });
 
-    //-------------------------refresh list of sections/locations created------------------------
-    function refreshValues(url,target) {
-
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('GET', url);
-        xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
-        xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send();
-        xhttp.onload = function() {
-            let current = document.getElementById(target);
-            String(xhttp.responseText);
-            while(current.firstChild){
-              current.removeChild(current.lastChild);
-            }
-            current.innerHTML = String(xhttp.responseText);
-        }
-    }
-
-
-  
-
     //---------------------------refresh calendar location options---------------------------------
   
       function DynamicForm3(sectionIdTag, locationOptionsTag) {
@@ -372,11 +351,13 @@
           while (options.firstChild) {
             options.removeChild(options.firstChild);
           }
-          let nodeDefault = document.createElement("option");
-          nodeDefault.value="0";
-          nodeDefault.innerHTML="--- select a location ---";
           let obj = JSON.parse(xhttp.response)
-          options.appendChild(nodeDefault);
+          if(obj.length > 0){
+            let nodeDefault = document.createElement("option");
+            nodeDefault.value="0";
+            nodeDefault.innerHTML="--- select a location ---";
+            options.appendChild(nodeDefault);
+          }
           for(var i = 0; i < obj.length; i++){
             let node = document.createElement("option");
             node.value = `${String(obj[i].id)}`;

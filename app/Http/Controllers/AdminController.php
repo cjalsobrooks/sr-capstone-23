@@ -173,14 +173,14 @@ class AdminController extends Controller
     {
         $sections  = Section::all();
         $vol = Volunteer::find($id);
-        $allShifts = Shift::all();
         $volShifts = DB::table('shifts')
-                        ->join('rosters', 'shifts.id', '=', 'rosters.shift_id')
-                        ->join('locations', 'locations.id', '=', 'shifts.location_id')
-                        ->join('sections', 'sections.id', '=', 'locations.section_id')
-                        ->where('rosters.volunteer_id', '=', $id)
-                        ->select( 'shifts.id','sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
-                        ->get();
+            ->join('rosters', 'shifts.id', '=', 'rosters.shift_id')
+            ->join('locations', 'locations.id', '=', 'shifts.location_id')
+            ->join('sections', 'sections.id', '=', 'locations.section_id')
+            ->where('rosters.volunteer_id', '=', $id)
+            ->select( 'shifts.id','sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
+            ->get();
+        $allShifts = Shift::all();
         return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts','sections'));
     }
 
@@ -355,6 +355,19 @@ class AdminController extends Controller
                         ->get();
                         
         return view('partial.displaylocations', compact('locations'));
+    }
+
+    public function refreshVolShifts($id)
+    {
+        $volShifts = DB::table('shifts')
+            ->join('rosters', 'shifts.id', '=', 'rosters.shift_id')
+            ->join('locations', 'locations.id', '=', 'shifts.location_id')
+            ->join('sections', 'sections.id', '=', 'locations.section_id')
+            ->where('rosters.volunteer_id', '=', $id)
+            ->select( 'shifts.id','sections.name as section_name', 'locations.name as location_name', 'shifts.name', 'shifts.start_time', 'shifts.end_time')
+            ->get();
+        $vol = Volunteer::find($id);
+        return view('partial.displayvolshifts', compact('volShifts', 'vol'));
     }
 
 

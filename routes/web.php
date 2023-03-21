@@ -62,6 +62,7 @@ Route::get('/unregistervol/{shiftid}/{volid}', [AdminController::class, 'unregis
 //refresh values
 Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');
 Route::get('/refreshlocations', [AdminController::class, 'refreshLocations'])->name('refreshlocations');
+Route::get('/refreshvolshifts/{volid}', [AdminController::class, 'refreshVolShifts'])->name('refreshvolshifts');
 
 
 //user routes-------------------------------------------------------

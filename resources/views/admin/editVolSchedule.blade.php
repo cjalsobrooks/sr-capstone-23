@@ -10,6 +10,7 @@
     <label for="sectionId2" class="form-label">Choose section
     </label>
     <select name="sectionId2" type="text" class="form-control" id="sectionId2"  required="">
+      <option value="0">--- select a section ---</option>
       @foreach ($sections as $section)
         <option value="{{$section->id}}">{{$section->name}}</option>
       @endforeach
@@ -20,7 +21,6 @@
     </label>
     <div class="input-group has-validation">
       <select class="form-control" id="locationoptions" name="locationoptions">
-
       </select>
     </div>
   </div>
@@ -43,16 +43,7 @@
       </tr>
     </thead>
     <tbody id="responsivebody" class="shadow-sm">
-     @foreach ($volShifts as $shift)
-        <tr>
-            <td id="1">{{$shift->section_name}}</td>
-            <td id="2">{{$shift->location_name}}</td>
-            <td id="3">{{$shift->name}}</td>
-            <td id="4">{{date('h:i:s a m/d', strtotime(strval($shift->start_time)))}}</td>
-            <td id="5">{{date('h:i:s a m/d', strtotime(strval($shift->end_time)))}}</td>
-            <td id="5"><a style="text-decoration: none;" href="/unregistervol/{{$shift->id}}/{{$vol->id}}">Unregister</a></td>
-        </tr>
-     @endforeach
+       @include('partial.displayvolshifts')
     </tbody>
   </table>
 </div>
@@ -60,6 +51,26 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 <script>
 
+    //---------------Unregister Ajax action-------------------------------------
+   let staticElement = document.getElementById('responsivebody');
+   staticElement.addEventListener('click', (evt)=>{
+     const link = evt.target.closest(".unregister")
+     Unregister(link.dataset.value);
+   });
+   
+   function Unregister(link){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("get", link, true);
+      xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+      xhttp.send();
+      xhttp.onload = function(){
+        alert(xhttp.response);
+        LoadCalendar();
+        refreshValues('/refreshvolshifts/' + document.querySelector("#volId-hidden").value, 'responsivebody');
+      }
+   }
+
+    //---------------Calendar definition statement-------------------------------
       var calendarEl = document.getElementById('calendar');
             
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -68,7 +79,7 @@
         initialDate: '2023-06-02',
         duration: {days: 3},
         headerToolbar: {
-          left: 'prev next',
+          left: '',
           center: 'title',
           right: ''
         },
@@ -82,7 +93,8 @@
                 xhttp.send();
                 xhttp.onload = function(){
                   alert(xhttp.response);
-                  calendar.removeAllEvents();
+                  LoadCalendar();
+                  refreshValues('/refreshvolshifts/' + document.querySelector("#volId-hidden").value, 'responsivebody');
                 }
             }
         }
@@ -104,11 +116,13 @@
           while (options.firstChild) {
             options.removeChild(options.firstChild);
           }
-          let nodeDefault = document.createElement("option");
-          nodeDefault.value="0";
-          nodeDefault.innerHTML="--- select a location ---";
           let obj = JSON.parse(xhttp.response)
-          options.appendChild(nodeDefault);
+          if(obj.length > 0){
+            let nodeDefault = document.createElement("option");
+            nodeDefault.value="0";
+            nodeDefault.innerHTML="--- select a location ---";
+            options.appendChild(nodeDefault);
+          }
           for(var i = 0; i < obj.length; i++){
             let node = document.createElement("option");
             node.value = `${String(obj[i].id)}`;
@@ -118,7 +132,7 @@
         }
       }
 
-      function DynamicForm4() {
+      function LoadCalendar() {
         calendar.removeAllEvents();
         let locationId = document.querySelector('#locationoptions').value;
         if(locationId == ""){
@@ -147,10 +161,7 @@
       document.getElementById("sectionId2").addEventListener("click", ()=>{
         DynamicForm3('#sectionId2','locationoptions');
       });
-      document.getElementById("locationoptions").addEventListener("change", DynamicForm4);
-
-    //---------------Calendar definition statement-------------------------------
-
+      document.getElementById("locationoptions").addEventListener("change", LoadCalendar);
 
 </script>
 @endsection
