@@ -46,17 +46,50 @@ class UserController extends Controller
 
     public function sectionLead() {
         // //actual logic will go here not complete obviously
-        // $sections = DB::table('sections')
-        //     ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-        //     ->join('users', 'volunteers.user_id', '=', 'users.id')
-        //     ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name', 'volunteers.id as volId', 'users.id as uId')
-        //     ->get();
 
-        //  $sec = Section::where('userId', $cId);
-        // $userSec = [];
-        // foreach($sec as $s) {
-        //     array_push($userSec, $s);
+        //step 1: get section lead IDS and vol IDs associated w user
+
+        // $sectionLeadIds = [];
+
+        // $sections = DB::table('sections')
+        //               ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+        //               ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name', 'volunteers.id as volId')
+        //               ->get();
+
+        // foreach($sections as $section){
+        //     array_push($sectionLeadIds, $section->volId);
         // }
-        return view('lead.secLeadInfo');
-    } 
+
+        // $volunteers = Volunteer::All();
+
+        // $uVols = Volunteer::where('user_id', Auth::user()->id)->get();
+        
+        // $userSections = [];
+        // foreach($uVols as $vol) {
+        //     if (Section::where('volunteer_id', $vol->id)->exists())
+        //     {
+        //         array_push($userSections, Section::where('volunteer_id', $vol->id)->get());
+        //     }
+        // }
+
+        // return view('lead.secLeadInfo', compact('userSections'));
+
+
+        
+
+ 
+    //     step 3: choose section where section lead id = current vol id
+    //     step 4: join sections - locations - shifts 
+    //     step 5: choose shifts that take place in section
+
+        
+
+    //     //  $sec = Section::where('userId', $cId);
+    //     // $userSec = [];
+    //     // foreach($sec as $s) {
+    //     //     array_push($userSec, $s);
+    //     // }
+    //     return view('lead.secLeadInfo');
+    // } 
+}
 }

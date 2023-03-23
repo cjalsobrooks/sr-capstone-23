@@ -60,6 +60,7 @@
         allDaySlot: false,
         initialView: 'timeGrid',
         initialDate: '2023-06-02',
+        slotMinTime: '14:00',
         duration: {days: 3},
         headerToolbar: {
           left: '',

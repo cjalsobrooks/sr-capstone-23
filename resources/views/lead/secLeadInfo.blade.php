@@ -9,6 +9,11 @@
     </div>
     
     <div class="container mt-5">
+      <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
+          @foreach ($userSections as $section)
+              <option value="{{$section->id}}">{{$section->name}}</option>
+          @endforeach
+      </select>
       <h2 id="message">Scheduled shifts:</h2>
       <div style="" class="editoptions col-12-sm my-4" id="showcalendar">
         <div style="max-height: 400px;" id="calendarSec"></div>
@@ -25,6 +30,7 @@
         allDaySlot: false,
         initialView: 'timeGrid',
         initialDate: '2023-06-02',
+        slotMinTime: '12:00',
         duration: {days: 3},
         headerToolbar: {
           left: '',
