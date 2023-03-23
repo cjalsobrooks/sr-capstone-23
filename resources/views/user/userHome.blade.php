@@ -41,7 +41,10 @@
           </tr>
           <tr>
             <td>Friday, February 24th</td>
-            <td>Security</td>
+            <td><button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Security
+                </button>
+            </td>
             <td>9:00 AM</td>
             <td>1:00 PM</td>
           </tr>
@@ -50,7 +53,6 @@
     </div>
   </main>
 
-  <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js%27%3E'></script> -->
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   <script>
 
