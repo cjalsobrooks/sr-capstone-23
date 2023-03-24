@@ -14,29 +14,28 @@
     
     <div class="container mt-5">
     <h2 id="message">Riverbend Map</h2>
-    <button onclick="DarkFunction()">Dark Mode</button>
+    <button id="DarkMode">Dark Mode</button>
 
     <!-- Dropdown for map change -->
     <div class="dropdown">
-      <button onclick="Dropping()" class="btn btn-secondary dropdown-toggle" type="button">Directions</button>
+      <button onhover="Dropping()" class="btn btn-secondary dropdown-toggle" type="button">Directions</button>
       <ul id="Dropdown" class="dropdown-menu">
-        <li><input type="text" placeholder="Search" id="myInput" onkeyup="SearchFilter()"></li>
-        <li><a class="dropdown-item" href="map">Map</a></li>
-            <li class= "dropdown dropend"><a class="dropdown-item dropdown-toggle" href="#">Access points </a>
+        <li><button id="Map" class="dropdown-item">Map</button></li>
+            <li class= "dropdown dropend"><a class="dropdown-item dropdown-toggle">Access points</a>
               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Main Entrance</a></li>
-                  <li><a class="dropdown-item" href="#">Marina Entrance</a></li>
-                  <li><a class="dropdown-item" href="#">VIP Coke Stage</a></li>
-                  <li><a class="dropdown-item" href="#">VIP Bud Stage</a></li>
-                  <li><a class="dropdown-item" href="#">VIP Pier</a></li>
-                  <li><a class="dropdown-item" href="#">Skybox</a></li>
+                  <li><button id = "MaiEnt" class="dropdown-item">Main Entrance</button></li>
+                  <li><button id ="MarEnt"  class="dropdown-item">Marina Entrance</button></li>
+                  <li><button id ="Coke"  class="dropdown-item">VIP Coke Stage</button></li>
+                  <li><button id ="Bud"  class="dropdown-item">VIP Bud Stage</button></li>
+                  <li><button id ="Pier"  class="dropdown-item">VIP Pier</button></li>
+                  <li><button id ="Skybox"  class="dropdown-item" >Skybox</button</li>
               </ul>
             </li>
             <li class= "dropdown dropend"><a class="dropdown-item  dropdown-toggle" href="#">Credential Checkers</a>
               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Power Alley Gate</a></li>
-                  <li><a class="dropdown-item" href="#">Southern Belle Entrance</a></li>
-                  <li><a class="dropdown-item" href="#">Boneyard Gate</a></li>
+                  <li><a id ="" class="dropdown-item" >Power Alley Gate</a></li>
+                  <li><a id ="" class="dropdown-item" >Southern Belle Entrance</a></li>
+                  <li><a id ="" class="dropdown-item" >Boneyard Gate</a></li>
               </ul>
             </li>
         </li>
@@ -45,7 +44,7 @@
 
     <!-- Map -->
     <div class="text-center">
-        <img src="https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png" alt="Responsive image" class="img-fluid">
+        <img src="https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png" id="image" alt="Responsive image" class="img-fluid">
     </div>
     
 
@@ -77,11 +76,27 @@ function SearchFilter() {
   }
 }
 
-//when button is clicked, the page is transferred into dark mode
-function DarkFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
+//Checks for a button click
+document.querySelectorAll('button').forEach(occurence => {
+  let id = occurence.getAttribute('id');
+  occurence.addEventListener('click', function() {
+    if(id=="DarkMode"){//if button with id "DarkMode" is hit, it changes the page CSS to the style above labeled "dark mode"
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+    if(id == "MarEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg";
+    }
+    if(id == "MaiEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*";
+    }
+    if(id == "Map"){//if button with id "Map" is hit, it changes the picture to the link given.
+      document.getElementById("image").src = "https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png";
+    }
+  } );
+});
+
+
 
 let dropdowns = document.querySelectorAll('.dropdown-toggle')
 dropdowns.forEach((dd)=>{
