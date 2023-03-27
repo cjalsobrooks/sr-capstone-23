@@ -1,4 +1,4 @@
-@extends('layouts.volunteer')
+@extends(Auth::user()->is_admin ? 'layouts.admin' : 'layouts.volunteer')
 
 @section('content')
 <style>
