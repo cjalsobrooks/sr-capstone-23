@@ -93,6 +93,12 @@
                       Edit Users
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/riverbendmap">
+                      <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                      Riverbend Map
+                    </a>
+                </li>
                 @if(Auth::User()->is_section_lead == 1)
                   <li class="nav-item">
                     <a class="nav-link" href="/sectionlead">
