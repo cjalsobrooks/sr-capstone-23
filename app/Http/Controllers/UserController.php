@@ -44,35 +44,32 @@ class UserController extends Controller
         return view('user.riverbendMap');
     }
 
-    public function sectionLead() {
+    public function sectionLead(Request $id) {
         // //actual logic will go here not complete obviously
 
         //step 1: get section lead IDS and vol IDs associated w user
-
         // $sectionLeadIds = [];
 
         // $sections = DB::table('sections')
-        //               ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-        //               ->select('sections.name', 'sections.description', 'sections.id', 'volunteers.first_name', 'volunteers.last_name', 'volunteers.id as volId')
-        //               ->get();
+        //             ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+        //             ->select('sections.*', 'volunteers.id as vID', 'volunteers.user_id as uID', 'volunteers.first_name as first', 'volunteers.last_name as last')
+        //             ->where('uID', '=', $id);
 
-        // foreach($sections as $section){
-        //     array_push($sectionLeadIds, $section->volId);
-        // }
+        // $locations = DB::table('locations')
+        //             ->joinSub($sections, 'user_sections', function(JoinClause $join) {
+        //                 $join->on('locations.section_id', '=', 'user_sections.id');
+        //             })
+        //             ->select('user_sections.*', 'locations.id');
 
-        // $volunteers = Volunteer::All();
-
-        // $uVols = Volunteer::where('user_id', Auth::user()->id)->get();
+        // $shifts = DB::table('shifts')
+        //             ->joinSub($locations, 'user_locations', function(JoinClause $join) {
+        //                 $join->on('shifts.location_id', '=', 'user_locations.id');
+        //             })
+        //             ->select('user_locations.*', 'shifts.*')
+        //             ->get();
         
-        // $userSections = [];
-        // foreach($uVols as $vol) {
-        //     if (Section::where('volunteer_id', $vol->id)->exists())
-        //     {
-        //         array_push($userSections, Section::where('volunteer_id', $vol->id)->get());
-        //     }
-        // }
 
-        // return view('lead.secLeadInfo', compact('userSections'));
+        return view('lead.secLeadInfo');
 
 
         
