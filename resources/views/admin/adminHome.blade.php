@@ -41,18 +41,18 @@
           <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
         </div>
       </div>
-      <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+      <button id="" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
 
       @csrf <!-- {{ csrf_field() }} -->
     </form>
 
-    <form style="display:none;" id="emailform2" class="needs-validation" novalidate="" action="" method="POST">
+    <form style="display:none;" id="emailform2" class="needs-validation" novalidate="" action="javascript:void(0)" method="">
       <h4>Email All</h4>
       <div class="row g-3">
         <div class="col-sm-12">
           <label for="firstName" class="form-label">Message
           </label>
-          <textarea name="name" type="text" class="form-control" id="" placeholder="" value="" required=""></textarea>
+          <textarea name="messageall" type="text" class="form-control" id="messageall" placeholder="" value="" required=""></textarea>
         </div>
       </div>
       <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>

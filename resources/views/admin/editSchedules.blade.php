@@ -17,7 +17,7 @@
     <div>
     </div>
     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
       Edit Options
     </button>
     <ul class="dropdown-menu">
@@ -77,7 +77,7 @@
         <div>
         </div>
         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           Create Options
         </button>
         <ul class="dropdown-menu">
@@ -122,7 +122,7 @@
         <div style="border: 1px groove" class="d-flex flex-column align-items-stretch flex-shrink-0  my-4">
           <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
       
-            <svg class="bi me-2" width="30" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="bi me-2" width="30" height="24" version="1.1" id="Layer_1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px"
               viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
             <path fill="#282828" d="M100.232,149.198c-2.8,0-5.4-1.8-7.2-5.2c-22.2-41-22.4-41.4-22.4-41.6c-3.2-5.1-4.9-11.3-4.9-17.6
               c0-19.1,15.5-34.6,34.6-34.6s34.6,15.5,34.6,34.6c0,6.5-1.8,12.8-5.2,18.2c0,0-1.2,2.4-22.2,41
@@ -177,7 +177,7 @@
       <div style="border: 1px groove" class="d-flex flex-column align-items-stretch flex-shrink-0  my-4">
         <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
     
-          <svg class="bi me-2" width="30" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          <svg class="bi me-2" width="30" height="24" version="1.1" id="Layer_1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
           <path fill="#282828" d="M100.232,149.198c-2.8,0-5.4-1.8-7.2-5.2c-22.2-41-22.4-41.4-22.4-41.6c-3.2-5.1-4.9-11.3-4.9-17.6
             c0-19.1,15.5-34.6,34.6-34.6s34.6,15.5,34.6,34.6c0,6.5-1.8,12.8-5.2,18.2c0,0-1.2,2.4-22.2,41

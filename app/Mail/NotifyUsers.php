@@ -13,14 +13,17 @@ class NotifyUsers extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $names;
+    public $messages;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(private $name)
+    public function __construct(string $n, string $m)
     {
-        //
+        $this->names = $n;
+        $this->messages = $m;
     }
 
     /**
@@ -44,7 +47,6 @@ class NotifyUsers extends Mailable
     {
         return new Content(
             view: 'mail.email',
-            with: ['name' => $this->name]
         );
     }
 

@@ -18,8 +18,8 @@
 </head>
 <body>
 <div>
-    <p>Hey {{ $name }},</p>
-    <p>This is a Laravel test email template.</p>
+    <p>{{ $names }},</p>
+    <p>{{ $messages }}.</p>
     <p class="signature">Henry</p>
 </div>
 </body>

@@ -3,7 +3,7 @@
       function DynamicForm2() {
         let data = document.forms.usereditsearch;
         let lastname = data['finduser2'].value;
-        let body = document.getElementById('responsivebody')
+        let body = document.getElementById('responsivebody');
 
         //request for emails from server
         token = document.querySelector('meta[name="csrf-token"]').content;

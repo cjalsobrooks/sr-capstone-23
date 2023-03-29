@@ -387,13 +387,19 @@ class AdminController extends Controller
     }
 
     //api triggers email event
-    public function sendEmail()
+    public function sendEmail(Request $request)
     {
         //currently functional, requires .env mailer configuration for smtp.
-        $users = User::all();
-        foreach($users as $user){
-            Mail::to($user->email)->send(new NotifyUsers($user->name));
+        try{
+            $users = User::all();
+            foreach($users as $user){
+                Mail::to($user->email)->send(new NotifyUsers($user->first_name, $request->get('messageall')));
+            }
+            return "All users have been notified.";
+        }catch(Exception $e){
+            return $e->message();
         }
+
     }
 
 }

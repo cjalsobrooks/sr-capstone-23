@@ -1,19 +1,35 @@
       
       //-------------button triggers email event-------------------------
-      // function SendMail() {
-      //   token = document.querySelector('meta[name="csrf-token"]').content;
-      //   var xhttp = new XMLHttpRequest();
-      //   xhttp.open("get", "/testmail", false);
-      //   xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
-      //   xhttp.send();
 
-      //   if(xhttp.readyState == 4){
-      //     console.log("success")  
-      //   }else{
-      //     console.log(xhttp.response)
-      //   }
-      // }
-      // document.getElementById("sendemail").addEventListener("click", SendMail, false);
+      //=================!!!!!! WARNING !!!!!!!======================================================
+      // Please read here before taking action.
+
+      // I assume if you are reading this then you want to send emails.
+      // Before uncommenting this function please check carefully in the database
+      // to ensure there are no fake email addresses. Sending emails to fake addresses
+      // or sending emails that are bounced back from the recipient address lowers the reputation
+      // score with the smtp provider. This may result in the banning or cancelling of our email service.
+
+      // Comment this function back when done testing
+
+
+      function SendMail() {
+        if(confirm("Are you sure you want to send all?")){
+          let form = document.forms.emailform2;
+          var formData = new FormData();
+          formData.append('messageall', form['messageall'].value);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("post", "/emailall", true);
+          xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+          xhttp.send(formData);
+          xhttp.onload = function(){
+            alert(xhttp.response);
+          }
+        }
+      }
+      document.getElementById("sendemail").addEventListener("click", SendMail, false);
+
+      //===================================================================================================
 
       //-----------Find user emails javascript logic---------------------
       let currently_visible = [];
@@ -27,7 +43,6 @@
         
         if(lastname.length > 0){
             //request for emails from server
-            token = document.querySelector('meta[name="csrf-token"]').content;
 
             var xhttp = new XMLHttpRequest();
             xhttp.open("get", "/findemail/" + lastname, true);
