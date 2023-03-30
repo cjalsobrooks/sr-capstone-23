@@ -138,6 +138,12 @@
                     Riverbend Map
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/viewgroup">
+                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                    View Group
+                  </a>
+                </li>
                 @if(Auth::User()->is_section_lead)
                 <li class="nav-item">
                   <a class="nav-link" href="/sectionlead/{{Auth::User()->id}}">

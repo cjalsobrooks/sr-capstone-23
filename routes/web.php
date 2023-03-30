@@ -71,6 +71,7 @@ Route::middleware(['redirect'])->group(function() {
 });
 Route::get('/emailsupervisor', [UserController::class, 'emailSupervisor']);
 Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
+Route::get('/viewgroup', 'UserController@findGroupByID')->name('viewgroup');
 Route::get('/sectionlead', [UserController::class, 'sectionLead'])->name('sectionlead');
 
 

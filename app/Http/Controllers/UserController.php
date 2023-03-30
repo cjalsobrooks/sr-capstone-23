@@ -89,4 +89,23 @@ class UserController extends Controller
     //     return view('lead.secLeadInfo');
     // } 
 }
+
+    public function viewGroup() {
+        return view('user.viewGroup');
+    }
+
+    //ajax search volunteers
+    public function findGroupByID($search){
+        $volunteers = Volunteer::where('user_id', '=', $search)->get();
+        $names_array = [];
+        foreach($volunteers as $vol){
+            $vol_array = [];
+            $vol_array['firstname'] = $vol->first_name;
+            $vol_array['lastname'] = $vol->last_name;
+            $vol_array['Id'] = $vol->id;
+            array_push($names_array, $vol_array);
+        }
+        return json_encode($names_array);
+    }
+
 }
