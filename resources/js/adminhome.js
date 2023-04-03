@@ -13,38 +13,38 @@
       // Comment this function back when done testing
 
 
-      function SendMailAll() {
-        if(confirm("Are you sure you want to send all?")){
-          let form = document.forms.emailform2;
-          var formData = new FormData();
-          formData.append('messageall', form['messageall'].value);
-          var xhttp = new XMLHttpRequest();
-          xhttp.open("post", "/emailall", true);
-          xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
-          xhttp.send(formData);
-          xhttp.onload = function(){
-            alert(xhttp.response);
-          }
-        }
-      }
-      document.getElementById("sendemail2").addEventListener("click", SendMailAll, false);
+      // function SendMailAll() {
+      //   if(confirm("Are you sure you want to send all?")){
+      //     let form = document.forms.emailform2;
+      //     var formData = new FormData();
+      //     formData.append('messageall', form['messageall'].value);
+      //     var xhttp = new XMLHttpRequest();
+      //     xhttp.open("post", "/emailall", true);
+      //     xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+      //     xhttp.send(formData);
+      //     xhttp.onload = function(){
+      //       alert(xhttp.response);
+      //     }
+      //   }
+      // }
+      // document.getElementById("sendemail2").addEventListener("click", SendMailAll, false);
 
-      function SendMailUser() {
-        if(confirm("Are you sure you want to send?")){
-          let form = document.forms.emailform;
-          var formData = new FormData();
-          formData.append('messageuser', form['messageuser'].value);
-          formData.append('emailselect', form['emailselect'].value);
-          var xhttp = new XMLHttpRequest();
-          xhttp.open("post", "/emailuser", true);
-          xhttp.setRequestHeader("X-CSRF-TOKEN", token);
-          xhttp.send(formData);
-          xhttp.onload = function(){
-            alert(xhttp.response);
-          }
-        }
-      }
-      document.getElementById("sendemail").addEventListener("click", SendMailUser, false);
+      // function SendMailUser() {
+      //   if(confirm("Are you sure you want to send?")){
+      //     let form = document.forms.emailform;
+      //     var formData = new FormData();
+      //     formData.append('messageuser', form['messageuser'].value);
+      //     formData.append('emailselect', form['emailselect'].value);
+      //     var xhttp = new XMLHttpRequest();
+      //     xhttp.open("post", "/emailuser", true);
+      //     xhttp.setRequestHeader("X-CSRF-TOKEN", token);
+      //     xhttp.send(formData);
+      //     xhttp.onload = function(){
+      //       alert(xhttp.response);
+      //     }
+      //   }
+      // }
+      // document.getElementById("sendemail").addEventListener("click", SendMailUser, false);
 
 
       //===================================================================================================

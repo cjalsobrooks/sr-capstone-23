@@ -17,6 +17,7 @@ class Volunteer extends Model
         'shirt_size',
         'age',
         'is_waiver_signed',
-        'waiver_signed_by'
+        'waiver_signed_by',
+        'comment'
     ];
 }

@@ -8,6 +8,15 @@
                     <div class="card-header regform">{{ __('Register') }}</div>
 
                     <div class="card-body">
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form id="registernew" method="POST" action="{{ route('register') }}">
                             @csrf
                             @honeypot
@@ -144,7 +153,7 @@
                                         <label for="firstname1" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="firstname1" type="text" class="e1 form-control @error('firstname1') is-invalid @enderror" name="firstname1" value="name" autocomplete="name">
+                                            <input id="firstname1" type="text" class="e1 form-control @error('firstname1') is-invalid @enderror" name="firstname1" value="" autocomplete="name">
 
                                             @error('firstname1')
                                                 <span class="invalid-feedback" role="alert">
@@ -159,7 +168,7 @@
                                         <label for="lastname1" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="lastname1" type="text" class="e1 form-control @error('lastname1') is-invalid @enderror" name="lastname1" value="name" autocomplete="name">
+                                            <input id="lastname1" type="text" class="e1 form-control @error('lastname1') is-invalid @enderror" name="lastname1" value="" autocomplete="name">
 
                                             @error('lastname1')
                                                 <span class="invalid-feedback" role="alert">
@@ -203,7 +212,7 @@
                                         <label for="firstname2" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="firstname2" type="text" class="e2 form-control @error('firstname2') is-invalid @enderror" name="firstname2" value="name" autocomplete="name">
+                                            <input id="firstname2" type="text" class="e2 form-control @error('firstname2') is-invalid @enderror" name="firstname2" value="" autocomplete="name">
 
                                             @error('firstname2')
                                                 <span class="invalid-feedback" role="alert">
@@ -218,7 +227,7 @@
                                         <label for="lastname2" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="lastname2" type="text" class="e2 form-control @error('lastname2') is-invalid @enderror" name="lastname2" value="name" autocomplete="name">
+                                            <input id="lastname2" type="text" class="e2 form-control @error('lastname2') is-invalid @enderror" name="lastname2" value="" autocomplete="name">
 
                                             @error('lastname2')
                                                 <span class="invalid-feedback" role="alert">
@@ -638,7 +647,7 @@
                                         <label for="lastname9" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="lastname9" type="text" class="e9 form-control @error('lastname9') is-invalid @enderror" name="lastname9" value="name" autocomplete="name">
+                                            <input id="lastname9" type="text" class="e9 form-control @error('lastname9') is-invalid @enderror" name="lastname9" value="" autocomplete="name">
 
                                             @error('lastname9')
                                                 <span class="invalid-feedback" role="alert">
@@ -681,7 +690,12 @@
                                 <!-- check have read waiver -->
                                 <label for="waiver_signed" class="col-md-4 col-form-label text-md-end">{{ __('I have read and agree to the waiver.') }}</label>
                                 <div class=col-md-1>
-                                    <input name="waiver_signed" type="checkbox" value="yes" required>
+                                    <input name="waiver_signed" type="checkbox" value="1" required>
+                                    @error('waiver_signed')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 
                                 <!-- signed by input -->
@@ -700,8 +714,8 @@
                             
                             <div class="row mb-3">
                                 <div class="col-md-10 offset-md-1">
-                                    <label for="comments">Additional Comments (optional):</label>
-                                    <textarea class="form-control" id="comments" name="comment" rows="4"></textarea>
+                                    <label for="comment">Additional Comments (optional):</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
                                 </div>
                             </div>
 
