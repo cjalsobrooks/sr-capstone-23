@@ -90,13 +90,30 @@ class UserController extends Controller
     // } 
 }
 
-    public function viewGroup() {
-        return view('user.viewGroup');
+    public function viewGroup($id)
+    {
+        $volunteers = DB::table('volunteers')
+                        ->where('user_id', $id)
+                        ->select('id', 'first_name', 'last_name')
+                        ->get();
+        
+        $result = [];
+        foreach ($volunteers as $volunteer) {
+            $obj = new \stdClass();
+            $obj->id = $volunteer->id;
+            $obj->first_name = $volunteer->first_name;
+            $obj->last_name = $volunteer->last_name;
+            $result[] = $obj;
+        }
+
+        return response()->json($result, 200, [], JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT)
+                    ->header('Content-Type', 'application/json');
     }
 
     //ajax search volunteers
-    public function findGroupByID($search){
-        $volunteers = Volunteer::where('user_id', '=', $search)->get();
+    public function findGroupByID(){
+        $userId = Auth::user()->id;
+        $volunteers = Volunteer::where('user_id', '=', $userId)->get();
         $names_array = [];
         foreach($volunteers as $vol){
             $vol_array = [];
@@ -107,5 +124,6 @@ class UserController extends Controller
         }
         return json_encode($names_array);
     }
+    
 
 }
