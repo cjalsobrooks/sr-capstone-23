@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <form id="registernew" method="POST" action="{{ route('register') }}">
                             @csrf
-                            
+                            @honeypot
                                 <!-- email input -->
                                 <div class="row mb-3">
                                     <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>

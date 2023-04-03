@@ -28,7 +28,6 @@ class NotifyUsers extends Mailable
         $this->messages = $m;
         $this->adminfirst = $af;
         $this->adminlast = $al;
-
     }
 
     /**
