@@ -19,8 +19,8 @@
 <body>
 <div>
     <p>{{ $names }},</p>
-    <p>{{ $messages }}.</p>
-    <p class="signature">Henry</p>
+    <p>{{ $messages }}</p>
+    <p class="signature">Volunteer Administrator,<br>{{ $adminfirst }} {{ $adminlast }}</p>
 </div>
 </body>
 </html>

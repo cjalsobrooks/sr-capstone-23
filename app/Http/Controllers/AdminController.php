@@ -11,7 +11,9 @@ use App\Models\Location;
 use App\Models\Shift;
 use App\Models\Roster;
 use Illuminate\Support\Facades\Mail;
+use illuminate\Support\Facades\Auth;
 use App\Mail\NotifyUsers;
+
 
 class AdminController extends Controller
 {
@@ -387,15 +389,28 @@ class AdminController extends Controller
     }
 
     //api triggers email event
-    public function sendEmail(Request $request)
+    public function sendEmailAll(Request $request)
     {
         //currently functional, requires .env mailer configuration for smtp.
         try{
             $users = User::all();
             foreach($users as $user){
-                Mail::to($user->email)->send(new NotifyUsers($user->first_name, $request->get('messageall')));
+                Mail::to($user->email)->send(new NotifyUsers($user->first_name, $request->get('messageall'), Auth::user()->first_name, Auth::user()->last_name));
             }
             return "All users have been notified.";
+        }catch(Exception $e){
+            return $e->message();
+        }
+
+    }
+
+    public function sendEmailUser(Request $request)
+    {
+        //currently functional, requires .env mailer configuration for smtp.
+        try{
+            $user = User::where('email', '=', $request->get('emailselect'))->firstOrFail();
+            Mail::to($request->get('emailselect'))->send(new NotifyUsers($user->first_name, $request->get('messageuser'), Auth::user()->first_name, Auth::user()->last_name));
+            return "User has been notified.";
         }catch(Exception $e){
             return $e->message();
         }

@@ -15,15 +15,20 @@ class NotifyUsers extends Mailable
 
     public $names;
     public $messages;
+    public $adminfirst;
+    public $adminlast;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $n, string $m)
+    public function __construct(string $n, string $m, string $af, string $al)
     {
         $this->names = $n;
         $this->messages = $m;
+        $this->adminfirst = $af;
+        $this->adminlast = $al;
+
     }
 
     /**

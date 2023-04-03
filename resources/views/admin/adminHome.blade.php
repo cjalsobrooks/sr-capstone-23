@@ -38,10 +38,10 @@
         <div class="col-sm-12">
           <label for="firstName" class="form-label">Message
           </label>
-          <textarea name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required=""></textarea>
+          <textarea name="messageuser" type="text" class="form-control" id="messageuser" placeholder="" value="" required=""></textarea>
         </div>
       </div>
-      <button id="" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+      <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
 
       @csrf <!-- {{ csrf_field() }} -->
     </form>
@@ -55,7 +55,7 @@
           <textarea name="messageall" type="text" class="form-control" id="messageall" placeholder="" value="" required=""></textarea>
         </div>
       </div>
-      <button id="sendemail" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+      <button id="sendemail2" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
       @csrf <!-- {{ csrf_field() }} -->
     </form>
 

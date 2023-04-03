@@ -48,7 +48,8 @@ Route::get('/editvolschedule/{id}', [AdminController::class, 'editVolSchedule'])
 
 //admin emails
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
-Route::post('/emailall', [AdminController::class, 'sendEmail']);
+Route::post('/emailall', [AdminController::class, 'sendEmailAll']);
+Route::post('/emailuser', [AdminController::class, 'sendEmailUser']);
 
 //create
 Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');
