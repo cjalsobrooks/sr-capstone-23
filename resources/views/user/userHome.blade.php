@@ -90,7 +90,7 @@
       });
   </script>
   @prepend('js')
-    @vite(['resources/js/adminhome.js'])   
+    
   @endprepend
   
 

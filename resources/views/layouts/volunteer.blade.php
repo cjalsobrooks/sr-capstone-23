@@ -93,7 +93,7 @@
 
 
 
-    @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/user.scss', 'resources/js/app.js'])
     @stack('js')
     
 </head>
