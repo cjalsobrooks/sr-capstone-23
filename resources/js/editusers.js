@@ -47,15 +47,5 @@
           }
         } 
       }
-        function delay2(callback, ms) {
-          var timer = 0;
-          return function() {
-            var context = this, args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-              callback.apply(context, args);
-            }, ms || 0);
-          };
-        }
-
-      document.getElementById("finduser2").addEventListener("keyup", delay2(DynamicForm2, 500), true);
+      
+      document.getElementById("finduser2").addEventListener("keyup", delay(DynamicForm2, 500), true);

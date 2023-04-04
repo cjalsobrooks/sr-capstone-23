@@ -3,7 +3,7 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
-    <h2 class="h2"><span class="fw-bold">Admin : </span>{{ Auth::user()->first_name }}</h2>
+    <h2 class="h2"> Admin : <span class="text-muted" style="font-family:nunito;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></h2>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group me-2">
         <button id="showedit" type="button" class="btn btn-sm btn-outline-secondary">Edit Schedule</button>
@@ -66,7 +66,7 @@
       </div>
   </div>
     <div style="display: none;" class="editoptions col-12-sm my-4" id="showcalendar">
-      <div id="calendar"></div>
+      <div style="max-height:400px;" id="calendar"></div>
     </div>
   </div>
 
@@ -261,170 +261,5 @@
   @endprepend
 
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
-  <script>
-
-
-
-      //---------------------------Create new DB entities---------------------------------
-      function create(val) {
-        // Form fields, see IDs above
-        let createURL = '';
-        let refreshURL = '';
-        let targetDiv= '';
-        let params;
-
-        switch(val) {
-        case 1:
-          createURL = '/createsection';
-          refreshURL = '/refreshsections';
-          targetDiv = 'target1';
-          params = {
-            volId: document.querySelector('#volId').value,
-            sectionName: document.querySelector('#section-name').value,
-            sectionDescription: document.querySelector('#section-description').value
-          }
-          break;
-        case 2:
-          createURL = '/createlocation';
-          refreshURL = '/refreshlocations';
-          targetDiv = 'target2'
-          params = {
-            sectionId: document.querySelector('#sectionId').value,
-            locationName: document.querySelector('#location-name').value,
-            locationDescription: document.querySelector('#location-description').value
-          }
-          break;
-        case 3:
-          createURL = '/createshift';
-          refreshURL = '';
-          targetDiv = ''
-          params ={
-            locationId: document.querySelector('#locationoptions2').value,
-            sectionId: document.querySelector('#sectionId3').value,
-            shiftName: document.querySelector('#shift-name').value,
-            shiftDescription: document.querySelector('#shift-description').value,
-            shiftDay: document.querySelector('#shift-day').value,
-            startTime: document.querySelector('#start-time').value,
-            endTime: document.querySelector('#end-time').value,
-            numVolunteers: document.querySelector('#num-volunteers').value
-          }
-          break;
-      }
-
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', createURL);
-        xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
-        xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send(JSON.stringify(params));
-        xhttp.onload = function() {
-            alert(xhttp.responseText);
-            refreshValues(refreshURL,targetDiv);
-        }
-    }
-
-    let submitSection = document.getElementById("addsection");
-    submitSection.addEventListener('click', () =>{
-      create(1);
-    });
-
-    let submitLocation = document.getElementById("addlocation");
-    submitLocation.addEventListener('click', () =>{
-      create(2);
-    });
-
-    let submitShift = document.getElementById("addshift");
-    submitShift.addEventListener('click', () =>{
-      create(3);
-    });
-
-    //---------------------------refresh calendar location options---------------------------------
-  
-      function DynamicForm3(sectionIdTag, locationOptionsTag) {
-        let sectionId = document.querySelector(sectionIdTag).value
-        let options = document.getElementById(locationOptionsTag);
-        token = document.querySelector('meta[name="csrf-token"]').content;
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("get", "/findlocations/" + sectionId, true);
-        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
-        xhttp.send();
-        xhttp.onload = function(){
-          while (options.firstChild) {
-            options.removeChild(options.firstChild);
-          }
-          let obj = JSON.parse(xhttp.response)
-          if(obj.length > 0){
-            let nodeDefault = document.createElement("option");
-            nodeDefault.value="0";
-            nodeDefault.innerHTML="--- select a location ---";
-            options.appendChild(nodeDefault);
-          }
-          for(var i = 0; i < obj.length; i++){
-            let node = document.createElement("option");
-            node.value = `${String(obj[i].id)}`;
-            node.innerHTML = `${String(obj[i].name)}`;
-            options.appendChild(node);
-          }
-        }
-      }
-
-    //---------------Calendar definition statement-------------------------------
-    var calendarEl = document.getElementById('calendar');
-            
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      allDaySlot: false,
-      initialView: 'list',
-      initialDate: '2023-06-02',
-      duration: {days: 3},
-      headerToolbar: {
-        left: 'prev next',
-        center: 'title',
-        right: 'list,timeGrid,timeGridDay'
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      calendar.render();
-    });
-
-
-
-      //--------load the calendar--------------------------------------------------
-      function DynamicForm4() {
-
-        calendar.removeAllEvents();
-        let sectionId = document.querySelector('#locationoptions').value
-        if(sectionId == ""){
-          sectionId=0;
-        }
-        token = document.querySelector('meta[name="csrf-token"]').content;
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("get", "/findshifts/" + sectionId, true);
-        xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
-        xhttp.send();
-        xhttp.onload = function(){
-          let obj = JSON.parse(xhttp.response)
-          for(var i = 0; i < obj.length; i++){
-            //call database on page load and render these with correct values in loop
-            calendar.addEvent({
-              title: `${String(obj[i].current)} out of ${String(obj[i].max)}`,
-              start: String(obj[i].start),
-              end: String(obj[i].end)});
-          }
-
-          calendar.render();
-        }
-      }
-
-      //event listner binds search actions
-      document.getElementById("sectionId2").addEventListener("click", ()=>{
-        DynamicForm3('#sectionId2','locationoptions');
-      });
-      document.getElementById("locationoptions").addEventListener("change", DynamicForm4);
-
-      //reuse Dynamic form 3 for shift creation form
-      document.getElementById("sectionId3").addEventListener("click", ()=>{
-        DynamicForm3('#sectionId3','locationoptions2');
-      });
-  </script>
 
 @endsection

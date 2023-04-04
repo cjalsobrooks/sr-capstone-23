@@ -82,18 +82,6 @@
         }
       }
 
-      function delay1(callback, ms) {
-          var timer = 0;
-          return function() {
-            var context = this, args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-              callback.apply(context, args);
-            }, ms || 0);
-          };
-        }
-
-
       function findEmail() {
         let data = document.forms.emailform;
         let lastname = data['userselect'].value;
@@ -103,7 +91,7 @@
       }
       
       document.getElementById("userselect").addEventListener("click", findEmail, true);
-      document.getElementById("finduser").addEventListener("keyup", delay1(DynamicForm1, 500), true);
+      document.getElementById("finduser").addEventListener("keyup", delay(DynamicForm1, 500), true);
 
       //-------------------Form Toggling----------------------------------------------
       function toggleOne(){

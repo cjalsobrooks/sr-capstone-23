@@ -56,7 +56,7 @@ class AdminController extends Controller
             $obj_array['user'] = $prop_array;
             array_push($user_array, $obj_array);
         }
-        return $user_array;
+        return json_encode($user_array); //<--laravel automatically translates this to json. json_encode() is not required here.
     }
 
 
@@ -120,7 +120,7 @@ class AdminController extends Controller
             $found_array['end'] = $shift->end_time;
             array_push($shift_array, $found_array);
         }
-        return $shift_array;
+        return json_encode($shift_array);
     }
 
     //ajax search sections
@@ -133,7 +133,7 @@ class AdminController extends Controller
             $found_array['name'] = $location->name;
             array_push($location_array, $found_array);
         }
-        return $location_array;
+        return json_encode($location_array); 
     }
 
     //ajax search volunteers
@@ -147,7 +147,7 @@ class AdminController extends Controller
             $vol_array['Id'] = $vol->id;
             array_push($names_array, $vol_array);
         }
-        return json_encode($names_array);
+        return json_encode($names_array); //<--laravel automatically translates this array to json. json_encode() is not required here.
     }
 
     public function findVolunteers2($search)
@@ -385,7 +385,7 @@ class AdminController extends Controller
             $user_array['email'] = $user->email;
             array_push($email_array, $user_array);
         }
-        return json_encode($email_array);
+        return json_encode($email_array); 
     }
 
     //api triggers email event

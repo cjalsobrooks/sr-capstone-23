@@ -22,9 +22,10 @@
     </script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <script>
+
+        //scripts shared between pages belong in this global admin scripts reference (temporarily)
         //-------------------------refresh partial views created------------------------
         function refreshValues(url,target) {
-
           const xhttp = new XMLHttpRequest();
           xhttp.open('GET', url);
           xhttp.setRequestHeader("X-CSRF-TOKEN", token); 
@@ -39,6 +40,19 @@
               current.innerHTML = String(xhttp.responseText);
           }
         }
+
+        //
+        function delay(callback, ms) {
+        var timer = 0;
+        return function() {
+          var context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            callback.apply(context, args);
+          }, ms || 0);
+        };
+      }
+
     </script>
 
     @vite(['resources/sass/admin.scss', 'resources/js/app.js'])
