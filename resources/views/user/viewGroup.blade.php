@@ -14,8 +14,6 @@
                 <th>Volunteer ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,8 +22,6 @@
                 <td>{{$vol->id}}</td>
                 <td>{{$vol->first_name}}</td>
                 <td>{{$vol->last_name}}</td>
-                <td><a style="text-decoration: none;" href="#" class="edit-volunteer" data-id="{{$vol->id}}">Edit</a></td>
-                <td><a style="text-decoration: none;" href="#">Delete</a></td>
             </tr>
         @endforeach
         </tbody>

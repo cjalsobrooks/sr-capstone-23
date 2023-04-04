@@ -116,14 +116,16 @@ class UserController extends Controller
         $volunteers = Volunteer::where('user_id', '=', $userId)->get();
         $names_array = [];
         foreach($volunteers as $vol){
-            $vol_array = [];
-            $vol_array['firstname'] = $vol->first_name;
-            $vol_array['lastname'] = $vol->last_name;
-            $vol_array['Id'] = $vol->id;
+            $vol_array = [
+                'id' => $vol->id,
+                'first_name' => $vol->first_name,
+                'last_name' => $vol->last_name,
+            ];
             array_push($names_array, $vol_array);
         }
-        return json_encode($names_array);
+        return response()->json(['volunteers' => $names_array]);
     }
+    
     
 
 }
