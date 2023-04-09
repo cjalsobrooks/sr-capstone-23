@@ -49,11 +49,13 @@ Route::get('/findvolunteers2/{search}', [AdminController::class, 'findVolunteers
 Route::get('/findlocations/{search}', [AdminController::class, 'findLocations'])->name('findlocations');
 Route::get('/findshifts/{search}', [AdminController::class, 'findShifts']);
 Route::get('/editvolschedule/{id}', [AdminController::class, 'editVolSchedule'])->name('editvolschedule');
+Route::get('/editroster/{id}', [AdminController::class, 'editRoster'])->name('editroster');
 
 //admin emails
 Route::get('/findemail/{search}', [AdminController::class, 'findEmails']);
 Route::post('/emailall', [AdminController::class, 'sendEmailAll']);
 Route::post('/emailuser', [AdminController::class, 'sendEmailUser']);
+Route::post('/emailsection', [AdminController::class, 'sendEmailSection']);
 
 //create
 Route::post('/createsection', [AdminController::class, 'createSection'])->name('createsection');

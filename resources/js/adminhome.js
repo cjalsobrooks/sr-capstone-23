@@ -13,38 +13,55 @@
       // Comment this function back when done testing
 
 
-      // function SendMailAll() {
-      //   if(confirm("Are you sure you want to send all?")){
-      //     let form = document.forms.emailform2;
-      //     var formData = new FormData();
-      //     formData.append('messageall', form['messageall'].value);
-      //     var xhttp = new XMLHttpRequest();
-      //     xhttp.open("post", "/emailall", true);
-      //     xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
-      //     xhttp.send(formData);
-      //     xhttp.onload = function(){
-      //       alert(xhttp.response);
-      //     }
-      //   }
-      // }
-      // document.getElementById("sendemail2").addEventListener("click", SendMailAll, false);
+      function SendMailAll() {
+        if(confirm("Are you sure you want to send all?")){
+          let form = document.forms.emailform2;
+          var formData = new FormData();
+          formData.append('messageall', form['messageall'].value);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("post", "/emailall", true);
+          xhttp.setRequestHeader("X-CSRF-TOKEN", token);  
+          xhttp.send(formData);
+          xhttp.onload = function(){
+            alert(xhttp.response);
+          }
+        }
+      }
+      document.getElementById("sendemail2").addEventListener("click", SendMailAll, false);
 
-      // function SendMailUser() {
-      //   if(confirm("Are you sure you want to send?")){
-      //     let form = document.forms.emailform;
-      //     var formData = new FormData();
-      //     formData.append('messageuser', form['messageuser'].value);
-      //     formData.append('emailselect', form['emailselect'].value);
-      //     var xhttp = new XMLHttpRequest();
-      //     xhttp.open("post", "/emailuser", true);
-      //     xhttp.setRequestHeader("X-CSRF-TOKEN", token);
-      //     xhttp.send(formData);
-      //     xhttp.onload = function(){
-      //       alert(xhttp.response);
-      //     }
-      //   }
-      // }
-      // document.getElementById("sendemail").addEventListener("click", SendMailUser, false);
+      function SendMailUser() {
+        if(confirm("Are you sure you want to send?")){
+          let form = document.forms.emailform;
+          var formData = new FormData();
+          formData.append('messageuser', form['messageuser'].value);
+          formData.append('emailselect', form['emailselect'].value);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("post", "/emailuser", true);
+          xhttp.setRequestHeader("X-CSRF-TOKEN", token);
+          xhttp.send(formData);
+          xhttp.onload = function(){
+            alert(xhttp.response);
+          }
+        }
+      }
+      document.getElementById("sendemail").addEventListener("click", SendMailUser, false);
+
+      function SendMailSection() {
+        if(confirm("Are you sure you want to send?")){
+          let form = document.forms.emailform3;
+          var formData = new FormData();
+          formData.append('messagesection', form['messageuser'].value);
+          formData.append('sectionselect', form['sectionselect'].value);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("post", "/emailsection", true);
+          xhttp.setRequestHeader("X-CSRF-TOKEN", token);
+          xhttp.send(formData);
+          xhttp.onload = function(){
+            alert(xhttp.response);
+          }
+        }
+      }
+      document.getElementById("sendemail3").addEventListener("click", SendMailSection, false);
 
 
       //===================================================================================================
@@ -97,11 +114,20 @@
       function toggleOne(){
         document.getElementById("emailform").style.display = 'block';
         document.getElementById("emailform2").style.display = 'none';
+        document.getElementById("emailform3").style.display = 'none';
       }
       document.getElementById("showone").addEventListener("click", toggleOne, true);
 
       function toggleAll(){
         document.getElementById("emailform").style.display = 'none';
         document.getElementById("emailform2").style.display = 'block';
+        document.getElementById("emailform3").style.display = 'none';
       }
       document.getElementById("showall").addEventListener("click", toggleAll, true);
+
+      function toggleSection(){
+        document.getElementById("emailform").style.display = 'none';
+        document.getElementById("emailform2").style.display = 'none';
+        document.getElementById("emailform3").style.display = 'block';
+      }
+      document.getElementById("showsection").addEventListener("click", toggleSection, true);

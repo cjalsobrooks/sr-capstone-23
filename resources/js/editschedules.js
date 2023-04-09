@@ -138,9 +138,11 @@
                 for(var i = 0; i < obj.length; i++){
                   //call database on page load and render these with correct values in loop
                   calendar.addEvent({
-                    title: `${String(obj[i].current)} out of ${String(obj[i].max)}`,
+                    title: `${String(obj[i].current)} out of ${String(obj[i].max)} / Click to view`,
                     start: String(obj[i].start),
-                    end: String(obj[i].end)});
+                    end: String(obj[i].end),
+                    url: `/editroster/${String(obj[i].id)}`
+                  });
                 }
       
                 calendar.render();

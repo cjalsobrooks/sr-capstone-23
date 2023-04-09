@@ -8,11 +8,12 @@
         <div class="btn-group me-2">
           <button id="showall" type="button" class="btn btn-sm btn-outline-secondary">All</button>
           <button id="showone" type="button" class="btn btn-sm btn-outline-secondary">One</button>
+          <button id="showsection" type="button" class="btn btn-sm btn-outline-secondary">Section</button>
         </div>
       </div>
     </div>
     
-    <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
+    <form id="emailform" class="needs-validation" novalidate="" action="javascript:void(0)" method="POST">
       <h4>Email Individual</h4>
       <div class="row g-3">
         <div class="col-sm-6">
@@ -36,7 +37,7 @@
           </div>
         </div>
         <div class="col-sm-12">
-          <label for="firstName" class="form-label">Message
+          <label for="messageuser" class="form-label">Message
           </label>
           <textarea name="messageuser" type="text" class="form-control" id="messageuser" placeholder="" value="" required=""></textarea>
         </div>
@@ -50,12 +51,34 @@
       <h4>Email All</h4>
       <div class="row g-3">
         <div class="col-sm-12">
-          <label for="firstName" class="form-label">Message
+          <label for="messageall" class="form-label">Message
           </label>
           <textarea name="messageall" type="text" class="form-control" id="messageall" placeholder="" value="" required=""></textarea>
         </div>
       </div>
       <button id="sendemail2" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+      @csrf <!-- {{ csrf_field() }} -->
+    </form>
+
+    <form style="display:none;" id="emailform3" class="needs-validation" novalidate="" action="javascript:void(0)" method="POST">
+      <h4>Email Section</h4>
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label for="sectionselect" class="form-label">Section Name</label>
+          <select name="sectionselect" type="text" class="form-control" id="sectionselect"  required="">
+              @foreach ($sections as $section)
+                <option value="{{$section->id}}">{{$section->name}}</option>
+              @endforeach
+          </select>
+        </div>
+        <div class="col-sm-12">
+          <label for="messagesection" class="form-label">Message
+          </label>
+          <textarea name="messagesection" type="text" class="form-control" id="messageuser" placeholder="" value="" required=""></textarea>
+        </div>
+      </div>
+      <button id="sendemail3" type="button" class="btn btn-success mt-4">Emails: don't press yet</button>
+
       @csrf <!-- {{ csrf_field() }} -->
     </form>
 

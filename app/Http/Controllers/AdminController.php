@@ -27,7 +27,8 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.adminHome', compact('users'));
+        $sections = Section::all();
+        return view('admin.adminHome', compact('users','sections'));
     }
 
 
@@ -186,6 +187,20 @@ class AdminController extends Controller
         return view('admin.editVolSchedule', compact('vol', 'allShifts', 'volShifts','sections'));
     }
 
+    public function editRoster($id)
+    {
+        $volunteers = DB::table('shifts')
+                    ->join('locations', 'locations.id','=','shifts.location_id')
+                    ->join('sections','sections.id','=','locations.section_id')
+                    ->join('rosters','shifts.id','=','rosters.shift_id')
+                    ->join('volunteers', 'rosters.volunteer_id', '=', 'volunteers.id')
+                    ->where('shifts.id', '=', $id)
+                    ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','locations.name as location_name', 'shifts.start_time' )
+                    ->get();
+                    
+        return view('admin.editRosters', compact('volunteers'));
+    }
+
 
     //create-----------------------------------------------------------------
     public function createSection(Request $request)
@@ -341,6 +356,7 @@ class AdminController extends Controller
 
 
     //refresh page values----------------------------------------------------
+
     public function refreshSections()
     {
         $sections = DB::table('sections')
@@ -417,4 +433,26 @@ class AdminController extends Controller
 
     }
 
+
+    public function sendEmailSection(Request $request)
+    {
+        //currently functional, requires .env mailer configuration for smtp.
+        
+             $users = DB::table('users')
+            ->join('volunteers', 'volunteers.user_id', '=', 'users.id')
+            ->join('rosters', 'rosters.volunteer_id', '=', 'volunteers.id')
+            ->join('shifts', 'shifts.id', '=', 'rosters.shift_id')
+            ->join('locations', 'locations.id', '=', 'shifts.location_id')
+            ->join('sections', 'sections.id','=','locations.section_id')
+            ->where('locations.section_id', '=', $request->get('sectionselect'))
+            ->select('users.first_name', 'users.last_name', 'users.email', 'sections.name as section_name')
+            ->distinct()
+            ->get();
+            foreach($users as $user){
+                Mail::to($user->email)->send(new NotifyUsers($user->first_name, $request->get('messagesection'), Auth::user()->first_name, Auth::user()->last_name));
+            }
+            return "{$users[0]->section_name} has been notified.";
+
+
+    }
 }
