@@ -216,7 +216,11 @@ class AdminController extends Controller
                     'name' => $request->input('sectionName'),
                     'description' => $request->input('sectionDescription')
                 ]);
-                return "Section was created successfully.";
+                $leadVol = Volunteer::findOrFail($request->input('volId'));
+                $leadUser = User::findOrFail($leadVol->user_id);
+                $leadUser->is_section_lead = 1;
+                $leadUser->save();
+                return "Section was created successfully.";                
             }catch(Exception $e){
                 return $e->getMessage();
             }

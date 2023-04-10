@@ -10,7 +10,17 @@
     
     <div class="container mt-5">
       <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
-          
+          <option value='--'>Choose a section</option>
+        @foreach ($sections as $s)
+          <option value="{{$s->id}}">{{$s->name}}</option>
+        @endforeach
+      </select>
+
+      <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
+          <option value='--'>Choose a location</option>  
+      @foreach ($locations as $l)
+          <option value="{{$l->id}}">{{$l->name}}</option>
+        @endforeach
       </select>
     </div>
 

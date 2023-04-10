@@ -81,7 +81,7 @@ Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
 Route::middleware(['auth'])->group(function() {
     Route::get('/viewgroup', [UserController::class, 'findGroupByID'])->name('viewgroup');
 });
-Route::get('/sectionlead', [UserController::class, 'sectionLead'])->name('sectionlead');
+Route::get('/sectionlead/{id}', [UserController::class, 'sectionLead'])->name('sectionlead');
 
 
 //waiver------------------------------------------------------------

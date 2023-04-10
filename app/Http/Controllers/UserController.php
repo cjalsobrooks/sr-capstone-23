@@ -50,10 +50,13 @@ class UserController extends Controller
         //step 1: get section lead IDS and vol IDs associated w user
         // $sectionLeadIds = [];
 
-        // $sections = DB::table('sections')
-        //             ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-        //             ->select('sections.*', 'volunteers.id as vID', 'volunteers.user_id as uID', 'volunteers.first_name as first', 'volunteers.last_name as last')
-        //             ->where('uID', '=', $id);
+        $sections = DB::table('sections')
+                    ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
+                    ->select('sections.*', 'volunteers.id as vID', 'volunteers.user_id as uID', 'volunteers.first_name as first', 'volunteers.last_name as last')
+                    ->where('uID', '=', $id)
+                    ->get();
+
+        $locations = Location::All();
 
         // $locations = DB::table('locations')
         //             ->joinSub($sections, 'user_sections', function(JoinClause $join) {
@@ -69,7 +72,7 @@ class UserController extends Controller
         //             ->get();
         
 
-        return view('lead.secLeadInfo');
+        return view('lead.secLeadInfo', compact('sections', 'locations'));
 
 
         
