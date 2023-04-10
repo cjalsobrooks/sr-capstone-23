@@ -84,14 +84,35 @@ document.querySelectorAll('button').forEach(occurence => {
       var element = document.body;
       element.classList.toggle("dark-mode");
     }
-    if(id == "MarEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg";
-    }
-    if(id == "MaiEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*";
-    }
     if(id == "Map"){//if button with id "Map" is hit, it changes the picture to the link given.
       document.getElementById("image").src = "https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png";
+    }
+    if(id == "MarEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\MarinaEntrance.png";
+    }
+    if(id == "MaiEnt"){//if button with id "MaiEnt" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\MainEntrance.png";
+    }
+    if(id == "Coke"){//if button with id "Coke" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\VIPCokeStage.png";
+    }
+    if(id == "Bud"){//if button with id "Bud" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\VIPBudStage.png";
+    }
+    if(id == "Pier"){//if button with id "Pier" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\Pier.png";
+    }
+    if(id == "Skybox"){//if button with id "Skybox" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\Skybox.png";
+    }
+    if(id == "PAGate"){//if button with id "Skybox" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\PowerAlley.png";
+    }
+    if(id == "SBEnt"){//if button with id "Skybox" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\SouthernBelleEntrance.png";
+    }
+    if(id == "BoneGate"){//if button with id "Skybox" is hit, it changes the picture to the link given.
+      document.getElementById("image").src="Image\RiverbendPictures\BoneGate.png";
     }
   } );
 });
