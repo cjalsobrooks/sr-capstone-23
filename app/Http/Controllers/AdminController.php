@@ -189,16 +189,25 @@ class AdminController extends Controller
 
     public function editRoster($id)
     {
-        $volunteers = DB::table('shifts')
-                    ->join('locations', 'locations.id','=','shifts.location_id')
-                    ->join('sections','sections.id','=','locations.section_id')
-                    ->join('rosters','shifts.id','=','rosters.shift_id')
-                    ->join('volunteers', 'rosters.volunteer_id', '=', 'volunteers.id')
-                    ->where('shifts.id', '=', $id)
-                    ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','locations.name as location_name', 'shifts.start_time' )
-                    ->get();
+        if(count($volunteers = DB::table('shifts')
+        ->join('locations', 'locations.id','=','shifts.location_id')
+        ->join('sections','sections.id','=','locations.section_id')
+        ->join('rosters','shifts.id','=','rosters.shift_id')
+        ->join('volunteers', 'rosters.volunteer_id', '=', 'volunteers.id')
+        ->where('shifts.id', '=', $id)
+        ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','locations.name as location_name', 'shifts.start_time', '1 as exists' )
+        ->get()) > 0){
+            return view('admin.editRosters', compact('volunteers'));
+        }else{
+            $volunteers = DB::table('shifts')
+            ->join('locations', 'locations.id','=','shifts.location_id')
+            ->join('sections','sections.id','=','locations.section_id')
+            ->where('shifts.id', '=', $id)
+            ->select('sections.name as section_name','locations.name as location_name', 'shifts.start_time' ,'0 as exists')
+            ->get();
+                return view('admin.editRosters', compact('volunteers'));
+            }
                     
-        return view('admin.editRosters', compact('volunteers'));
     }
 
 

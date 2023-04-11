@@ -18,13 +18,15 @@
           </tr>
         </thead>
         <tbody id="responsivebody" class="shadow-sm">
-         @foreach ($volunteers as $volunteer)
-            <tr>
-                <td id="2">{{$volunteer->first_name}}</td>
-                <td id="2">{{$volunteer->last_name}}</td>
-                <td id="6"><a style="text-decoration: none;" href="#">Unassign</a></td>
-            </tr>
-         @endforeach
+        @if($volunteers[0]->exists == 1)
+          @foreach ($volunteers as $volunteer)
+              <tr>
+                  <td id="2">{{$volunteer->first_name}}</td>
+                  <td id="2">{{$volunteer->last_name}}</td>
+                  <td id="6"><a style="text-decoration: none;" href="#">Unassign</a></td>
+              </tr>
+          @endforeach
+        @endif
         </tbody>
       </table>
     </div>

@@ -31,7 +31,7 @@
         <div class="col-sm-6">
           <label for="emailselect" class="form-label">Email Address</label>
           <div class="input-group has-validation">
-            <span class="input-group-text">@</span>
+            <span style="margin-top:5px; margin-bottom:10px;" class="input-group-text">@</span>
             <input class="form-control" id="emailselect" name="emailselect">
 
           </div>
