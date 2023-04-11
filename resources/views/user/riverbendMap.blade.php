@@ -44,7 +44,7 @@
 
     <!-- Map -->
     <div class="text-center">
-        <img src="https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png" id="image" alt="Responsive image" class="img-fluid">
+        <img src="https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png" id="image"  class="img-fluid">
     </div>
     
 
@@ -88,31 +88,31 @@ document.querySelectorAll('button').forEach(occurence => {
       document.getElementById("image").src = "https://www.wdef.com/content/uploads/2022/04/q/q/riverbend-map.png";
     }
     if(id == "MarEnt"){//if button with id "MarEnt" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Images\MarinaEntrance.png";
+      document.getElementById("image").src="\Images\MarinaEntrance.png";
     }
     if(id == "MaiEnt"){//if button with id "MaiEnt" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\MainEntrance.png";
+      document.getElementById("image").src="\Image\MainEntrance.png";
     }
     if(id == "Coke"){//if button with id "Coke" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\VIPCokeStage.png";
+      document.getElementById("image").src="\Image\VIPCokeStage.png";
     }
     if(id == "Bud"){//if button with id "Bud" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\VIPBudStage.png";
+      document.getElementById("image").src="\Image\VIPBudStage.png";
     }
     if(id == "Pier"){//if button with id "Pier" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\Pier.png";
+      document.getElementById("image").src="\Image\Pier.png";
     }
     if(id == "Skybox"){//if button with id "Skybox" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\Skybox.png";
+      document.getElementById("image").src="\Image\Skybox.png";
     }
     if(id == "PAGate"){//if button with id "Skybox" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\PowerAlley.png";
+      document.getElementById("image").src="/Image\PowerAlley.png";
     }
     if(id == "SBEnt"){//if button with id "Skybox" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\SouthernBelleEntrance.png";
+      document.getElementById("image").src="\Image\SouthernBelleEntrance.png";
     }
     if(id == "BoneGate"){//if button with id "Skybox" is hit, it changes the picture to the link given.
-      document.getElementById("image").src="Image\BoneGate.png";
+      document.getElementById("image").src="\Image\BoneGate.png";
     }
   } );
 });
