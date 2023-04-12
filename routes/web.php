@@ -70,6 +70,7 @@ Route::get('/unregistervol/{shiftid}/{volid}', [AdminController::class, 'unregis
 Route::get('/refreshsections', [AdminController::class, 'refreshSections'])->name('refreshsections');
 Route::get('/refreshlocations', [AdminController::class, 'refreshLocations'])->name('refreshlocations');
 Route::get('/refreshvolshifts/{volid}', [AdminController::class, 'refreshVolShifts'])->name('refreshvolshifts');
+Route::get('/refreshsingleshift/{shiftid}', [AdminController::class, 'refreshSingleShift'])->name('refreshsingleshift');
 
 
 //user routes-------------------------------------------------------
@@ -78,9 +79,8 @@ Route::middleware(['redirect'])->group(function() {
 });
 Route::get('/emailsupervisor', [UserController::class, 'emailSupervisor']);
 Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
-Route::middleware(['auth'])->group(function() {
-    Route::get('/viewgroup', [UserController::class, 'findGroupByID'])->name('viewgroup');
-});
+Route::get('/viewgroup', [UserController::class, 'findGroupByID'])->name('viewgroup');
+
 Route::get('/sectionlead/{id}', [UserController::class, 'sectionLead'])->name('sectionlead');
 
 

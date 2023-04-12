@@ -143,7 +143,6 @@
       </div>
 
       
-
     <div id="location" style="display:none;" class="createoptions">
       <h2 class="fw-bold my-3">Add Location</h2>
       <form id="locationform" class="needs-validation" novalidate="" action="javascript:void(0)" method="POST">
@@ -249,7 +248,7 @@
       </form>
       <button id="addshift" type="button" class="btn btn-success mt-4">Submit</button>
       <div style="display:none" class="row pt-4"> 
-        @include('partial.displayshifts')
+        @include('partial.displayshifts') <!---- This partial view refresh was not completed ---->
       </div>
     </div>
   </div>

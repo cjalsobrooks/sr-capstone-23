@@ -1,4 +1,3 @@
-
   @foreach ($sections as $section)
     <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
       <div class="d-flex align-items-center justify-content-between">

@@ -96,12 +96,6 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                    Rosters
-                  </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/editusers">
                       <span data-feather="shopping-cart" class="align-text-bottom"></span>
                       Edit Users

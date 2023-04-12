@@ -195,19 +195,21 @@ class AdminController extends Controller
         ->join('rosters','shifts.id','=','rosters.shift_id')
         ->join('volunteers', 'rosters.volunteer_id', '=', 'volunteers.id')
         ->where('shifts.id', '=', $id)
-        ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','locations.name as location_name', 'shifts.start_time', '1 as exists' )
+        ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','sections.volunteer_id as section_lead_id','locations.name as location_name', 'shifts.start_time', 'shifts.name as shift_name','shifts.id as shift_id', '1 as exists' )
         ->get()) > 0){
-            return view('admin.editRosters', compact('volunteers'));
+        
+            $section_lead = Volunteer::find($volunteers[0]->section_lead_id);
+            return view('admin.editRosters', compact('volunteers', 'section_lead'));
         }else{
             $volunteers = DB::table('shifts')
             ->join('locations', 'locations.id','=','shifts.location_id')
             ->join('sections','sections.id','=','locations.section_id')
             ->where('shifts.id', '=', $id)
-            ->select('sections.name as section_name','locations.name as location_name', 'shifts.start_time' ,'0 as exists')
+            ->select('sections.name as section_name','sections.volunteer_id as section_lead_id','locations.name as location_name', 'shifts.start_time' , 'shifts.name as shift_name', 'shifts.id as shift_id', '0 as exists')
             ->get();
-                return view('admin.editRosters', compact('volunteers'));
+                $section_lead = Volunteer::find($volunteers[0]->section_lead_id);
+                return view('admin.editRosters', compact('volunteers', 'section_lead'));
             }
-                    
     }
 
 
@@ -368,8 +370,7 @@ class AdminController extends Controller
     }
 
 
-    //refresh page values----------------------------------------------------
-
+    //refresh page values with XMLHttpRequest----------------------------------------------------
     public function refreshSections()
     {
         $sections = DB::table('sections')
@@ -401,6 +402,30 @@ class AdminController extends Controller
         return view('partial.displayvolshifts', compact('volShifts', 'vol'));
     }
 
+    public function refreshSingleShift($id)
+    {
+        if(count($volunteers = DB::table('shifts')
+        ->join('locations', 'locations.id','=','shifts.location_id')
+        ->join('sections','sections.id','=','locations.section_id')
+        ->join('rosters','shifts.id','=','rosters.shift_id')
+        ->join('volunteers', 'rosters.volunteer_id', '=', 'volunteers.id')
+        ->where('shifts.id', '=', $id)
+        ->select('volunteers.first_name','volunteers.last_name','volunteers.id','sections.name as section_name','sections.volunteer_id as section_lead_id','locations.name as location_name', 'shifts.start_time', 'shifts.name as shift_name','shifts.id as shift_id', '1 as exists' )
+        ->get()) > 0){
+        
+            $section_lead = Volunteer::find($volunteers[0]->section_lead_id);
+            return view('partial.displaysingleshift', compact('volunteers', 'section_lead'));
+        }else{
+            $volunteers = DB::table('shifts')
+            ->join('locations', 'locations.id','=','shifts.location_id')
+            ->join('sections','sections.id','=','locations.section_id')
+            ->where('shifts.id', '=', $id)
+            ->select('sections.name as section_name','sections.volunteer_id as section_lead_id','locations.name as location_name', 'shifts.start_time' , 'shifts.name as shift_name', '0 as exists')
+            ->get();
+                $section_lead = Volunteer::find($volunteers[0]->section_lead_id);
+                return view('partial.displaysingleshift', compact('volunteers', 'section_lead'));
+        }
+    }
 
     //send emails------------------------------------------------------------
     //ajax search user emails
