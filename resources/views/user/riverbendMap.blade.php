@@ -6,6 +6,22 @@
   background-color: black;
   color: white;
 }
+
+* {box-sizing: border-box;}
+
+.img-magnifier-container {
+  position: relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 80px;
+  height: 80px;
+}
 </style>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -21,7 +37,7 @@
       <button onhover="Dropping()" class="btn btn-secondary dropdown-toggle" type="button">Directions</button>
       <ul id="Dropdown" class="dropdown-menu">
         <li><button id="Map" class="dropdown-item">Map</button></li>
-            <li class= "dropdown dropend"><a class="dropdown-item dropdown-toggle">Access points</a>
+            <li class= "dropdown dropend"><button class="dropdown-item dropdown-toggle">Access points</button>
               <ul class="dropdown-menu">
                   <li><button id = "MaiEnt" class="dropdown-item">Main Entrance</button></li>
                   <li><button id ="MarEnt"  class="dropdown-item">Marina Entrance</button></li>
@@ -33,9 +49,9 @@
             </li>
             <li class= "dropdown dropend"><a class="dropdown-item  dropdown-toggle" href="#">Credential Checkers</a>
               <ul class="dropdown-menu">
-                  <li><a id ="" class="dropdown-item" >Power Alley Gate</a></li>
-                  <li><a id ="" class="dropdown-item" >Southern Belle Entrance</a></li>
-                  <li><a id ="" class="dropdown-item" >Boneyard Gate</a></li>
+                  <li><button id ="PAGate" class="dropdown-item" >Power Alley Gate</button></li>
+                  <li><button id ="SBEnt" class="dropdown-item" >Southern Belle Entrance</button></li>
+                  <li><button id ="BoneGate" class="dropdown-item" >Boneyard Gate</button></li>
               </ul>
             </li>
         </li>
@@ -117,8 +133,7 @@ document.querySelectorAll('button').forEach(occurence => {
   } );
 });
 
-
-
+// dropdowns so the menu works correctly and listens for the click so the dropdown happens
 let dropdowns = document.querySelectorAll('.dropdown-toggle')
 dropdowns.forEach((dd)=>{
     dd.addEventListener('click', function (e) {
