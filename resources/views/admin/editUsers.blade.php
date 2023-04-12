@@ -10,7 +10,7 @@
     <form id="usereditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="finduser2" class="form-label">Users by last name
+          <label for="finduser2" class="form-label">Search users by last name
           </label>
           <input name="finduser2" type="text" class="form-control" id="finduser2"  required="">
         </div>

@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-sm-6">
     
-    <label for="sectionId2" class="form-label">Choose section
+    <label for="sectionId2" class="form-label">1. Choose section
     </label>
     <select name="sectionId2" type="text" class="form-control" id="sectionId2"  required="">
       <option value="0">--- select a section ---</option>
@@ -17,7 +17,7 @@
     </select>
   </div>
   <div class="col-sm-6">
-    <label for="locationoptions" class="form-label">Choose section location
+    <label for="locationoptions" class="form-label">2. Choose section location
     </label>
     <div class="input-group has-validation">
       <select class="form-control" id="locationoptions" name="locationoptions">

@@ -31,7 +31,7 @@
       <h2 class="fw-bold my-3">Edit Volunteers</h2>
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <form id="voleditsearch" class="needs-validation" novalidate="" action="javascript:void(0);" method="">
-            <label for="findvol2" class="form-label">Volunteers by last name
+            <label for="findvol2" class="form-label">Search volunteers by last name
             </label>
             <input name="findfindvol2" type="text" class="form-control" id="findvol2"  required="">
           @csrf <!-- {{ csrf_field() }} -->
@@ -46,7 +46,7 @@
       <div class="row">
         <h2 class="fw-bold my-3 ">Edit Section</h2>
         <div class="col-sm-6">
-          <label for="sectionId2" class="form-label">Choose section
+          <label for="sectionId2" class="form-label">1. Choose section
           </label>
           <select name="sectionId2" type="text" class="form-control" id="sectionId2"  required="">
             @foreach ($sections as $section)
@@ -55,7 +55,7 @@
           </select>
         </div>
         <div class="col-sm-6">
-          <label for="locationoptions" class="form-label">Choose section location
+          <label for="locationoptions" class="form-label">2. Choose section location
           </label>
           <div class="input-group has-validation">
             <select class="form-control" id="locationoptions" name="locationoptions">
@@ -94,12 +94,12 @@
           <h4>Choose section leader</h4>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="finduser1" class="form-label">Volunteers by last name
+              <label for="finduser1" class="form-label">1. Search volunteers by last name
               </label>
               <input name="finduser1" type="text" class="form-control" id="finduser1"  required="">
             </div>
             <div class="col-sm-6">
-              <label for="volselect" class="form-label">Name</label>
+              <label for="volselect" class="form-label">2. Select name</label>
               <div class="input-group has-validation">
                 <select class="form-control" id="volselect" name="volselect">
                 </select>
@@ -201,7 +201,7 @@
       <form id="emailform" class="needs-validation" novalidate="" action="" method="POST">
         <div class="row g-3">
           <div class="col-sm-6">
-            <h4>Choose Section</h4>
+          <label for="sectionId3" class="form-label">1. Choose section</label>
             <div class="input-group has-validation">
               <select class="form-control" id="sectionId3" name="sectionId3">
                 @foreach ($sections as $section)
@@ -211,7 +211,7 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <h4>Choose Location</h4>
+          <label for="locationoptions2" class="form-label">2. Choose section location</label>
             <div class="input-group has-validation">
               <select class="form-control" id="locationoptions2" name="locationoptions2">
               </select>
