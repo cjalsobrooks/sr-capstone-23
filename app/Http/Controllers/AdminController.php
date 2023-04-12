@@ -22,6 +22,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('is_admin');
+        $this->middleware('verified');
     }
 
     public function index()
