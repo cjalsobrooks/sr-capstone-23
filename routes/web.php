@@ -85,6 +85,7 @@ Route::get('/riverbendmap', [UserController::class, 'riverbendMap']);
 Route::get('/viewgroup', [UserController::class, 'findGroupByID'])->name('viewgroup');
 
 Route::get('/sectionlead/{id}', [UserController::class, 'sectionLead'])->name('sectionlead');
+Route::get('/secLeadFindLocations/{search}', [UserController::class, 'secLeadFindLocations'])->name('secLeadFindLocations');
 
 
 //pdf routes------------------------------------------------------------

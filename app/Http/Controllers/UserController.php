@@ -67,6 +67,18 @@ class UserController extends Controller
 
     }
 
+    public function secLeadFindLocations($search) {
+        $locations = Location::where('section_id',$search)->get();
+        $location_array = []; 
+        foreach($locations as $location){
+            $found_array = [];
+            $found_array['id'] = $location->id;
+            $found_array['name'] = $location->name;
+            array_push($location_array, $found_array);
+        }
+        return json_encode($location_array); 
+    }
+
     public function viewGroup($id)
     {
         $volunteers = DB::table('volunteers')

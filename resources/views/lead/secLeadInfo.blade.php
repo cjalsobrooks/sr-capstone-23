@@ -8,20 +8,33 @@
     </div>
     
     <div class="container mt-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Section ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($sections as $s)
+            <tr>
+              <th scope="row">{{$s->id}}</th>
+              <td>{{$s->name}}</td>
+              <td>{{$s->description}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container mt-5">
       <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
           <option value='--'>Choose a section</option>
         @foreach ($sections as $s)
           <option value="{{$s->id}}" data-name="{{$s->name}}">{{$s->name}}</option>
         @endforeach
       </select>
-
-      <select name="locationId" type="text" class="form-control" id="locationId"  required="">
-          <option value='--'>Choose a location</option>  
-      @foreach ($locations as $l)
-          <option value="{{$l->id}}">{{$l->name}}</option>
-        @endforeach
-      </select>
-
     </div>
 
       <h2 id="message">Scheduled shifts:</h2>
