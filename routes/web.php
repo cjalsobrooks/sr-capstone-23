@@ -87,8 +87,13 @@ Route::get('/viewgroup', [UserController::class, 'findGroupByID'])->name('viewgr
 Route::get('/sectionlead/{id}', [UserController::class, 'sectionLead'])->name('sectionlead');
 
 
-//waiver------------------------------------------------------------
+//pdf routes------------------------------------------------------------
 Route::get('/view-waiver', function() {
     $file = storage_path('/app/pdfs/waiver.pdf');
     return response()->file($file);
 })->name('view-waiver');
+
+Route::get('/production', function() {
+    $file = storage_path('/app/pdfs/PRODDUMMY.pdf');
+    return response()->file($file);
+})->name('prod-schedule');

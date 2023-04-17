@@ -17,39 +17,13 @@
       <div style="" class="editoptions col-12-sm my-4" id="showcalendar">
         <div style="max-height: 400px;" id="calendarSec"></div>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Position</th>
-            <th>Shift Start Time</th>
-            <th>Shift End Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Wednesday, February 22nd</td>
-            <td>Checkpoint</td>
-            <td>9:00 AM</td>
-            <td>1:00 PM</td>
-          </tr>
-          <tr>
-            <td>Thursday, February 23rd</td>
-            <td>Janitorial</td>
-            <td>1:00 PM</td>
-            <td>5:00 PM</td>
-          </tr>
-          <tr>
-            <td>Friday, February 24th</td>
-            <td><button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Security
-                </button>
-            </td>
-            <td>9:00 AM</td>
-            <td>1:00 PM</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div class="row mb-3 ">
+        <div class="col-md-6 offset-3">                          
+          <a class="btn btn-secondary" href="{{route('prod-schedule')}}" target=_blank>{{ __('Click here to view the production schedule.') }}</a>
+        </div>
+      </div>
+
     </div>
   </main>
 
