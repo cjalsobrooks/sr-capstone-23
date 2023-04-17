@@ -45,54 +45,27 @@ class UserController extends Controller
         return view('user.riverbendMap');
     }
 
+    // fn to get sections associated with user 
     public function sectionLead(Request $id) {
-        // //actual logic will go here not complete obviously
 
-        //step 1: get section lead IDS and vol IDs associated w user
-        // $sectionLeadIds = [];
+        $user = Auth::User();
 
-        $sections = DB::table('sections')
-                    ->join('volunteers', 'sections.volunteer_id', '=', 'volunteers.id')
-                    ->select('sections.*', 'volunteers.id as vID', 'volunteers.user_id as uID', 'volunteers.first_name as first', 'volunteers.last_name as last')
-                    ->where('uID', '=', $id)
+        $userGroup = DB::table('volunteers')
+                    ->where('user_id', $user->id)
                     ->get();
 
-        $locations = Location::All();
+        $vols = [];
+        foreach($userGroup as $v) {
+            array_push($vols, $v->id);
+        }
 
-        // $locations = DB::table('locations')
-        //             ->joinSub($sections, 'user_sections', function(JoinClause $join) {
-        //                 $join->on('locations.section_id', '=', 'user_sections.id');
-        //             })
-        //             ->select('user_sections.*', 'locations.id');
+        $sections = Section::whereIn('volunteer_id', $vols)->get();
 
-        // $shifts = DB::table('shifts')
-        //             ->joinSub($locations, 'user_locations', function(JoinClause $join) {
-        //                 $join->on('shifts.location_id', '=', 'user_locations.id');
-        //             })
-        //             ->select('user_locations.*', 'shifts.*')
-        //             ->get();
-        
+        $locations = Location::all();        
 
-        return view('lead.secLeadInfo', compact('sections', 'locations'));
+        return view('lead.secLeadInfo', compact('sections', 'locations', 'vols'));
 
-
-        
-
- 
-    //     step 3: choose section where section lead id = current vol id
-    //     step 4: join sections - locations - shifts 
-    //     step 5: choose shifts that take place in section
-
-        
-
-    //     //  $sec = Section::where('userId', $cId);
-    //     // $userSec = [];
-    //     // foreach($sec as $s) {
-    //     //     array_push($userSec, $s);
-    //     // }
-    //     return view('lead.secLeadInfo');
-    // } 
-}
+    }
 
     public function viewGroup($id)
     {

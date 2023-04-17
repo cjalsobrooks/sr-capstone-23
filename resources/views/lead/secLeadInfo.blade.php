@@ -4,24 +4,24 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h2 class="h2"><span class="fw">Section: </span>Sec Name</h2>
-      <h2 class="h2"><span class="fw">Lead: </span><span class="text-muted" style="font-family:nunito;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></h2>      
+      <h2 class="h2"><span class="fw">Section information</span></h2>      
     </div>
     
     <div class="container mt-5">
       <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
           <option value='--'>Choose a section</option>
         @foreach ($sections as $s)
-          <option value="{{$s->id}}">{{$s->name}}</option>
+          <option value="{{$s->id}}" data-name="{{$s->name}}">{{$s->name}}</option>
         @endforeach
       </select>
 
-      <select name="sectionId" type="text" class="form-control" id="sectionId"  required="">
+      <select name="locationId" type="text" class="form-control" id="locationId"  required="">
           <option value='--'>Choose a location</option>  
       @foreach ($locations as $l)
           <option value="{{$l->id}}">{{$l->name}}</option>
         @endforeach
       </select>
+
     </div>
 
       <h2 id="message">Scheduled shifts:</h2>
